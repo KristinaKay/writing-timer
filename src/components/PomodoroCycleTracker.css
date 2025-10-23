@@ -1,0 +1,73 @@
+.pomodoro-cycle-tracker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--background-medium);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.cycle-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cycle-icon {
+  font-size: 1.5rem;
+}
+
+.cycle-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.cycle-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--background-medium);
+  transition: all 0.3s ease;
+}
+
+.dot.completed {
+  background: var(--theme-primary);
+  box-shadow: 0 0 8px rgba(233, 30, 99, 0.5);
+}
+
+.dot.current {
+  background: var(--theme-secondary);
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}

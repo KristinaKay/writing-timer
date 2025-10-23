@@ -1,0 +1,71 @@
+.circular-progress-container {
+  position: relative;
+  display: inline-block;
+}
+
+.circular-progress-svg {
+  transform: rotate(-90deg); /* Start from top instead of right */
+  filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.28));
+}
+
+/* Background track circle */
+.circular-progress-track {
+  fill: none;
+  stroke: var(--background-light);
+  stroke-linecap: round;
+}
+
+/* Animated progress circle */
+.circular-progress-indicator {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease, stroke 0.3s ease;
+  /* default indicator color follows theme primary */
+  stroke: var(--theme-primary);
+}
+
+/* Content centered inside the circle */
+.circular-progress-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* Pulsing animation when timer is running */
+@keyframes pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.28));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.5));
+  }
+}
+
+.circular-progress-container.running .circular-progress-svg {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Completion effect */
+.circular-progress-container.complete .circular-progress-svg {
+  filter: drop-shadow(0 0 20px rgba(102, 187, 106, 0.8));
+}
+
+.circular-progress-container.complete .circular-progress-indicator {
+  stroke: var(--accent-success) !important;
+}
+
+/* Accessibility: Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .circular-progress-container.running .circular-progress-svg {
+    animation: none;
+  }
+  
+  .circular-progress-indicator {
+    transition: none;
+  }
+}
+

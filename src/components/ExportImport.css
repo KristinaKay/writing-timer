@@ -1,0 +1,174 @@
+.export-import-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.section-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+/* Export Button */
+.export-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, var(--theme-secondary) 0%, #00A8CC 100%);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  width: 100%;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+}
+
+.export-btn:active {
+  transform: translateY(0);
+}
+
+/* Import Button */
+.import-btn-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.import-input {
+  display: none;
+}
+
+.import-btn {
+  display: block;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+.import-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+}
+
+.import-btn:active {
+  transform: translateY(0);
+}
+
+/* Clear All Button */
+.clear-all-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 59, 48, 0.1);
+  color: rgba(255, 59, 48, 0.9);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  width: 100%;
+}
+
+.clear-all-btn:hover {
+  background: rgba(255, 59, 48, 0.2);
+  border-color: rgba(255, 59, 48, 0.5);
+  color: #ff3b30;
+  transform: translateY(-2px);
+}
+
+.clear-all-btn:active {
+  transform: translateY(0);
+}
+
+/* Status Message */
+.import-status {
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+
+.import-status.success {
+  background: rgba(76, 175, 80, 0.12);
+  border: 1px solid rgba(76, 175, 80, 0.24);
+  color: var(--accent-success);
+}
+
+.import-status.error {
+  background: rgba(255, 59, 48, 0.08);
+  border: 1px solid rgba(255, 59, 48, 0.18);
+  color: var(--accent-danger);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Data Info */
+.data-info {
+  background: var(--overlay-03);
+  border: 1px solid var(--overlay-10);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.data-info h5 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0 0 0.6rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.data-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.data-info li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding-left: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .export-btn,
+  .import-btn,
+  .clear-all-btn {
+    font-size: 0.85rem;
+    padding: 0.7rem 1.2rem;
+  }
+}

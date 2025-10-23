@@ -1,0 +1,51 @@
+name: Smoke Screenshot
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps
+        run: |
+          npm ci
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Serve built site (preview)
+        run: |
+          npm run preview &
+          echo "Waiting for preview to start..."
+          npx wait-on http://localhost:4173/
+
+      - name: Install Chromium (for puppeteer-core)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Run smoke screenshot
+        env:
+          SMOKE_URL: http://localhost:4173/
+          CHROME_PATH: /usr/bin/chromium-browser
+        run: |
+          npm run smoke:screenshot
+
+      - name: Upload screenshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-screenshot
+          path: test/smoke/screenshot.png

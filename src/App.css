@@ -1,0 +1,1032 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --theme-primary: #E91E63;
+  --theme-secondary: #00D4FF;
+  --theme-background: linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 100%);
+  --text-color: #ffffff;
+  /* centralized overlay definitions for white overlays (use variables instead of literals) */
+  --overlay-03: rgba(255,255,255,0.03);
+  --overlay-05: rgba(255,255,255,0.05);
+  --overlay-06: rgba(255,255,255,0.06);
+  --overlay-08: rgba(255,255,255,0.08);
+  --overlay-10: rgba(255,255,255,0.10);
+  --overlay-12: rgba(255,255,255,0.12);
+  --overlay-15: rgba(255,255,255,0.15);
+  --overlay-16: rgba(255,255,255,0.16);
+  --overlay-20: rgba(255,255,255,0.20);
+  --overlay-38: rgba(255,255,255,0.38);
+  --overlay-40: rgba(255,255,255,0.40);
+  --overlay-60: rgba(255,255,255,0.60);
+  --overlay-80: rgba(255,255,255,0.80);
+  --overlay-92: rgba(255,255,255,0.92);
+  --overlay-96: rgba(255,255,255,0.96);
+
+  /* dark overlays for use with dark themes (preserve contrast when JS hasn't run) */
+  --overlay-black-03: rgba(0,0,0,0.03);
+  --overlay-black-05: rgba(0,0,0,0.05);
+  --overlay-black-06: rgba(0,0,0,0.06);
+  --overlay-black-08: rgba(0,0,0,0.08);
+  --overlay-black-10: rgba(0,0,0,0.10);
+  --overlay-black-12: rgba(0,0,0,0.12);
+  --overlay-black-15: rgba(0,0,0,0.15);
+  --overlay-black-16: rgba(0,0,0,0.16);
+  --overlay-black-20: rgba(0,0,0,0.20);
+  --overlay-black-38: rgba(0,0,0,0.38);
+  --overlay-black-40: rgba(0,0,0,0.40);
+  --overlay-black-60: rgba(0,0,0,0.60);
+  --overlay-black-80: rgba(0,0,0,0.80);
+  --overlay-black-92: rgba(0,0,0,0.92);
+  --overlay-black-96: rgba(0,0,0,0.96);
+
+  /* Default to dark-theme friendly values (used before JS runs) */
+  --text-secondary: var(--overlay-60); /* increased from 0.38 to 0.6 for WCAG AA compliance */
+  --background-light: var(--overlay-black-06);
+  --background-medium: var(--overlay-black-12); /* lighter by default for better contrast */
+  /* Control styling variables for inputs and form chrome */
+  --control-background: var(--overlay-black-12); /* lighter input backgrounds for visibility */
+  --control-border: var(--overlay-black-16);
+  /* Progress ring stroke color (inactive track) */
+  --progress-track-stroke: var(--overlay-black-20);
+  --control-text: var(--text-color);
+  --text-color-inverse: #ffffff;
+  --accent-danger: #ff3b30;
+  --accent-success: #4caf50;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 100%);
+  color: var(--text-color);
+  /* Use responsive horizontal padding so content can reach edges on small screens but stay spaced on large screens */
+  padding: 2rem clamp(1rem, 4vw, 4rem);
+  width: 100%;
+}
+
+/* Light theme overrides using data-theme attribute set on the document element */
+:root[data-theme="light"] .App {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  color: #213547; /* darker text for readability */
+}
+
+/* Define theme variables specifically for light theme so components render correctly
+   even before JS runs to initialize dynamic variables. These are conservative
+   readable defaults used throughout component CSS. */
+:root[data-theme="light"] {
+  --text-color: #213547;
+  --text-secondary: rgba(33,53,71,0.56);
+  --background-light: var(--overlay-96);
+  --background-medium: var(--overlay-92);
+  --theme-primary: #E91E63;
+  --theme-secondary: #00D4FF;
+  --text-color-inverse: #ffffff;
+}
+:root[data-theme="light"] .sidebar,
+:root[data-theme="light"] .sidebar-section,
+:root[data-theme="light"] .section-header,
+:root[data-theme="light"] .section-content,
+:root[data-theme="light"] .debug-info {
+  background: var(--overlay-06);
+}
+
+/* Per-theme overrides for dark themes to ensure good contrast and tuned control colors */
+:root[data-theme="dark"] {
+  --background-light: var(--overlay-black-06);
+  --background-medium: var(--overlay-black-12);
+  --text-secondary: var(--overlay-60);
+  --control-background: var(--overlay-black-12);
+  --control-border: var(--overlay-black-16);
+  --control-text: #ffffff;
+}
+
+:root[data-theme="dark"] .section-header,
+:root[data-theme="dark"] .preset-btn {
+  background: var(--background-light);
+  color: var(--control-text);
+  border-color: var(--control-border);
+}
+
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .sidebar-section,
+:root[data-theme="dark"] .section-header,
+:root[data-theme="dark"] .section-content {
+  background: var(--background-medium);
+  color: var(--control-text);
+}
+
+:root[data-theme="ocean"] {
+  --background-light: rgba(8,18,28,0.06);
+  --background-medium: rgba(8,18,28,0.12);
+  --text-secondary: rgba(255,255,255,0.5);
+  --control-background: rgba(8,18,28,0.12);
+  --control-border: rgba(255,255,255,0.06);
+  --control-text: #ffffff;
+  --progress-track-stroke: rgba(255,255,255,0.06);
+}
+
+:root[data-theme="ocean"] .section-header,
+:root[data-theme="ocean"] .preset-btn {
+  background: var(--background-light);
+  color: var(--control-text);
+  border-color: var(--control-border);
+}
+
+:root[data-theme="ocean"] .sidebar,
+:root[data-theme="ocean"] .sidebar-section,
+:root[data-theme="ocean"] .section-header,
+:root[data-theme="ocean"] .section-content {
+  background: var(--background-medium);
+  color: var(--control-text);
+  box-shadow: none;
+}
+
+:root[data-theme="midnight"] {
+  --background-light: var(--overlay-black-06);
+  --background-medium: var(--overlay-black-12);
+  --text-secondary: var(--overlay-60);
+  --control-background: var(--overlay-black-12);
+  --control-border: var(--overlay-black-20);
+  --control-text: #ffffff;
+  --progress-track-stroke: var(--overlay-black-38);
+}
+
+:root[data-theme="midnight"] .section-header,
+:root[data-theme="midnight"] .preset-btn {
+  background: var(--background-light);
+  color: var(--control-text);
+  border-color: var(--control-border);
+}
+
+:root[data-theme="midnight"] .sidebar,
+:root[data-theme="midnight"] .sidebar-section,
+:root[data-theme="midnight"] .section-header,
+:root[data-theme="midnight"] .section-content {
+  background: var(--background-medium);
+  color: var(--control-text);
+}
+
+:root[data-theme="sunset"] {
+  --background-light: rgba(45,27,31,0.06);
+  --background-medium: rgba(45,27,31,0.12);
+  --text-secondary: rgba(255,255,255,0.5);
+  --control-background: rgba(45,27,31,0.12);
+  --control-border: rgba(255,255,255,0.06);
+  --control-text: #ffffff;
+  --progress-track-stroke: rgba(255,255,255,0.06);
+}
+
+:root[data-theme="sunset"] .section-header,
+:root[data-theme="sunset"] .preset-btn {
+  background: var(--background-light);
+  color: var(--control-text);
+  border-color: var(--control-border);
+}
+
+:root[data-theme="sunset"] .sidebar,
+:root[data-theme="sunset"] .sidebar-section,
+:root[data-theme="sunset"] .section-header,
+:root[data-theme="sunset"] .section-content {
+  background: var(--background-medium);
+  color: var(--control-text);
+}
+
+:root[data-theme="forest"] {
+  --background-light: rgba(16,32,16,0.06);
+  --background-medium: rgba(16,32,16,0.12);
+  --text-secondary: rgba(255,255,255,0.5);
+  --control-background: rgba(16,32,16,0.12);
+  --control-border: rgba(255,255,255,0.06);
+  --control-text: #ffffff;
+  --progress-track-stroke: rgba(255,255,255,0.06);
+}
+
+:root[data-theme="forest"] .section-header,
+:root[data-theme="forest"] .preset-btn {
+  background: var(--background-light);
+  color: var(--control-text);
+  border-color: var(--control-border);
+}
+
+:root[data-theme="forest"] .sidebar,
+:root[data-theme="forest"] .sidebar-section,
+:root[data-theme="forest"] .section-header,
+:root[data-theme="forest"] .section-content {
+  background: var(--background-medium);
+  color: var(--control-text);
+}
+
+/* Force common form controls and task inputs to use the light-theme text color */
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] select,
+:root[data-theme="light"] .custom-input,
+:root[data-theme="light"] .word-input,
+:root[data-theme="light"] .task-input,
+:root[data-theme="light"] .input-with-unit input {
+  color: var(--text-color) !important;
+}
+
+:root[data-theme="light"] .preset-btn,
+:root[data-theme="light"] .custom-input,
+:root[data-theme="light"] .theme-card {
+  background: var(--overlay-08);
+  background: var(--background-medium) !important;
+  border: 2px solid rgba(33,53,71,0.06) !important;
+}
+
+:root[data-theme="light"] .custom-input::placeholder,
+:root[data-theme="light"] .word-input::placeholder,
+:root[data-theme="light"] .task-input::placeholder,
+:root[data-theme="light"] input::placeholder,
+:root[data-theme="light"] textarea::placeholder {
+  color: rgba(33,53,71,0.45) !important;
+}
+
+:root[data-theme="light"] .sidebar-toggle:hover,
+:root[data-theme="light"] .preset-btn:hover {
+  background: var(--overlay-20);
+}
+
+:root[data-theme="light"] .btn-secondary:hover:not(:disabled) {
+  background: var(--overlay-15);
+  transform: translateY(-2px);
+}
+
+/* Strong overrides for form controls and UI chrome in light theme */
+:root[data-theme="light"] input,
+:root[data-theme="light"] textarea,
+:root[data-theme="light"] select,
+:root[data-theme="light"] .custom-input,
+:root[data-theme="light"] .word-input,
+:root[data-theme="light"] .input-with-unit input {
+  background: #ffffff !important;
+  color: var(--text-color) !important;
+  border: 1px solid rgba(33,53,71,0.06) !important;
+}
+
+:root[data-theme="light"] input::placeholder,
+:root[data-theme="light"] textarea::placeholder,
+:root[data-theme="light"] .custom-input::placeholder,
+:root[data-theme="light"] .word-input::placeholder {
+  color: rgba(33,53,71,0.45) !important;
+}
+
+:root[data-theme="light"] .section-header,
+:root[data-theme="light"] .preset-btn,
+:root[data-theme="light"] .btn-secondary {
+  background: #ffffff !important;
+  color: var(--text-color) !important;
+  border: 1px solid rgba(33,53,71,0.06) !important;
+}
+
+:root[data-theme="light"] .btn-primary {
+  /* keep primary color but ensure border is visible */
+  border: 1px solid rgba(33,53,71,0.06) !important;
+}
+
+:root[data-theme="light"] .input-with-unit input {
+  background: transparent !important;
+}
+
+/* Make sure circular progress ring is visible on light backgrounds */
+:root[data-theme="light"] .circular-progress-track {
+  stroke: rgba(33,53,71,0.06) !important;
+}
+
+:root[data-theme="light"] .circular-progress-indicator {
+  stroke: var(--theme-primary) !important;
+}
+
+/* Default progress track stroke uses theme variable so it's visible per-theme */
+.circular-progress-track {
+  stroke: var(--progress-track-stroke, rgba(0,0,0,0.06)) !important;
+}
+
+.circular-progress-indicator {
+  stroke: var(--theme-primary) !important;
+}
+
+/* Fallback: force any lingering white text to the configured text color in light mode */
+:root[data-theme="light"] * {
+  color: var(--text-color) !important;
+}
+
+:root[data-theme="light"] .sidebar,
+:root[data-theme="light"] .sidebar-section,
+:root[data-theme="light"] .section-header,
+:root[data-theme="light"] .section-content,
+:root[data-theme="light"] .debug-info {
+  background: var(--overlay-60);
+  color: #213547;
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .btn-primary {
+  color: #ffffff;
+}
+
+:root[data-theme="light"] .preset-btn,
+:root[data-theme="light"] .custom-input,
+:root[data-theme="light"] .theme-card {
+  background: var(--overlay-80);
+  color: #213547;
+  border-color: rgba(33,53,71,0.06);
+}
+
+:root[data-theme="light"] .section-header.active,
+:root[data-theme="light"] .section-header:focus-visible {
+  background: linear-gradient(90deg, rgba(100,108,255,0.12), rgba(100,108,255,0.06));
+  border-left: 4px solid rgba(100,108,255,0.9);
+}
+
+/* Force commonly white text to use theme text color in light mode */
+:root[data-theme="light"] h1,
+:root[data-theme="light"] .time,
+:root[data-theme="light"] .progress-info,
+:root[data-theme="light"] .debug-info,
+:root[data-theme="light"] .section-header,
+:root[data-theme="light"] .section-header span,
+:root[data-theme="light"] .preset-btn,
+:root[data-theme="light"] .btn-secondary,
+:root[data-theme="light"] .tasklist-section,
+:root[data-theme="light"] .tasklist-section *,
+:root[data-theme="light"] .task-item,
+:root[data-theme="light"] .theme-card,
+:root[data-theme="light"] .theme-info,
+:root[data-theme="light"] .theme-name,
+:root[data-theme="light"] .theme-desc,
+:root[data-theme="light"] .statistics-card,
+:root[data-theme="light"] .statistics-card * {
+  color: var(--text-color) !important;
+}
+
+/* Ensure icons and small labels are darker in light mode */
+:root[data-theme="light"] .collapse-icon,
+:root[data-theme="light"] .compact-label,
+:root[data-theme="light"] .progress-info small {
+  color: var(--text-secondary) !important;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Main Layout */
+.app-layout {
+  display: flex;
+  gap: 2rem;
+  /* Let layout span full width; use internal container for max-width when centered layout is needed */
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+}
+
+/* Optional centered container: use .container inside .app-layout when a centered column is desired */
+.app-layout .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Timer Section with Circular Progress */
+.timer-section {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+/* Timer Display (inside the circle) */
+.timer-display {
+  text-align: center;
+}
+
+.time {
+  font-size: 4rem;
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  /* subtle dark shadow for readability in both themes */
+  text-shadow: 0 0 8px rgba(0,0,0,0.06);
+}
+
+.progress-info {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  min-height: 1.2rem;
+}
+
+/* Control Buttons */
+.controls {
+  display: flex;
+  gap: 1rem; /* Increased from 0.75rem for better spacing */
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1.02rem;
+  padding: 0.56rem 1.1rem;
+  min-height: 44px; /* WCAG 2.5.5: minimum touch target */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-weight: 500;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+  color: var(--text-color-inverse);
+  min-width: 120px;
+  padding: 0.56rem 1.2rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--background-light);
+  color: var(--text-color);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 0.46rem 0.9rem;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--overlay-15);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Debug Info */
+.debug-info {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.debug-info small {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Spacing for TaskList when placed below the timer */
+.tasklist-section {
+  margin-top: 1.25rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Tighten spacing for task items to fit compact mode better */
+.task-item {
+  padding: 0.4rem 0.6rem;
+  gap: 0.5rem;
+}
+
+/* Task input visibility improvements */
+.task-input,
+.task-input input {
+  background: var(--control-background);
+  color: var(--control-text);
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.task-input::placeholder,
+.task-input input::placeholder {
+  color: var(--text-secondary);
+}
+
+.task-input:focus,
+.task-input input:focus {
+  outline: none;
+  background: var(--background-light);
+  color: var(--text-color);
+  border-color: var(--theme-primary);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 380px;
+  background: var(--background-medium);
+  border-radius: 16px;
+  padding: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.sidebar.closed {
+  width: 60px;
+  padding: 0.5rem;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--background-light);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--text-color);
+  width: 32px;
+  height: 32px;
+  min-width: 44px; /* WCAG 2.5.5: minimum touch target */
+  min-height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 6px; /* Expand hit area */
+  z-index: 10;
+}
+
+.sidebar.closed .sidebar-toggle {
+  right: 50%;
+  transform: translateX(50%);
+}
+
+.sidebar-toggle:hover {
+  background: var(--overlay-20);
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 3rem;
+}
+
+/* Group headers for workflow-organized sidebar */
+.sidebar-group-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  padding: 0.5rem 0.75rem 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.sidebar-group-separator {
+  height: 1px;
+  background: var(--background-light);
+  margin: 0.5rem 0.75rem;
+  border-radius: 2px;
+}
+
+/* Sidebar Sections */
+.sidebar-section {
+  background: var(--background-medium);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.section-header {
+  width: 100%;
+  background: var(--background-light);
+  border: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: background 0.3s ease;
+}
+
+.section-header:hover {
+  background: var(--overlay-20); /* Increased from --overlay-12 for more noticeable feedback */
+}
+
+.collapse-icon {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.section-content {
+  padding: 0 1rem;
+  /* Start collapsed: hide content using max-height with transition for smooth animation */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 320ms ease, padding 220ms ease;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.section-content.open {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  max-height: 100%; /* large enough to show typical content; adjust if you add more content */
+}
+
+.section-header:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.18);
+}
+
+/* Visual indicator for the currently active or focused accordion header */
+.section-header.active,
+.section-header:focus-visible,
+.section-header[aria-expanded="true"] {
+  background: linear-gradient(90deg, rgba(100,108,255,0.12), rgba(100,108,255,0.06));
+  box-shadow: 0 6px 18px rgba(100,108,255,0.06);
+  border-left: 4px solid rgba(100,108,255,0.9);
+}
+
+/* Presets in Sidebar */
+.sidebar-section .presets {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.sidebar-section .presets h3 {
+  display: none;
+}
+
+.preset-btn {
+  background: var(--background-light);
+  color: var(--text-color);
+  font-size: 0.88rem;
+  padding: 0.44rem 0.9rem;
+  margin: 0.22rem 0;
+  border: 1px solid rgba(0,0,0,0.06);
+  width: 100%;
+  display: block;
+}
+
+.preset-btn:hover {
+  background: var(--overlay-15); /* Increased from --background-light for more noticeable feedback */
+  border-color: rgba(0,0,0,0.12); /* Darker border on hover */
+}
+
+/* Custom Duration Input */
+.custom-duration {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--overlay-10);
+}
+
+.custom-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  background: var(--background-medium);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.custom-input:focus {
+  outline: none;
+  background: var(--background-light);
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.12);
+}
+
+.custom-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.custom-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: 100%;
+  padding: 0.46rem 0.9rem;
+}
+
+.custom-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Global form control styles to ensure readable text and visible borders in light mode */
+input, textarea, select, .custom-input, .word-input, .input-with-unit input, .task-input, .task-input input {
+  background: var(--control-background);
+  color: var(--control-text);
+  border: 1px solid var(--control-border);
+  border-radius: 6px;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+input::placeholder, textarea::placeholder, .custom-input::placeholder, .word-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Stronger visible focus state */
+input:focus, textarea:focus, .custom-input:focus, .word-input:focus, .task-input:focus, .task-input input:focus {
+  outline: none;
+  background: var(--background-light);
+  color: var(--text-color);
+  border-color: var(--theme-primary);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+}
+
+/* Ensure section headers and primary buttons have subtle borders in light theme */
+:root[data-theme="light"] .section-header {
+  border: 1px solid rgba(33,53,71,0.06);
+  background: var(--overlay-92);
+}
+
+:root[data-theme="light"] .btn-primary {
+  border: 1px solid rgba(33,53,71,0.06);
+}
+
+/* Pomodoro-specific fallbacks when component CSS still contains hard-coded whites */
+.pomodoro-container {
+  background: var(--background-medium);
+  color: var(--text-color);
+}
+.input-with-unit {
+  background: var(--background-medium);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.input-with-unit input {
+  color: var(--text-color);
+}
+.expand-btn {
+  background: var(--background-light);
+  color: var(--text-color);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.pomodoro-explanation {
+  background: rgba(233, 30, 99, 0.08);
+  border: 1px solid rgba(233, 30, 99, 0.18);
+}
+
+/* Adjust nested components in sidebar */
+.sidebar-section .session-mode-container,
+.sidebar-section .pomodoro-container {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 320px;
+  }
+}
+
+@media (max-width: 968px) {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .app-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 600px;
+    order: 2;
+  }
+
+  .sidebar.closed {
+    width: 100%;
+    height: 60px;
+  }
+
+  .sidebar.closed .sidebar-content {
+    display: none;
+  }
+
+  .main-content {
+    order: 1;
+  }
+
+  .timer-section {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .timer-section {
+    transform: scale(0.75);
+  }
+
+  .time {
+    font-size: 3rem;
+  }
+
+  .progress-info {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-section {
+    transform: scale(0.65);
+    margin-bottom: 0;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .controls {
+    gap: 0.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .sidebar-toggle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Compact mode - smaller paddings/margins for dense layout */
+html.compact, body.compact {
+  font-size: 0.98rem;
+}
+
+html.compact .App, body.compact .App {
+  padding: 1rem clamp(0.5rem, 3vw, 2rem);
+}
+
+html.compact .controls {
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+html.compact button, body.compact button {
+  padding: 0.36rem 0.8rem;
+  border-radius: 8px;
+}
+
+html.compact .btn-primary {
+  min-width: 100px;
+  padding: 0.36rem 0.9rem;
+}
+
+html.compact .sidebar {
+  padding: 0.6rem;
+}
+
+html.compact .section-header {
+  padding: 0.6rem 1rem;
+}
+
+html.compact .preset-btn {
+  padding: 0.32rem 0.6rem;
+  margin: 0.12rem 0;
+}
+
+html.compact .task-list-container .task-item {
+  padding: 0.4rem 0.6rem;
+}
+
+html.compact .word-inputs .word-input-group label {
+  font-size: 0.85rem;
+}
+
+/* compact mode for custom inputs */
+html.compact .custom-input, html.compact .word-input {
+  padding: 0.4rem 0.6rem;
+}
+
+
+/* Slightly tighter spacing on small screens for the moved TaskList */
+@media (max-width: 768px) {
+  .tasklist-section {
+    margin-top: 0.9rem;
+    padding: 0 1rem;
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tasklist-section {
+    margin-top: 0.6rem;
+    padding: 0 0.5rem;
+    max-width: 100%;
+  }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility: Focus indicators for keyboard navigation */
+button:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-text:focus-visible {
+  outline: 3px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+
+.sidebar-toggle:focus-visible {
+  outline: 3px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+.preset-btn:focus-visible {
+  outline: 3px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--theme-primary);
+  outline-offset: 2px;
+}
+

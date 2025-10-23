@@ -1,0 +1,162 @@
+.session-mode-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+/* Current Mode Badge */
+.current-mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--overlay-05);
+  border: 2px solid;
+  border-radius: 50px;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.mode-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.mode-label {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.mode-status {
+  font-size: 1.2rem;
+  line-height: 1;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Mode Description */
+.mode-description {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+/* Mode Selector Section */
+.mode-selector {
+  background: var(--overlay-05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.mode-selector h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Mode Buttons */
+.mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.mode-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 0.8rem;
+  background: var(--overlay-05);
+  border: 2px solid;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  color: var(--text-color);
+}
+
+.mode-btn:hover:not(:disabled) {
+  background: var(--overlay-10);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mode-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mode-btn.active {
+  background: var(--overlay-15);
+  box-shadow: 0 0 20px var(--mode-color);
+}
+
+.mode-btn.active .mode-btn-icon {
+  color: var(--mode-color);
+  transform: scale(1.2);
+}
+
+.mode-btn-icon {
+  font-size: 2rem;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.mode-btn-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Lock Message */
+.mode-lock-message {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+.mode-lock-message small {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mode-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .mode-btn {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .mode-btn-icon {
+    font-size: 1.5rem;
+  }
+
+  .mode-btn-label {
+    font-size: 0.8rem;
+  }
+
+  .current-mode-badge {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
+}

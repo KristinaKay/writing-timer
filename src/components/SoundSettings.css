@@ -1,0 +1,220 @@
+.sound-settings-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Sound Toggle */
+.sound-toggle-section {
+  padding-bottom: 0.5rem;
+}
+
+.sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sound-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background: var(--background-medium);
+  border-radius: 50px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--text-color);
+  top: 3px;
+  left: 3px;
+  transition: transform 0.3s ease;
+}
+
+.sound-toggle input:checked + .toggle-slider {
+  background: var(--theme-primary);
+}
+
+.sound-toggle input:checked + .toggle-slider::before {
+  transform: translateX(24px);
+}
+
+.toggle-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.enabled-badge {
+  font-size: 0.75rem;
+  background: rgba(233, 30, 99, 0.3);
+  color: #E91E63;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid rgba(233, 30, 99, 0.5);
+}
+
+/* Section Label */
+.section-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Sound Type Selection */
+.sound-type-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sound-type-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.sound-type-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  background: var(--background-medium);
+  color: var(--text-color);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.sound-type-btn:hover {
+  background: var(--background-light);
+  border-color: rgba(0,0,0,0.08);
+}
+
+.sound-type-btn.active {
+  background: rgba(233, 30, 99, 0.12);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+  font-weight: 600;
+}
+
+/* Volume Control */
+.volume-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.volume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.volume-value {
+  font-size: 0.9rem;
+  color: var(--theme-primary);
+  font-weight: 600;
+}
+
+.volume-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--background-light);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #E91E63;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: #C2185B;
+  transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #E91E63;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  background: #C2185B;
+  transform: scale(1.2);
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, 
+    var(--theme-primary) 0%, 
+    var(--theme-primary) var(--volume-percent, 50%), 
+    var(--background-light) var(--volume-percent, 50%), 
+    var(--background-light) 100%);
+}
+
+/* Test Button */
+.test-sound-btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, var(--theme-primary) 0%, #C2185B 100%);
+  color: var(--text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.test-sound-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+}
+
+.test-sound-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sound-type-buttons {
+    grid-template-columns: 1fr;
+  }
+}
