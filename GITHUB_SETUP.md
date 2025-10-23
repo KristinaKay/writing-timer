@@ -23,7 +23,7 @@ If you don't have GitHub CLI installed, follow these steps:
 git add .
 
 # Create initial commit
-git commit -m "Initial commit: Writing Timer with accessibility improvements"
+git commit -m "Initial commit: A Timer to Write with accessibility improvements"
 
 # Add GitHub as remote (replace YOUR_USERNAME)
 git remote add origin https://github.com/YOUR_USERNAME/writing-timer.git

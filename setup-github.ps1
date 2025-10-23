@@ -1,7 +1,7 @@
-# GitHub Repository Setup Script for Writing Timer
+# GitHub Repository Setup Script for A Timer to Write
 # This script will create a private repository and push your code
 
-Write-Host "=== Writing Timer - GitHub Setup ===" -ForegroundColor Cyan
+Write-Host "=== A Timer to Write - GitHub Setup ===" -ForegroundColor Cyan
 Write-Host ""
 
 # Check if GitHub CLI is installed
@@ -21,7 +21,7 @@ git add .
 
 # Create initial commit
 Write-Host "Creating initial commit..." -ForegroundColor Green
-git commit -m "Initial commit: Writing Timer with accessibility improvements
+git commit -m "Initial commit: A Timer to Write with accessibility improvements
 
 - React-based writing timer application
 - Multiple timer modes (Pomodoro, custom durations)

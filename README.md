@@ -1,5 +1,5 @@
 ````markdown
-# ⏱️ Writing Timer
+# ⏱️ A Timer to Write
 
 ![dev](https://img.shields.io/badge/dev-vite-blue)
 ![React](https://img.shields.io/badge/React-18-blue)
@@ -21,7 +21,7 @@
 
 ## ℹ️ Overview
 
-Writing Timer is a productivity application built specifically for writers who want to track their writing sessions and maintain focus. Whether you're working on a novel, blog posts, or academic papers, this timer helps you stay accountable with visual feedback, task lists, and comprehensive statistics.
+A Timer to Write is a productivity application built specifically for writers who want to track their writing sessions and maintain focus. Whether you're working on a novel, blog posts, or academic papers, this timer helps you stay accountable with visual feedback, task lists, and comprehensive statistics.
 
 The app uses the Pomodoro technique by default but is fully customizable to fit your workflow. All data is stored locally in your browser, ensuring privacy and offline functionality.
 

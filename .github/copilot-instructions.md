@@ -1,7 +1,7 @@
-# Writing Timer - AI Coding Instructions
+# A Timer to Write - AI Coding Instructions
 
 ## Project Overview
-This is a Writing Timer application designed to help writers track their writing sessions and productivity. The project is currently in initial setup phase.
+This is A Timer to Write application designed to help writers track their writing sessions and productivity. The project is currently in initial setup phase.
 
 ## Architecture & Patterns
 
