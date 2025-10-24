@@ -71,7 +71,7 @@ When a timer completes, you'll get a custom message based on your mode:
 
 ```
 ┌─────────────────────────────────────────┐
-│  My Mercurial Timer for Writers         │
+│ A Timer to Write      │
 ├─────────────────────────────────────────┤
 │                                         │
 │  [✍️ Writing ●]  ← Current mode badge  │

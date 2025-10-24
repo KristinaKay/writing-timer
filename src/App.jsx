@@ -242,7 +242,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>My Mercurial Timer for Writers</h1>
+      <h1>A Timer to Write</h1>
       
       <div className="app-layout">
         {/* Main Timer Section */}
