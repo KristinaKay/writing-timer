@@ -465,7 +465,7 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+  background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
   color: var(--text-color-inverse);
   min-width: 120px;
   padding: 0.56rem 1.2rem;
@@ -473,7 +473,8 @@ button {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+  box-shadow: 0 6px 20px rgba(var(--theme-primary), 0.5);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -737,7 +738,7 @@ button {
   outline: none;
   background: var(--background-light);
   border-color: var(--theme-primary);
-  box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.12);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-primary) 12%, transparent);
 }
 
 .custom-input::placeholder {
@@ -817,8 +818,8 @@ input:focus, textarea:focus, .custom-input:focus, .word-input:focus, .task-input
   border: 1px solid rgba(0,0,0,0.06);
 }
 .pomodoro-explanation {
-  background: rgba(233, 30, 99, 0.08);
-  border: 1px solid rgba(233, 30, 99, 0.18);
+  background: color-mix(in srgb, var(--theme-primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-primary) 18%, transparent);
 }
 
 /* Adjust nested components in sidebar */

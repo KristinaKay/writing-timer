@@ -5,7 +5,7 @@
 
 .circular-progress-svg {
   transform: rotate(-90deg); /* Start from top instead of right */
-  filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.28));
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--theme-primary) 28%, transparent));
 }
 
 /* Background track circle */
@@ -38,15 +38,16 @@
 /* Pulsing animation when timer is running */
 @keyframes pulse {
   0%, 100% {
-    filter: drop-shadow(0 0 10px rgba(233, 30, 99, 0.28));
+    filter: drop-shadow(0 0 10px currentColor) brightness(1);
   }
   50% {
-    filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.5));
+    filter: drop-shadow(0 0 20px currentColor) brightness(1.2);
   }
 }
 
 .circular-progress-container.running .circular-progress-svg {
   animation: pulse 2s ease-in-out infinite;
+  color: var(--theme-primary);
 }
 
 /* Completion effect */
