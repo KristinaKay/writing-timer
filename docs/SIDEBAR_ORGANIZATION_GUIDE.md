@@ -2,17 +2,17 @@
 
 ## 🎯 Problem
 
-With 10 sidebar sections now (including Word Tracker), the sidebar can feel overwhelming. Let's organize it logically!
+With 10 sidebar sections now (including Word Tracker), the sidebar is long and overwhelming and disorganized.
 
 ---
 
-## ✨ Recommended Layout: Workflow Groups
+## ✨ Suggested Layout: Workflow Groups
 
-Organize by **when you use it** in your writing workflow:
+### Organize by **when you use it** in your writing workflow
 
 ### 📋 GROUP 1: SESSION SETUP (Before You Start)
 
-**Use these BEFORE starting timer**
+#### Use these BEFORE starting timer
 
 1. **📝 Session Mode**
    - Choose: Writing, Research, Creative, Spiraling
@@ -33,15 +33,15 @@ Organize by **when you use it** in your writing workflow:
 
 ### ⏱️ GROUP 2: TIMER DURATION (Choose Your Time)
 
-**Pick how long you'll work**
+#### Pick how long you'll work
 
-4. **⚡ Quick Presets**
+1. **⚡ Quick Presets**
    - 25 min (Pomodoro)
    - 45 min (Deep Focus)
    - 60 min (Long Session)
    - 15 min (Quick Sprint)
 
-5. **🎨 Custom Timer**
+2. **🎨 Custom Timer**
    - Enter any duration (1-999 min)
    - Set custom session length
 
@@ -49,15 +49,15 @@ Organize by **when you use it** in your writing workflow:
 
 ### 📊 GROUP 3: TRACKING & TASKS (During/After Session)
 
-**Reference during work, review after**
+#### Reference during work, review after
 
-6. **📋 Task List**
+1. **📋 Task List**
    - Add session goals
    - Check off as you complete
    - Drag to reorder
    - Clear completed
 
-7. **📊 Statistics**
+2. **📊 Statistics**
    - View session stats
    - See word count progress
    - Track productivity patterns
@@ -67,20 +67,20 @@ Organize by **when you use it** in your writing workflow:
 
 ### ⚙️ GROUP 4: APP SETTINGS (Set Once, Use Always)
 
-**Configure once, rarely change**
+#### Configure once, rarely change
 
-8. **🔊 Sound**
+1. **🔊 Sound**
    - Enable/disable notifications
    - Choose sound type
    - Adjust volume
    - Test sound
 
-9. **🎨 Themes**
+2. **🎨 Themes**
    - Select color scheme
    - 6 themes to choose from
    - Light/dark options
 
-10. **💾 Backup**
+3. **💾 Backup**
     - Export all data
     - Import backup
     - Clear all data

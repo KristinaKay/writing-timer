@@ -256,7 +256,7 @@ Environment variables:
 
 ## 📚 Documentation
 
-Additional guides and documentation are available in the `notes/` directory:
+Additional guides and documentation are available in the `docs/` directory:
 
 - **POMODORO_GUIDE.md**: How the Pomodoro feature works
 - **TASK_LIST_GUIDE.md**: Task management implementation

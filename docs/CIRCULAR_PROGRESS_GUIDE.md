@@ -1,6 +1,6 @@
 # Circular Progress Indicator - Installation Guide
 
-## 🎨 What You're Adding
+## 🎨 Additions
 
 A beautiful animated circular progress ring that:
 - Wraps around your timer display
@@ -12,32 +12,13 @@ A beautiful animated circular progress ring that:
 - Has smooth animations and pulsing effect when active
 - Responsive design for all screen sizes
 
-## 📦 Files to Install
+## 📦 Function Files
 
 You have 4 files to add/update:
 1. **CircularProgress.jsx** - The circular progress component (NEW)
 2. **CircularProgress.css** - Component styling (NEW)
-3. **App.jsx** - Updated to use CircularProgress (REPLACE)
-4. **App.css** - Updated styling for new layout (REPLACE)
-
-## 📂 Installation Steps
-
-### Step 1: Create components folder
-```bash
-mkdir src\components
-```
-
-### Step 2: Add CircularProgress files
-Move these files to your project:
-- `CircularProgress.jsx` → `src\components\CircularProgress.jsx`
-- `CircularProgress.css` → `src\components\CircularProgress.css`
-
-### Step 3: Replace existing files
-- `App-updated.jsx` → Rename to `App.jsx` and replace `src\App.jsx`
-- `App-updated.css` → Rename to `App.css` and replace `src\App.css`
-
-### Step 4: Watch the magic happen! ✨
-Your browser should auto-refresh and show the circular progress ring!
+3. **App.jsx** 
+4. **App.css**
 
 ## 🎯 What You'll See
 
@@ -112,15 +93,3 @@ Want to change the look? In `CircularProgress.jsx`:
 **Colors not changing:**
 - Verify the `getProgressColor()` function is working
 - Check that timer states are updating correctly
-
-## ✅ You're Done!
-
-Your timer now has a professional circular progress indicator! 
-
-Next up, you could add:
-- Keyboard shortcuts (Space, R keys)
-- Session mode selector
-- Task list with checkboxes
-- Sound notifications
-
-Want to tackle one of those next?

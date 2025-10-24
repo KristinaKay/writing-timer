@@ -1,6 +1,6 @@
 # Custom Duration - Feature Guide
 
-## ✨ What You Added
+## ✨ Additions
 
 A custom duration input that lets you set any timer length you want, from 1 to 999 minutes!
 
@@ -14,16 +14,6 @@ A custom duration input that lets you set any timer length you want, from 1 to 9
 ✅ **Brand styling** - Matches your hot pink theme  
 ✅ **Responsive** - Stacks vertically on mobile  
 
-## 📦 Files Updated
-
-- **App-with-CustomDuration.jsx** - Replace your `App.jsx`
-- **App-with-CustomDuration.css** - Replace your `App.css`
-
-## 📂 Installation
-
-1. **Replace** `src/App.jsx` with `App-with-CustomDuration.jsx`
-2. **Replace** `src/App.css` with `App-with-CustomDuration.css`
-3. **Save** and watch your browser refresh! ✨
 
 ## 🎮 How to Use
 
@@ -166,21 +156,3 @@ Perfect for:
 **Input doesn't clear:**
 - This happens after setting a duration or using a preset
 - It's working correctly!
-
-## 🎉 You're Done!
-
-Now you can set ANY duration you want! Perfect for:
-- Custom writing challenges
-- Specific meeting lengths
-- Flexible work blocks
-- Timed breaks
-
-Combine with session modes to track exactly how long you spend on different types of work! 🚀
-
-## 🔮 What's Next?
-
-With custom durations, you're ready for:
-1. **Task List** - Add specific tasks for each session
-2. **Statistics** - See how long you spend on different durations
-3. **Session History** - Track all your custom sessions
-4. **Keyboard Shortcuts** - Quick access to custom input (saved for last!)
