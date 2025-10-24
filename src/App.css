@@ -465,16 +465,22 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
+  background: 
+    linear-gradient(135deg, 
+      color-mix(in srgb, var(--theme-primary) 85%, var(--theme-secondary)) 0%, 
+      color-mix(in srgb, var(--theme-secondary) 85%, var(--theme-primary)) 100%
+    );
   color: var(--text-color-inverse);
   min-width: 120px;
   padding: 0.56rem 1.2rem;
+  filter: blur(0.3px);
+  backdrop-filter: blur(4px);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--theme-primary), 0.5);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--theme-primary) 50%, transparent);
+  filter: brightness(1.1) blur(0.2px);
 }
 
 .btn-primary:active {
