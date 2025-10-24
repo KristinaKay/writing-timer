@@ -18,34 +18,34 @@ export const themes = {
   },
   ocean: {
     name: '🌊 Ocean',
-    description: 'Cool blue tones',
-    primary: '#00D4FF',
-    secondary: '#9C27B0',
-    background: 'linear-gradient(135deg, #0a1929 0%, #1a2f3f 100%)',
+    description: 'Aurora - Cyan and violet like northern lights',
+    primary: '#22D3EE',
+    secondary: '#8B5CF6',
+    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
     textColor: '#ffffff'
   },
   sunset: {
     name: '🌅 Sunset',
-    description: 'Warm orange and pink',
-    primary: '#FF6B35',
-    secondary: '#F7931E',
-    background: 'linear-gradient(135deg, #2d1b1f 0%, #3d2a1f 100%)',
+    description: 'Desert Sunset - Golden amber with red accents',
+    primary: '#F59E0B',
+    secondary: '#EF4444',
+    background: 'linear-gradient(135deg, #451a03 0%, #78350f 100%)',
     textColor: '#ffffff'
   },
   forest: {
     name: '🌲 Forest',
-    description: 'Natural green tones',
-    primary: '#4CAF50',
-    secondary: '#8BC34A',
-    background: 'linear-gradient(135deg, #1a2f1a 0%, #2a3f2a 100%)',
+    description: 'Pine & Mint - Bright green with minty freshness',
+    primary: '#22C55E',
+    secondary: '#6EE7B7',
+    background: 'linear-gradient(135deg, #052e16 0%, #064e27 100%)',
     textColor: '#ffffff'
   },
   midnight: {
     name: '🌃 Midnight',
-    description: 'Deep blue night',
-    primary: '#9C27B0',
-    secondary: '#00D4FF',
-    background: 'linear-gradient(135deg, #0d1117 0%, #1a1d29 100%)',
+    description: 'Cosmic Violet - Vibrant violet and fuchsia',
+    primary: '#8B5CF6',
+    secondary: '#D946EF',
+    background: 'linear-gradient(135deg, #18122b 0%, #2d1b4e 100%)',
     textColor: '#ffffff'
   }
 };
