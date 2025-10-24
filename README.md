@@ -1,4 +1,3 @@
-````markdown
 # ⏱️ A Timer to Write
 
 ![dev](https://img.shields.io/badge/dev-vite-blue)
@@ -6,7 +5,6 @@
 ![Accessibility](https://img.shields.io/badge/WCAG-AA-green)
 
 > *A focused writing timer application designed to help writers track sessions, manage tasks, and boost productivity.*
-
 
 ## 🌟 Highlights
 
@@ -18,13 +16,11 @@
 - **Export/Import**: Save and restore your session data
 - **Compact Mode**: Toggle for a streamlined interface
 
-
 ## ℹ️ Overview
 
 A Timer to Write is a productivity application built specifically for writers who want to track their writing sessions and maintain focus. Whether you're working on a novel, blog posts, or academic papers, this timer helps you stay accountable with visual feedback, task lists, and comprehensive statistics.
 
 The app uses the Pomodoro technique by default but is fully customizable to fit your workflow. All data is stored locally in your browser, ensuring privacy and offline functionality.
-
 
 ### ✍️ Author
 
@@ -33,7 +29,7 @@ GitHub: [@KristinaKay](https://github.com/KristinaKay)
 
 ## 🚀 Quick Start
 
-**View the app in action:**
+### View the app in action
 
 1. Start the timer with preset durations (25min, 45min, 1hr) or set a custom duration
 2. Add tasks to track what you're working on during each session
@@ -41,9 +37,9 @@ GitHub: [@KristinaKay](https://github.com/KristinaKay)
 4. Select a theme that suits your mood
 5. View your productivity statistics and session history
 
-**Features at a glance:**
+### Features at a glance
 
-```
+```markdown
 ✓ Start/Pause/Stop/Reset controls with keyboard shortcuts
 ✓ Circular progress indicator with real-time countdown
 ✓ Task list with drag-and-drop reordering
@@ -52,7 +48,6 @@ GitHub: [@KristinaKay](https://github.com/KristinaKay)
 ✓ Sound notifications with customizable alerts
 ✓ Export/Import data for backup
 ```
-
 
 ## ⬇️ Installation
 
@@ -86,7 +81,6 @@ npm run build
 ```
 
 The production files will be in the `dist/` directory.
-
 
 ## 🎨 Features
 
@@ -136,21 +130,17 @@ WCAG AA compliant with:
 - 44×44px minimum touch targets
 - Screen reader friendly
 
-
 ## 💭 Feedback and Contributing
 
 Found a bug or have a feature request? [Open an issue](https://github.com/KristinaKay/writing-timer/issues) on GitHub.
 
 Want to contribute? Pull requests are welcome! Please read the contribution guidelines in the [notes/](notes/) directory for development patterns and architecture decisions.
 
-
 ## 📝 License
 
 This project is private and not currently licensed for public use.
 
-
 ---
-
 
 ## 🛠️ Development
 
@@ -179,8 +169,6 @@ Quick tips:
 - Styles are in `src/App.css`; use the `.container` helper to constrain content while keeping background full-width.
 - Sidebar accordion state persists to localStorage under the key `openSidebarSection`.
 - For accessibility: use ArrowUp/ArrowDown, Tab/Shift+Tab to move between sidebar headers and Enter/Space to toggle a section.
-
-## 🛠️ Development
 
 ### Quick Reference
 
@@ -225,16 +213,13 @@ Start the dev server directly from VS Code:
 - Themes respect system color preferences
 - Animations respect `prefers-reduced-motion`
 
-
-## 🧪 Testing
-
 ## 🧪 Testing
 
 ### Visual Smoke Test
 
 The project includes an automated visual smoke test that captures a screenshot of the running app.
 
-**Option 1: Full automated test**
+#### Option 1: Full automated test
 
 ```powershell
 npm run smoke
@@ -242,7 +227,7 @@ npm run smoke
 
 This starts the dev server, captures a screenshot, and shuts down automatically.
 
-**Option 2: Manual screenshot**
+#### Option 2: Manual screenshot
 
 Start the dev server first:
 
@@ -256,7 +241,7 @@ Then in another terminal:
 npm run smoke:screenshot
 ```
 
-**Configuration**
+##### Configuration
 
 Environment variables:
 
@@ -264,11 +249,10 @@ Environment variables:
 - `SMOKE_URL`: Override target URL (default: <http://localhost:5173/>)
 - `SMOKE_WAIT_MS`: Wait time for server startup (milliseconds)
 
-**Output**
+##### Output
 
 - Screenshot: `test/smoke/screenshot.png`
 - Console logs: `test/smoke/console.log`
-
 
 ## 📚 Documentation
 
@@ -281,5 +265,3 @@ Additional guides and documentation are available in the `notes/` directory:
 - **BRAND_COLORS_GUIDE.md**: Theme color system
 
 For development patterns and architecture decisions, see `.github/copilot-instructions.md`.
-
-````
