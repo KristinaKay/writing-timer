@@ -65,7 +65,7 @@
   height: 40px;
   font-size: 1.5rem;
   padding: 0;
-  background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
+  background: var(--theme-primary);
   color: var(--text-color);
   border: none;
   border-radius: 8px;
