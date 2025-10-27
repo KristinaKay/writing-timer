@@ -24,39 +24,62 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
   
   // Use ref to track if timer has completed (prevent multiple onComplete calls)
   const hasCompletedRef = useRef(false);
+  
+  // Use ref to store the start time for accurate timing
+  const startTimeRef = useRef(null);
+  const pauseTimeRef = useRef(null);
 
-  // Main countdown logic
+  // Main countdown logic with accurate timing
   useEffect(() => {
     if (isRunning && !isPaused) {
+      // Record start time if not already set
+      if (!startTimeRef.current) {
+        const currentTimeInSeconds = minutes * 60 + seconds;
+        startTimeRef.current = Date.now() - (totalElapsed * 1000);
+      }
+      
+      // If resuming from pause, adjust start time
+      if (pauseTimeRef.current) {
+        const pauseDuration = Date.now() - pauseTimeRef.current;
+        startTimeRef.current += pauseDuration;
+        pauseTimeRef.current = null;
+      }
+
       intervalRef.current = setInterval(() => {
-        setSeconds((prevSeconds) => {
-          if (prevSeconds > 0) {
-            // Decrement seconds
-            setTotalElapsed(prev => prev + 1);
-            return prevSeconds - 1;
-          } else {
-            // Seconds reached 0, check minutes
-            setMinutes((prevMinutes) => {
-              if (prevMinutes > 0) {
-                // Decrement minutes and reset seconds to 59
-                setTotalElapsed(prev => prev + 1);
-                setSeconds(59);
-                return prevMinutes - 1;
-              } else {
-                // Timer completed
-                if (!hasCompletedRef.current) {
-                  hasCompletedRef.current = true;
-                  setIsRunning(false);
-                  onComplete();
-                }
-                return 0;
-              }
-            });
-            return 0;
+        // Calculate actual elapsed time
+        const now = Date.now();
+        const actualElapsed = Math.floor((now - startTimeRef.current) / 1000);
+        
+        // Calculate time remaining
+        const totalInitialSeconds = initialTime * 60;
+        const remainingSeconds = totalInitialSeconds - actualElapsed;
+        
+        if (remainingSeconds > 0) {
+          const newMinutes = Math.floor(remainingSeconds / 60);
+          const newSeconds = remainingSeconds % 60;
+          
+          setMinutes(newMinutes);
+          setSeconds(newSeconds);
+          setTotalElapsed(actualElapsed);
+        } else {
+          // Timer completed
+          setMinutes(0);
+          setSeconds(0);
+          setTotalElapsed(totalInitialSeconds);
+          
+          if (!hasCompletedRef.current) {
+            hasCompletedRef.current = true;
+            setIsRunning(false);
+            onComplete();
           }
-        });
-      }, 1000);
+        }
+      }, 100); // Check every 100ms for smoother updates
     } else {
+      // Record pause time when pausing
+      if (isPaused && !pauseTimeRef.current) {
+        pauseTimeRef.current = Date.now();
+      }
+      
       // Clear interval when paused or stopped
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -70,7 +93,7 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isRunning, isPaused, onComplete]);
+  }, [isRunning, isPaused, onComplete, initialTime]);
 
   // Start the timer
   const start = () => {
@@ -81,6 +104,7 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
     setIsRunning(true);
     setIsPaused(false);
     hasCompletedRef.current = false;
+    startTimeRef.current = null; // Reset to recalculate on next interval
   };
 
   // Pause the timer
@@ -112,6 +136,8 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
     setSeconds(0);
     setTotalElapsed(0);
     hasCompletedRef.current = false;
+    startTimeRef.current = null;
+    pauseTimeRef.current = null;
   };
 
   // Reset to initial time
@@ -128,6 +154,8 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
     setIsPaused(false);
     setTotalElapsed(0);
     hasCompletedRef.current = false;
+    startTimeRef.current = null;
+    pauseTimeRef.current = null;
   };
 
   // Add time during a session (for extensions)
