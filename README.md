@@ -258,10 +258,35 @@ Environment variables:
 
 Additional guides and documentation are available in the `docs/` directory:
 
+- **DEPLOYMENT.md**: How to deploy as a web app
 - **POMODORO_GUIDE.md**: How the Pomodoro feature works
 - **TASK_LIST_GUIDE.md**: Task management implementation
 - **SESSION_MODES_GUIDE.md**: Different session types
 - **CIRCULAR_PROGRESS_GUIDE.md**: Timer visualization
 - **BRAND_COLORS_GUIDE.md**: Theme color system
+- **CONTRIBUTING.md**: Guidelines for contributors
+- **CHANGELOG.md**: Version history
 
 For development patterns and architecture decisions, see `.github/copilot-instructions.md`.
+
+## 🌐 Deployment
+
+This app can be deployed to any static hosting service. See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
+
+**Quick Deploy Options:**
+- **Netlify**: Drag `dist/` folder or connect GitHub repo
+- **Vercel**: Auto-deploys from GitHub with zero config
+- **GitHub Pages**: Free hosting on GitHub
+- **Self-hosted**: Copy `dist/` to any web server
+
+**Build for production:**
+```bash
+npm run build
+```
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+Free to use, modify, and distribute. Created by [@KristinaKay](https://github.com/KristinaKay).
+

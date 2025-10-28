@@ -74,6 +74,17 @@ Suggestions for making compact mode more space-efficient:
 - Option to disable if not desired
 - Quote categories (motivation, creativity, famous authors, etc.)
 
+## Desktop & Deployment
+
+### 12. Desktop App Version
+- Package as native desktop application using Electron or Tauri
+- Create Windows .exe installer
+- Create Mac .app bundle
+- Run outside browser as standalone application
+- System tray integration for quick access
+- Auto-start on login option
+- Offline functionality
+
 ---
 
 ## Notes
