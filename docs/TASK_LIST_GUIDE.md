@@ -12,32 +12,7 @@ A fully-featured Task List with:
 - ✅ Focus reminder when timer is running
 - ✅ Smooth animations
 
-## 📦 Files to Install
-
-You'll download 3 files:
-
-1. **TaskList.jsx** - The component
-2. **TaskList.css** - The styling  
-3. **App-with-TaskList.jsx** - Updated App (rename to `App.jsx`)
-
-## 🚀 Installation Steps
-
-### Step 1: Add TaskList Component
-
-Place these in your `src/components/` folder:
-```
-TaskList.jsx → src/components/TaskList.jsx
-TaskList.css → src/components/TaskList.css
-```
-
-### Step 2: Replace App.jsx
-
-```
-App-with-TaskList.jsx → Rename to App.jsx → Replace src/App.jsx
-```
-
-**That's it!** Your browser will auto-refresh with the Task List! ✨
-
+---
 ## 🎯 What's in the New Section
 
 ### Task List Header
@@ -288,34 +263,6 @@ In `TaskList.css`, find `.task-text`:
 - Verify App-with-TaskList.jsx replaced App.jsx
 - Check console for import errors
 - Ensure TaskList.jsx is in components folder
-
-## ✅ Installation Checklist
-
-Before you start:
-- [ ] Downloaded all 3 files
-- [ ] Backed up current App.jsx (optional)
-
-Installation:
-- [ ] TaskList.jsx → src/components/
-- [ ] TaskList.css → src/components/
-- [ ] App-with-TaskList.jsx renamed to App.jsx
-- [ ] App.jsx replaced in src/
-
-Testing:
-- [ ] Browser refreshed automatically
-- [ ] No console errors
-- [ ] Task List section visible in sidebar
-- [ ] Can add tasks
-- [ ] Can check tasks
-- [ ] Can drag tasks
-- [ ] Can delete tasks
-- [ ] Stats show correctly
-- [ ] "Clear completed" works
-- [ ] Tasks persist after refresh
-
-## 🎉 You're Done!
-
-Your Mercurial Timer now has a fully-featured Task List!
 
 **What's next?**
 - Add keyboard shortcuts (coming soon)

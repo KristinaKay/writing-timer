@@ -12,14 +12,6 @@ A beautiful animated circular progress ring that:
 - Has smooth animations and pulsing effect when active
 - Responsive design for all screen sizes
 
-## 📦 Function Files
-
-You have 4 files to add/update:
-1. **CircularProgress.jsx** - The circular progress component (NEW)
-2. **CircularProgress.css** - Component styling (NEW)
-3. **App.jsx** 
-4. **App.css**
-
 ## 🎯 What You'll See
 
 When you start the timer:

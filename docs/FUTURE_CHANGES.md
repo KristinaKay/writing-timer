@@ -34,6 +34,46 @@ Suggestions for making compact mode more space-efficient:
 - Tighten spacing between elements
 - Consider removing non-essential UI elements entirely
 
+### 6. Connect Writing Modes to Preset Times
+- Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Spiraling) to default timer durations
+- Each mode could have a recommended/default time preset
+- Allow customization of mode-specific durations in settings
+- Automatically set timer duration when switching modes
+
+### 7. Connect Timer Elapsed Ring Color to the Session Mode
+- Change the circular progress ring color based on selected Session Mode
+- Each mode could have its own distinct color palette
+- Visual reinforcement of current session type
+- Maintain accessibility contrast requirements
+
+### 8. Custom Theme Creator
+- Allow users to create and save custom color themes
+- Color picker interface for primary, secondary, and background colors
+- Preview themes before applying
+- Import/export custom themes
+- Save multiple custom themes
+
+### 9. Add Music Player for Local Music Files
+- Integrate music player to play local audio files during writing sessions
+- Support common formats (MP3, WAV, FLAC, etc.)
+- Playlist creation and management
+- Volume control
+- Background music to enhance focus
+
+### 10. Notes Area
+- Quick notes section for capturing thoughts during sessions
+- Easy-to-access text area without disrupting timer
+- Auto-save notes
+- Session-specific or general notes options
+- Export notes to file
+
+### 11. Inspirational Quotes Feature
+- Display motivational/writing quotes
+- Rotate quotes on timer completion or session start
+- Ability to add custom quotes
+- Option to disable if not desired
+- Quote categories (motivation, creativity, famous authors, etc.)
+
 ---
 
 ## Notes

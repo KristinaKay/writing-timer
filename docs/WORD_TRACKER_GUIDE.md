@@ -14,20 +14,6 @@ Perfect for tracking your writing productivity!
 
 ---
 
-## 📦 Files to Install
-
-### New Component
-
-- `WordTracker.jsx` → src/components/WordTracker.jsx
-- `WordTracker.css` → src/components/WordTracker.css
-
-### Enhanced Statistics (replaces existing)
-
-- `Statistics-WITH-WORDS.jsx` → Rename to `Statistics.jsx` → Replace existing
-- `Statistics-ENHANCED.css` → Rename to `Statistics.css` → Replace existing
-
----
-
 ## ✨ Features
 
 ### Toggle On/Off
@@ -227,43 +213,6 @@ Word statistics appear in the Statistics section when tracking is enabled:
 - Last 20 word tracking sessions saved
 - Includes all session details
 - Used for statistics calculations
-
----
-
-## 📍 Recommended Sidebar Placement
-
-### Option 1: With Session Setup (Recommended)**
-
-```markdown
-1. 📝 Session Mode
-2. 📝 Track Word Count  ← NEW
-3. 🍅 Pomodoro Mode
-4. ⚡ Quick Presets
-5. 🎨 Custom Timer
-```
-
-## Option 2: After Duration Settings
-
-```markdown
-1. 📝 Session Mode
-2. 🍅 Pomodoro Mode
-3. ⚡ Quick Presets
-4. 🎨 Custom Timer
-5. 📝 Track Word Count  ← NEW
-```
-
-## Option 3: With Statistics
-
-```markdown
-1. 📝 Session Mode
-2. 🍅 Pomodoro Mode
-3. ⚡ Quick Presets
-4. 🎨 Custom Timer
-5. 📊 Statistics
-6. 📝 Track Word Count  ← NEW (right after stats)
-```
-
-Recommened: **Option 1** - placing it right after Session Mode, since you select your mode, then configure word tracking before starting.
 
 ---
 

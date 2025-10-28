@@ -12,33 +12,6 @@ The Pomodoro Technique is a time management method that breaks work into interva
 - ✅ Smart notifications for each phase
 - ✅ Flexible configuration (1-10 sessions before long break)
 
-## 📦 Files to Install
-
-You have 5 new files:
-1. **PomodoroSettings.jsx** - Configuration component (NEW)
-2. **PomodoroSettings-COMPLETE.css** - Settings styling (NEW)
-3. **PomodoroCycleTracker.jsx** - Visual progress tracker (NEW)
-4. **PomodoroCycleTracker.css** - Tracker styling (NEW)
-5. **App-with-Pomodoro.jsx** - Updated App with full integration (REPLACE)
-
-## 🚀 Installation Steps
-
-### Step 1: Add new components
-```
-PomodoroSettings.jsx → src\components\PomodoroSettings.jsx
-PomodoroSettings-COMPLETE.css → src\components\PomodoroSettings.css (rename it!)
-PomodoroCycleTracker.jsx → src\components\PomodoroCycleTracker.jsx
-PomodoroCycleTracker.css → src\components\PomodoroCycleTracker.css
-```
-
-### Step 2: Replace App.jsx
-```
-App-with-Pomodoro.jsx → Rename to App.jsx and replace src\App.jsx
-```
-
-### Step 3: Watch the magic! ✨
-Your browser will auto-refresh with full Pomodoro functionality!
-
 ## 🎯 How to Use
 
 ### Enabling Pomodoro Mode

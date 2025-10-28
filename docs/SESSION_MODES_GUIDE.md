@@ -23,26 +23,6 @@ A beautiful Session Mode Selector that lets you categorize your writing work int
 ✅ **Completion messages** - Customized alerts based on session mode  
 ✅ **Responsive design** - Works great on all screen sizes  
 
-## 📦 Files to Install
-
-You have 3 files:
-1. **SessionModeSelector.jsx** - The session mode component (NEW)
-2. **SessionModeSelector.css** - Component styling (NEW)
-3. **App-with-SessionMode.jsx** - Updated App.jsx (REPLACE)
-
-## 📂 Installation Steps
-
-### Step 1: Add SessionModeSelector files
-Move these files to your project:
-- `SessionModeSelector.jsx` → `src\components\SessionModeSelector.jsx`
-- `SessionModeSelector.css` → `src\components\SessionModeSelector.css`
-
-### Step 2: Replace App.jsx
-- `App-with-SessionMode.jsx` → Rename to `App.jsx` and replace `src\App.jsx`
-
-### Step 3: See it in action! 🎉
-Your browser should auto-refresh showing the new session mode selector!
-
 ## 🎯 How to Use
 
 ### Selecting a Mode
