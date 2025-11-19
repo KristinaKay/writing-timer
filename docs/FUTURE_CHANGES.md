@@ -4,29 +4,35 @@ This document tracks planned improvements and features for A Timer to Write.
 
 ## UI/UX Improvements
 
-### 1. Collapse Sidebar into a Gear Icon
-- Replace always-visible sidebar with a collapsible gear/settings icon
-- Opens sidebar as an overlay or slide-out panel
-- Saves screen space for the main timer interface
+### ✅ 1. Collapse Sidebar into a Gear Icon
 
-### 2. Reconfigure Sidebar Sections to be Collapsible
-- Make each sidebar section (Theme, Session Mode, Pomodoro, etc.) independently collapsible
-- Use accordion-style expand/collapse for better space conservation
-- Remember user's preferred collapsed/expanded state
+- ✅ Replace always-visible sidebar with a collapsible gear/settings icon
+- ✅ Opens sidebar as an overlay or slide-out panel
+- ✅ Saves screen space for the main timer interface
 
-### 3. Fix Task Completion Counter Bug
-- **Bug**: Unchecking and rechecking the same task increments the completed task counter each time
-- **Expected**: Should only increment once per task, or decrement when unchecked
-- **Priority**: Medium - affects statistics accuracy
+### ✅ 2. Reconfigure Sidebar Sections to be Collapsible
+
+- ✅ Make each sidebar section (Theme, Session Mode, Pomodoro, etc.) independently collapsible
+- ✅ Use accordion-style expand/collapse for better space conservation
+- ✅ Remember user's preferred collapsed/expanded state
+
+### ✅ 3. Fix Task Completion Counter Bug
+
+- ✅ **Bug**: Unchecking and rechecking the same task increments the completed task counter each time
+- ✅ **Expected**: Should only increment once per task, or decrement when unchecked
+- ✅ **Priority**: Medium - affects statistics accuracy
 
 ### 4. Simplify Button Styling
+
 - Remove gradients from buttons
 - Set buttons to use solid secondary color (`var(--theme-secondary)`)
 - Adjust hover states to work with solid colors (brightness, opacity, or slight color shift)
 - Maintain accessibility contrast ratios
 
 ### 5. Rework "Compact Mode" for True Compactness
+
 Suggestions for making compact mode more space-efficient:
+
 - Reduce padding on all controls and containers
 - Decrease border-radius on buttons and inputs
 - Remove or minimize text labels (use icons where possible)
@@ -35,18 +41,21 @@ Suggestions for making compact mode more space-efficient:
 - Consider removing non-essential UI elements entirely
 
 ### 6. Connect Writing Modes to Preset Times
-- Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Spiraling) to default timer durations
+
+- Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Roaming) to default timer durations
 - Each mode could have a recommended/default time preset
 - Allow customization of mode-specific durations in settings
 - Automatically set timer duration when switching modes
 
 ### 7. Connect Timer Elapsed Ring Color to the Session Mode
+
 - Change the circular progress ring color based on selected Session Mode
 - Each mode could have its own distinct color palette
 - Visual reinforcement of current session type
 - Maintain accessibility contrast requirements
 
 ### 8. Custom Theme Creator
+
 - Allow users to create and save custom color themes
 - Color picker interface for primary, secondary, and background colors
 - Preview themes before applying
@@ -54,6 +63,7 @@ Suggestions for making compact mode more space-efficient:
 - Save multiple custom themes
 
 ### 9. Add Music Player for Local Music Files
+
 - Integrate music player to play local audio files during writing sessions
 - Support common formats (MP3, WAV, FLAC, etc.)
 - Playlist creation and management
@@ -61,6 +71,7 @@ Suggestions for making compact mode more space-efficient:
 - Background music to enhance focus
 
 ### 10. Notes Area
+
 - Quick notes section for capturing thoughts during sessions
 - Easy-to-access text area without disrupting timer
 - Auto-save notes
@@ -68,6 +79,7 @@ Suggestions for making compact mode more space-efficient:
 - Export notes to file
 
 ### 11. Inspirational Quotes Feature
+
 - Display motivational/writing quotes
 - Rotate quotes on timer completion or session start
 - Ability to add custom quotes
@@ -77,6 +89,7 @@ Suggestions for making compact mode more space-efficient:
 ## Desktop & Deployment
 
 ### 12. Desktop App Version
+
 - Package as native desktop application using Electron or Tauri
 - Create Windows .exe installer
 - Create Mac .app bundle
@@ -88,6 +101,7 @@ Suggestions for making compact mode more space-efficient:
 ---
 
 ## Notes
+
 - Items will be prioritized and implemented based on user feedback and development time
 - Each item should be tested for accessibility compliance before implementation
 - Check off items as they are completed and move to CHANGELOG.md

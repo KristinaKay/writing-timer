@@ -8,7 +8,7 @@
 
 ## 🌟 Highlights
 
-- **Flexible Timer Modes**: Pomodoro technique, custom durations, and multiple session modes (Writing, Researching, Creative Thinking, Spiraling)
+- **Flexible Timer Modes**: Pomodoro technique, custom durations, and multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - **Task Management**: Drag-and-drop task list with circular checkboxes for easy session tracking
 - **Beautiful Themes**: Six stunning themes (Dark, Light, Ocean, Sunset, Forest, Midnight)
 - **Session Statistics**: Track your writing sessions with detailed productivity metrics
@@ -33,7 +33,7 @@ GitHub: [@KristinaKay](https://github.com/KristinaKay)
 
 1. Start the timer with preset durations (25min, 45min, 1hr) or set a custom duration
 2. Add tasks to track what you're working on during each session
-3. Choose a session mode (Writing, Researching, Creative Thinking, or Spiraling)
+3. Choose a session mode (Writing, Researching, Creative Thinking, or Roaming)
 4. Select a theme that suits your mood
 5. View your productivity statistics and session history
 
@@ -88,7 +88,7 @@ The production files will be in the `dist/` directory.
 
 - **Pomodoro**: 25-minute focused work sessions with 5-minute breaks
 - **Custom Duration**: Set any duration in hours and minutes
-- **Session Modes**: Writing, Researching, Creative Thinking, Spiraling
+- **Session Modes**: Writing, Researching, Creative Thinking, Roaming
 
 ### Task Management
 

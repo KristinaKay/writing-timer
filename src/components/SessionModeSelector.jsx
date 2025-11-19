@@ -11,25 +11,25 @@ const SESSION_MODES = [
     id: 'writing', 
     label: '✍️ Writing', 
     color: '#E91E63',
-    description: 'Creative writing and drafting'
+    description: 'Creative writing, blogging, drafting, journaling, and freeform writing.'
   },
   { 
     id: 'researching', 
     label: '🔍 Researching', 
     color: '#00D4FF',
-    description: 'Gathering information and sources'
+    description: 'Gathering information and sources, fact-checking, note-taking, and data collection.'
   },
   { 
     id: 'creative', 
     label: '💡 Creative Thinking', 
     color: '#9C27B0',
-    description: 'Brainstorming and ideation'
+    description: 'Brainstorming and ideation, mind mapping, and conceptual development.'
   },
   { 
-    id: 'spiraling', 
-    label: '🌀 Spiraling', 
+    id: 'roaming', 
+    label: '🌀 Roaming and Rabbit Holing', 
     color: '#FF9800',
-    description: 'Deep exploration and rabbit holes'
+    description: 'Deep exploration and rabbit holes; idea generation; inspiration gathering.'
   }
 ];
 

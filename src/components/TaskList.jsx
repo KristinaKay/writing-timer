@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { updateTaskCompletion } from '../lib/statisticsUtils';
 import './TaskList.css';
 
@@ -10,7 +10,15 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
   const [tasks, setTasks] = useState(() => {
     try {
       const saved = localStorage.getItem('mercurial-tasks');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Migrate existing tasks to include hasBeenCompleted field
+        return parsed.map(task => ({
+          ...task,
+          hasBeenCompleted: task.hasBeenCompleted ?? task.completed // If already completed, mark as having been completed
+        }));
+      }
+      return [];
     } catch {
       return [];
     }
@@ -18,6 +26,8 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
   
   const [newTaskText, setNewTaskText] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);
+  const [isToggling, setIsToggling] = useState(false);
+  const processedUpdates = useRef(new Set());
 
   // Save tasks to localStorage whenever they change
   useEffect(() => {
@@ -35,6 +45,7 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
         id: Date.now(), 
         text: newTaskText.trim(), 
         completed: false,
+        hasBeenCompleted: false, // Track if task was ever completed
         sessionMode: sessionMode
       }]);
       setNewTaskText('');
@@ -48,21 +59,67 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
     }
   };
 
-  // Toggle task completion
-  const toggleTask = (id) => {
-    const newTasks = tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(newTasks);
-    // If the task was just marked completed, increment statistics
-    const toggled = newTasks.find(t => t.id === id);
-    if (toggled && toggled.completed) {
-      try {
-        updateTaskCompletion();
-      } catch {
-        // ignore failures updating global statistics
-      }
+    // Toggle task completion
+  const toggleTask = (index) => {
+    if (isToggling) {
+      return;
     }
+    
+    setIsToggling(true);
+    
+    setTasks(prevTasks => {
+      const newTasks = [...prevTasks];
+      const oldTask = newTasks[index];
+      
+      if (!oldTask) {
+        setIsToggling(false);
+        return prevTasks;
+      }
+      
+      const wasCompleted = oldTask.completed;
+      const willBeCompleted = !wasCompleted;
+      const wasEverCompleted = oldTask.hasBeenCompleted ?? wasCompleted;
+      
+      // Create NEW task object (don't mutate existing)
+      const newTask = {
+        ...oldTask,
+        completed: willBeCompleted,
+        hasBeenCompleted: willBeCompleted ? true : false
+      };
+      
+      // Replace the task in the array
+      newTasks[index] = newTask;
+      
+      // Update statistics (deferred to avoid React render conflicts)
+      setTimeout(() => {
+        // Create unique ID for this update to prevent duplicates
+        const updateId = `${oldTask.id}-${Date.now()}-${willBeCompleted}`;
+        
+        if (processedUpdates.current.has(updateId)) {
+          setIsToggling(false);
+          return;
+        }
+        
+        processedUpdates.current.add(updateId);
+        
+        // Clean old entries to prevent memory leak (keep only last 100)
+        if (processedUpdates.current.size > 100) {
+          const entries = Array.from(processedUpdates.current);
+          processedUpdates.current = new Set(entries.slice(-50));
+        }
+        
+        if (willBeCompleted && !wasEverCompleted) {
+          updateTaskCompletion(true);
+          window.dispatchEvent(new CustomEvent('task-completed'));
+        } else if (!willBeCompleted && wasEverCompleted) {
+          updateTaskCompletion(false);
+        }
+        
+        setIsToggling(false);
+      }, 0);
+      
+      return newTasks;
+    });
   };
 
   // Delete task
@@ -165,10 +222,18 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
               {/* Checkbox */}
               <button
                 className="task-checkbox"
-                onClick={() => toggleTask(task.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleTask(index);
+                }}
                 aria-label={task.completed ? 'Mark as incomplete' : 'Mark as complete'}
               >
-                {task.completed && <span className="checkmark">✓</span>}
+                {task.completed ? (
+                  <span className="checkmark">✓</span>
+                ) : (
+                  <span className="empty-circle">○</span>
+                )}
               </button>
 
               {/* Task Text */}
@@ -187,6 +252,19 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
           ))
         )}
       </div>
+
+      {/* Clear Completed Button */}
+      {tasks.some(task => task.completed) && (
+        <div className="task-actions">
+          <button
+            className="clear-completed-btn"
+            onClick={clearCompleted}
+            title="Clear all completed tasks"
+          >
+            Clear Completed
+          </button>
+        </div>
+      )}
 
       {/* Timer Warning */}
       {isTimerRunning && tasks.filter(t => !t.completed).length > 0 && (

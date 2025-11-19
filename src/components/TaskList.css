@@ -177,20 +177,38 @@
   height: 20px;
   min-width: 44px; /* WCAG 2.5.5: minimum touch target */
   min-height: 44px;
-  border: 2px solid rgba(0,0,0,0.12);
+  border: 2px solid var(--text-secondary);
   border-radius: 50%;
-  background: transparent;
+  background: var(--background-light);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   padding: 12px; /* Expand hit area while keeping visual size */
+  position: relative;
+}
+
+/* Add subtle inner circle to indicate interactive state */
+.task-checkbox::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  opacity: 0.3;
+  transition: all 0.3s ease;
 }
 
 .task-checkbox:hover {
   border-color: var(--theme-primary);
-  background: color-mix(in srgb, var(--theme-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--theme-primary) 12%, var(--background-light));
+  transform: scale(1.05);
+}
+
+.task-checkbox:hover::before {
+  opacity: 0.6;
+  background: var(--theme-primary);
 }
 
 .task-item.completed .task-checkbox {
@@ -198,10 +216,82 @@
   background: var(--theme-primary);
 }
 
+.task-item.completed .task-checkbox::before {
+  display: none;
+}
+
 .checkmark {
-  color: var(--text-color);
+  color: var(--text-color-inverse);
   font-size: 0.8rem;
   font-weight: bold;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.empty-circle {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  opacity: 0.5;
+  line-height: 1;
+}
+
+/* Task Actions */
+.task-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-completed-btn {
+  background: var(--background-medium);
+  color: var(--text-secondary);
+  border: 1px solid var(--overlay-20);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-completed-btn:hover {
+  background: var(--overlay-20);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+  transform: translateY(-1px);
+}
+
+.empty-circle {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  opacity: 0.5;
+  line-height: 1;
+}
+
+/* Clear Completed Button */
+.task-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-completed-btn {
+  background: var(--background-medium);
+  color: var(--text-secondary);
+  border: 1px solid var(--overlay-20);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-completed-btn:hover {
+  background: var(--overlay-20);
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+  transform: translateY(-1px);
 }
 
 /* Task Text */

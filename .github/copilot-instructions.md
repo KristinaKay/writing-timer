@@ -29,7 +29,7 @@ This is A Timer to Write application designed to help writers track their writin
 - **Circular Progress Indicator**: Visual representation of time remaining with animated progress ring with customizable colors
 - **Digital Time Display**: Large, readable countdown with hour, minutes, seconds format
 - **Control Panel**: Start/Pause/Stop/Reset buttons with distinct visual states and keyboard shortcuts
-- **Session Status Badge**: Current session type (writing, researching, creative thinking, spiraling) with color coding.
+- **Session Status Badge**: Current session type (writing, researching, creative thinking, roaming) with color coding.
 - **Session Task To-Do List**: Display current tasks or goals for the session. Include circular checkbox to the left of each task for easy tracking. Allow for reordering of tasks via drag-and-drop.
 
 #### Productivity Dashboard

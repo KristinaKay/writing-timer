@@ -16,13 +16,13 @@ const Statistics = () => {
           writing: 0,
           researching: 0,
           creative: 0,
-          spiraling: 0
+          roaming: 0
         },
         minutesByMode: {
           writing: 0,
           researching: 0,
           creative: 0,
-          spiraling: 0
+          roaming: 0
         },
         completedPomodoros: 0,
         tasksCompleted: 0,
@@ -33,8 +33,8 @@ const Statistics = () => {
       return {
         totalSessions: 0,
         totalMinutes: 0,
-        sessionsByMode: { writing: 0, researching: 0, creative: 0, spiraling: 0 },
-        minutesByMode: { writing: 0, researching: 0, creative: 0, spiraling: 0 },
+        sessionsByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
+        minutesByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
         completedPomodoros: 0,
         tasksCompleted: 0,
         lastReset: new Date().toISOString(),
@@ -69,16 +69,19 @@ const Statistics = () => {
       }
     };
 
-    const statsHandler = (e) => {
+    const statsHandler = (event) => {
       try {
-        const d = e.detail || null;
-        if (d) setStats(d);
-        else {
+        if (event.detail) {
+          setStats(event.detail);
+        } else {
+          // Fallback: reload from localStorage
           const saved = localStorage.getItem('mercurial-statistics');
-          if (saved) setStats(JSON.parse(saved));
+          if (saved) {
+            setStats(JSON.parse(saved));
+          }
         }
       } catch {
-        // ignore
+        // ignore errors
       }
     };
 
@@ -114,8 +117,8 @@ const Statistics = () => {
     const newStats = {
       totalSessions: 0,
       totalMinutes: 0,
-      sessionsByMode: { writing: 0, researching: 0, creative: 0, spiraling: 0 },
-      minutesByMode: { writing: 0, researching: 0, creative: 0, spiraling: 0 },
+      sessionsByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
+      minutesByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
       completedPomodoros: 0,
       tasksCompleted: 0,
       lastReset: new Date().toISOString(),
@@ -140,20 +143,21 @@ const Statistics = () => {
       writing: '✍️',
       researching: '🔍',
       creative: '💡',
-      spiraling: '🌀'
+      roaming: '🌀'
     };
     return icons[mode] || '📝';
   };
 
   // Get mode label
   const getModeLabel = (mode) => {
-    const labels = {
+    const modeLabels = {
       writing: 'Writing',
-      researching: 'Researching',
-      creative: 'Creative Thinking',
-      spiraling: 'Spiraling'
+      researching: 'Research',
+      creative: 'Creative',
+      roaming: 'Roaming'
     };
-    return labels[mode] || mode;
+    
+    return modeLabels[mode] || mode;
   };
 
   // Calculate percentages for mode breakdown

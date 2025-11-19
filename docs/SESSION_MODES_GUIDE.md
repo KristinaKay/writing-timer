@@ -11,7 +11,7 @@ A beautiful Session Mode Selector that lets you categorize your writing work int
 | **Writing** | ✍️ | Hot Pink `#E91E63` | Creative writing and drafting |
 | **Researching** | 🔍 | Cyan `#00D4FF` | Gathering information and sources |
 | **Creative Thinking** | 💡 | Purple `#9C27B0` | Brainstorming and ideation |
-| **Spiraling** | 🌀 | Orange `#FF9800` | Deep exploration and rabbit holes |
+| **Roaming** | 🌀 | Orange `#FF9800` | Deep exploration and rabbit holes |
 
 ## ✨ Features
 
@@ -26,26 +26,31 @@ A beautiful Session Mode Selector that lets you categorize your writing work int
 ## 🎯 How to Use
 
 ### Selecting a Mode
+
 1. Click any of the four mode buttons
 2. The selected mode will highlight with its color
 3. A badge at the top shows your current mode
 
 ### During a Session
+
 - The current mode badge shows a pulsing dot (●) when timer is running
 - Mode buttons are **locked** while timer is active
 - You'll see a message: "⚠️ Stop the timer to change session mode"
 
 ### Changing Modes
+
 - **Stop or reset** the timer first
 - Click a different mode button
 - Start your new session type!
 
 ### Completion Messages
+
 When a timer completes, you'll get a custom message based on your mode:
+
 - "Writing session complete! Great work! 🎉"
 - "Researching session complete! Great work! 🎉"
 - "Creative thinking session complete! Great work! 🎉"
-- "Spiraling session complete! Great work! 🎉"
+- "Roaming session complete! Great work! 🎉"
 
 ## 🎨 Visual Layout
 
@@ -64,7 +69,7 @@ When a timer completes, you'll get a custom message based on your mode:
 │  └──────────┴──────────┘               │
 │  ┌──────────┬──────────┐               │
 │  │ 💡       │ 🌀       │               │
-│  │ Creative │Spiraling │               │
+│  │ Creative │ Roaming  │               │
 │  └──────────┴──────────┘               │
 │                                         │
 │        [Timer Display]                  │
@@ -75,14 +80,17 @@ When a timer completes, you'll get a custom message based on your mode:
 ## 🔧 Code Structure
 
 ### State Management
+
 ```jsx
 const [sessionMode, setSessionMode] = useState('writing');
 ```
+
 - Tracks current session mode
 - Defaults to 'writing'
 - Updates when user selects a mode
 
 ### Props Passed to Component
+
 ```jsx
 <SessionModeSelector 
   currentMode={sessionMode}
@@ -94,6 +102,7 @@ const [sessionMode, setSessionMode] = useState('writing');
 ## 🎨 Customization Options
 
 ### Add a New Mode
+
 In `SessionModeSelector.jsx`, add to the `SESSION_MODES` array:
 
 ```jsx
@@ -106,10 +115,13 @@ In `SessionModeSelector.jsx`, add to the `SESSION_MODES` array:
 ```
 
 ### Change Mode Colors
+
 Update the `color` property for any mode in the `SESSION_MODES` array.
 
 ### Change Grid Layout
+
 In `SessionModeSelector.css`, modify:
+
 ```css
 .mode-buttons {
   grid-template-columns: repeat(2, 1fr); /* Change 2 to 3 or 4 */
@@ -119,16 +131,19 @@ In `SessionModeSelector.css`, modify:
 ## 📱 Responsive Behavior
 
 ### Desktop (>768px)
+
 - 2x2 grid layout
 - Full-size buttons with large icons
 - Spacious padding
 
 ### Tablet (768px)
+
 - 2x2 grid layout
 - Medium-sized buttons
 - Adjusted padding
 
 ### Mobile (<480px)
+
 - Single column layout (1x4)
 - Stacked buttons for easier tapping
 - Compact design
@@ -147,15 +162,18 @@ In `SessionModeSelector.css`, modify:
 ## 🐛 Troubleshooting
 
 **Modes don't appear:**
+
 - Check that SessionModeSelector.jsx is in `src/components/`
 - Verify the import in App.jsx
 - Check browser console for errors
 
 **Buttons don't lock:**
+
 - Verify `isTimerRunning` prop is correctly passed
 - Check that `timer.isRunning || timer.isPaused` is working
 
 **Colors not showing:**
+
 - Make sure SessionModeSelector.css is imported
 - Check that inline styles are being applied
 - Inspect element in browser dev tools
@@ -163,12 +181,13 @@ In `SessionModeSelector.css`, modify:
 ## 🎯 What's Next?
 
 With session modes working, you're ready to add:
+
 1. **Task List** - To-do items for each session
 2. **Statistics Dashboard** - Track time spent in each mode
 3. **Session History** - See past sessions by mode
 4. **Keyboard Shortcuts** - Quick mode switching (saved for later!)
 
-## ✅ You're Done!
+## ✅ You're Done
 
 Your timer now has professional session mode tracking! Writers can categorize their work, track different activities, and stay organized.
 

@@ -39,16 +39,13 @@ function App() {
   // Sidebar collapse state
   const [sidebarOpen, setSidebarOpen] = useState(true);
   // Accordion: track which section is open
-  const [openSidebarSection, setOpenSidebarSection] = useState(() => {
-    try {
-      const stored = localStorage.getItem('openSidebarSection');
-      return stored || 'sessionMode';
-    } catch {
-      return 'sessionMode';
-    }
-  });
-
-  // Refs and keyboard navigation for accordion
+  const [openSidebarSection, setOpenSidebarSection] = useState(null);
+  const [openSidebarGroups, setOpenSidebarGroups] = useState({
+    sessionSetup: false,
+    timerDuration: false,
+    trackingTasks: false,
+    appSettings: false
+  });  // Refs and keyboard navigation for accordion
   const headerRefs = useRef({ 
     sessionMode: null, 
     wordTracker: null,
@@ -62,35 +59,23 @@ function App() {
   });
   const sectionOrder = ['sessionMode', 'wordTracker', 'pomodoro', 'presets', 'custom', 'statistics', 'sound', 'export', 'themes'];
 
-  const handleHeaderKeyDown = (e, id) => {
-    const key = e.key;
-    const currentIndex = sectionOrder.indexOf(id);
-    const isSpace = key === ' ' || key === 'Spacebar' || key === 'Space';
-    if (key === 'ArrowDown') {
+  const handleHeaderKeyDown = (e, sectionId) => {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      const next = sectionOrder[(currentIndex + 1) % sectionOrder.length];
-      headerRefs.current[next]?.focus();
-      return;
-    } else if (key === 'ArrowUp') {
-      e.preventDefault();
-      const prev = sectionOrder[(currentIndex - 1 + sectionOrder.length) % sectionOrder.length];
-      headerRefs.current[prev]?.focus();
-      return;
-    } else if (key === 'Enter' || isSpace) {
-      e.preventDefault();
-      setOpenSidebarSection((prev) => (prev === id ? null : id));
-      return;
-    }
-    if (key === 'Tab') {
-      e.preventDefault();
-      const offset = e.shiftKey ? -1 : 1;
-      const nextIndex = (currentIndex + offset + sectionOrder.length) % sectionOrder.length;
-      const next = sectionOrder[nextIndex];
-      headerRefs.current[next]?.focus();
+      setOpenSidebarSection(openSidebarSection === sectionId ? null : sectionId);
     }
   };
 
-  // Initialize theme on app load
+  const toggleSidebarGroup = (groupId) => {
+    setOpenSidebarGroups(prev => ({
+      ...prev,
+      [groupId]: !prev[groupId]
+    }));
+    // Close any open section when collapsing a group
+    if (openSidebarGroups[groupId]) {
+      setOpenSidebarSection(null);
+    }
+  };  // Initialize theme on app load
   useEffect(() => {
     initializeTheme();
   }, []);
@@ -105,19 +90,27 @@ function App() {
     }
   }, [openSidebarSection]);
 
+  // Helper function to track session if enough time has elapsed
+  const trackSessionIfValid = () => {
+    const sessionDuration = Math.round((timer.totalElapsed || 0) / 60); // minutes
+    if (sessionDuration >= 1) {
+      updateStatistics(sessionMode, sessionDuration, pomodoroEnabled && cycleType === 'work');
+      return true; // Session was tracked
+    }
+    return false; // Session too short to track
+  };
+
   // Handle timer completion with Pomodoro logic
   const handleTimerComplete = () => {
     // Play sound notification
     playSound();
 
-  // Calculate session duration (timer.totalElapsed is seconds)
-  const sessionDuration = Math.round((timer.totalElapsed || 0) / 60); // minutes
-
+    // Track the completed session
+    const wasTracked = trackSessionIfValid();
+    
     if (pomodoroEnabled) {
       if (cycleType === 'work') {
-        // Track statistics for work session
-        updateStatistics(sessionMode, sessionDuration, true);
-
+        // For Pomodoro work sessions, we already tracked above
         const newCompletedSessions = completedSessions + 1;
         setCompletedSessions(newCompletedSessions);
         
@@ -143,9 +136,8 @@ function App() {
         timer.setDuration(pomodoroConfig.workDuration);
       }
     } else {
-      // Track statistics for regular session
-      updateStatistics(sessionMode, sessionDuration, false);
-          alert((sessionMode.charAt(0).toUpperCase() + sessionMode.slice(1)) + ' session complete! Great work!');
+      // Regular session - statistics already tracked above
+      alert((sessionMode.charAt(0).toUpperCase() + sessionMode.slice(1)) + ' session complete! Great work!');
     }
 
     // Trigger WordTracker save (if user has tracking enabled) by dispatching a CustomEvent.
@@ -289,7 +281,10 @@ function App() {
             </button>
             
             <button 
-              onClick={timer.stop}
+              onClick={() => {
+                trackSessionIfValid();
+                timer.stop();
+              }}
               className="btn-secondary"
               disabled={!timer.isRunning && !timer.isPaused}
             >
@@ -297,7 +292,10 @@ function App() {
             </button>
             
             <button 
-              onClick={timer.reset}
+              onClick={() => {
+                trackSessionIfValid();
+                timer.reset();
+              }}
               className="btn-secondary"
             >
               🔄 Reset
@@ -326,18 +324,29 @@ function App() {
         {/* Collapsible Sidebar */}
   <div className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
           <button 
-            className="sidebar-toggle"
+            className="sidebar-toggle gear-toggle"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            title={sidebarOpen ? 'Close settings' : 'Open settings'}
+            aria-label={sidebarOpen ? 'Close settings panel' : 'Open settings panel'}
+            aria-expanded={sidebarOpen}
           >
-            {sidebarOpen ? '▶' : '◀'}
+            <span className="gear-icon" aria-hidden="true">⚙️</span>
+            <span className="sr-only">{sidebarOpen ? 'Close' : 'Open'} Settings</span>
           </button>
 
           {sidebarOpen && (
             <div className="sidebar-content">
             {/* GROUP 1: SESSION SETUP (before you start) */}
-            <div className="sidebar-group-header">Session Setup</div>
+            <button 
+              className="sidebar-group-header clickable"
+              onClick={() => toggleSidebarGroup('sessionSetup')}
+              aria-expanded={openSidebarGroups.sessionSetup}
+            >
+              <span>SESSION SETUP</span>
+              <span className="group-collapse-icon">{openSidebarGroups.sessionSetup ? '▼' : '▶'}</span>
+            </button>
 
+            {openSidebarGroups.sessionSetup && (<>
             {/* Session Mode Section */}
             <div className="sidebar-section">
                 <button 
@@ -405,10 +414,20 @@ function App() {
               </div>
 
               <div className="sidebar-group-separator" />
+              </>
+            )}
 
               {/* GROUP 2: TIMER DURATION (choose your time) */}
-              <div className="sidebar-group-header">Timer Duration</div>
+              <button 
+                className="sidebar-group-header clickable"
+                onClick={() => toggleSidebarGroup('timerDuration')}
+                aria-expanded={openSidebarGroups.timerDuration}
+              >
+                <span>TIMER DURATION</span>
+                <span className="group-collapse-icon">{openSidebarGroups.timerDuration ? '▼' : '▶'}</span>
+              </button>
 
+              {openSidebarGroups.timerDuration && (<>
               {/* Quick Presets Section */}
               <div className="sidebar-section">
                 <button 
@@ -477,12 +496,20 @@ function App() {
               </div>
 
               <div className="sidebar-group-separator" />
+              </>
+            )}
 
               {/* GROUP 3: TRACKING & TASKS (during/after session) */}
-              <div className="sidebar-group-header">Tracking & Tasks</div>
+              <button 
+                className="sidebar-group-header clickable"
+                onClick={() => toggleSidebarGroup('trackingTasks')}
+                aria-expanded={openSidebarGroups.trackingTasks}
+              >
+                <span>TRACKING & TASKS</span>
+                <span className="group-collapse-icon">{openSidebarGroups.trackingTasks ? '▼' : '▶'}</span>
+              </button>
 
-
-
+              {openSidebarGroups.trackingTasks && (<>
               {/* Statistics Section */}
               <div className="sidebar-section">
                 <button 
@@ -502,10 +529,20 @@ function App() {
               </div>
 
               <div className="sidebar-group-separator" />
+              </>
+            )}
 
               {/* GROUP 4: APP SETTINGS (set once) */}
-              <div className="sidebar-group-header">App Settings</div>
+              <button 
+                className="sidebar-group-header clickable"
+                onClick={() => toggleSidebarGroup('appSettings')}
+                aria-expanded={openSidebarGroups.appSettings}
+              >
+                <span>APP SETTINGS</span>
+                <span className="group-collapse-icon">{openSidebarGroups.appSettings ? '▼' : '▶'}</span>
+              </button>
 
+              {openSidebarGroups.appSettings && (<>
               {/* Sound Settings Section */}
               <div className="sidebar-section">
                 <button 
@@ -559,6 +596,8 @@ function App() {
                   <ThemeSelector />
                 </div>
               </div>
+              </>
+            )}
             </div>
           )}
         </div>

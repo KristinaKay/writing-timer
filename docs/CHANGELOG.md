@@ -11,44 +11,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial project setup with React and Vite
 - Timer functionality with start, pause, stop, and reset controls
 - Circular progress indicator with visual countdown
-- Task list with drag-and-drop reordering
-- Multiple session modes (Writing, Researching, Creative Thinking, Spiraling)
+- Task list with drag-and-drop reordering and completion tracking
+- Multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - Pomodoro timer with cycle tracking (25min work / 5min break)
 - Custom duration input for flexible timer settings
 - Six theme options (Dark, Light, Ocean, Sunset, Forest, Midnight)
 - Theme persistence using localStorage
-- Session statistics tracking
+- Session statistics tracking with task completion metrics
 - Export/Import functionality for session data
 - Sound notifications with customizable alerts
 - Compact mode toggle for streamlined interface
-- Sidebar organization with collapsible sections
+- Two-level collapsible sidebar organization (group and section level)
+- Gear icon sidebar toggle with rotation animation
+- Session tracking for partial sessions (1+ minute threshold)
+- Task completion statistics with proper increment/decrement logic
 - Full WCAG AA accessibility compliance
 - Keyboard navigation support throughout the app
 - Focus indicators on all interactive elements
 - Touch target sizes meeting 44×44px minimum
 - Reduced motion support for animations
-- Comprehensive documentation in notes/ directory
+- Comprehensive documentation in docs/ directory
 
 ### Changed
+
 - Renamed project from "Writing Timer" to "A Timer to Write"
 - Improved text contrast ratios to meet WCAG AA standards
 - Updated README with complete feature documentation
+- Enhanced task checkbox styling with theme-aware colors and visual indicators
+- Sidebar sections now collapsed by default for compact startup
+- Replaced always-visible sidebar with collapsible gear icon interface
+- Session statistics now track any 1+ minute session regardless of completion method
 
 ### Fixed
+
 - Theme persistence on page reload
 - Input field visibility when not focused
 - Progress ring visibility across all themes
 - Task input background contrast
+- Task completion counter bug preventing duplicate statistics counting
+- Task checkbox contrast issues across all themes
+- React render cycle conflicts causing statistics update failures
+- Task completion state synchronization with visual feedback
+- Task completion increment/decrement logic for accurate statistics
+- JSX syntax errors in sidebar component structure
 
 ### Accessibility
+
 - Increased text-secondary alpha from 0.38 to 0.5-0.6 for better contrast
 - Added prefers-reduced-motion media queries
 - Expanded touch targets to 44×44px minimum
 - Added comprehensive focus-visible states
+- Enhanced task checkbox visibility with theme integration
 - Increased line-height from 1.5 to 1.6 for better readability
 - Widened scrollbar from 6px to 12px
 - Improved hover state feedback
 - Enhanced keyboard navigation support
+- Added ARIA labels and screen reader support for sidebar toggle
+- Implemented proper semantic markup for collapsible sections
 
 ---
 
@@ -57,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Version Format
 
 Versions follow [Semantic Versioning](https://semver.org/):
+
 - **MAJOR** version for incompatible API changes
 - **MINOR** version for backwards-compatible new features
 - **PATCH** version for backwards-compatible bug fixes
