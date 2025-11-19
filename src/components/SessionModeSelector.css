@@ -64,60 +64,84 @@
   letter-spacing: 1px;
 }
 
-/* Mode Buttons */
-.mode-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
+/* Mode Dropdown - Compact select menu */
+.mode-dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.mode-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 1rem 0.8rem;
+.dropdown-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.mode-dropdown {
+  width: 100%;
+  padding: 0.75rem 1rem;
   background: var(--overlay-05);
-  border: 2px solid;
+  border: 2px solid var(--overlay-15);
   border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-color);
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: inherit;
-  color: var(--text-color);
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 3rem;
 }
 
-.mode-btn:hover:not(:disabled) {
+/* Hardcoded dark styling for dropdown options */
+.mode-dropdown,
+.mode-dropdown option {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+.mode-dropdown:hover:not(:disabled),
+.mode-dropdown:focus {
+  background: #3a3a3a !important;
+}
+
+.mode-dropdown:hover:not(:disabled) {
   background: var(--overlay-10);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-color: var(--overlay-25);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.mode-btn:disabled {
+.mode-dropdown:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 3px rgba(var(--theme-primary-rgb), 0.2);
+}
+
+.mode-dropdown:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-.mode-btn.active {
-  background: var(--overlay-15);
-  box-shadow: 0 0 20px var(--mode-color);
-}
-
-.mode-btn.active .mode-btn-icon {
-  color: var(--mode-color);
-  transform: scale(1.2);
-}
-
-.mode-btn-icon {
-  font-size: 2rem;
-  line-height: 1;
-  transition: all 0.3s ease;
-}
-
-.mode-btn-label {
-  font-size: 0.9rem;
+.mode-dropdown option {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1rem;
   font-weight: 500;
-  text-align: center;
+}
+
+.mode-dropdown option:hover,
+.mode-dropdown option:focus,
+.mode-dropdown option:checked {
+  background: #404040 !important;
+  color: #ffffff !important;
 }
 
 /* Lock Message */
@@ -131,22 +155,67 @@
   font-size: 0.85rem;
 }
 
+/* Project Name Field */
+.project-name-field {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.project-name-field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.project-name-field .optional {
+  font-weight: normal;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.project-name-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--overlay-05);
+  border: 1px solid var(--overlay-15);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.project-name-input:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  background: var(--overlay-10);
+  box-shadow: 0 0 0 2px rgba(var(--theme-primary-rgb), 0.2);
+}
+
+.project-name-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.project-name-input::placeholder {
+  color: var(--text-secondary);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .mode-buttons {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
+  .mode-dropdown-container {
+    gap: 0.4rem;
   }
 
-  .mode-btn {
-    padding: 0.8rem 0.5rem;
+  .mode-dropdown {
+    padding: 0.7rem 0.9rem;
+    padding-right: 2.8rem;
+    font-size: 0.9rem;
   }
 
-  .mode-btn-icon {
-    font-size: 1.5rem;
-  }
-
-  .mode-btn-label {
+  .dropdown-label {
     font-size: 0.8rem;
   }
 
@@ -156,7 +225,13 @@
 }
 
 @media (max-width: 480px) {
-  .mode-buttons {
-    grid-template-columns: 1fr;
+  .mode-dropdown {
+    padding: 0.6rem 0.8rem;
+    padding-right: 2.6rem;
+    font-size: 0.85rem;
+  }
+
+  .dropdown-label {
+    font-size: 0.75rem;
   }
 }

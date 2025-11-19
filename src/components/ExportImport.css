@@ -17,9 +17,9 @@
   font-family: inherit;
   font-size: 0.9rem;
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, var(--theme-secondary) 0%, #00A8CC 100%);
-  color: var(--text-color);
-  border: none;
+  background: var(--theme-primary);
+  color: var(--text-color-inverse);
+  border: 2px solid var(--theme-primary);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -29,7 +29,8 @@
 
 .export-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
+  background: color-mix(in srgb, var(--theme-primary) 85%, #000000);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--theme-primary) 50%, transparent);
 }
 
 .export-btn:active {
@@ -51,9 +52,9 @@
   font-family: inherit;
   font-size: 0.9rem;
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
-  color: var(--text-color);
-  border: none;
+  background: color-mix(in srgb, var(--theme-primary) 70%, #000000);
+  color: var(--text-color-inverse);
+  border: 2px solid color-mix(in srgb, var(--theme-primary) 70%, #000000);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -64,7 +65,8 @@
 
 .import-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+  background: color-mix(in srgb, var(--theme-primary) 55%, #000000);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--theme-primary) 50%, transparent);
 }
 
 .import-btn:active {

@@ -34,7 +34,7 @@ const PomodoroSettings = ({
           />
           <span className="toggle-slider"></span>
           <span className="toggle-label">
-            🍅 Pomodoro Mode
+            Pomodoro Mode
             {pomodoroEnabled && <span className="enabled-badge">Active</span>}
           </span>
         </label>

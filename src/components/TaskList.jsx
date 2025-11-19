@@ -163,6 +163,17 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
 
   return (
     <div className="task-list-container">
+      {/* Section Header */}
+      <div className="section-title">
+        <span>Task List</span>
+        <span 
+          className="info-tooltip" 
+          title="You can export your task lists via App Settings > Backup"
+        >
+          ℹ️
+        </span>
+      </div>
+      
       {/* Task Stats */}
       {totalCount > 0 && (
         <div className="task-stats">

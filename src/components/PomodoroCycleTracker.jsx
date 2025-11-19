@@ -5,7 +5,8 @@ const PomodoroCycleTracker = ({
   currentCycle, 
   totalCycles, 
   completedSessions, 
-  cycleType 
+  cycleType,
+  sessionMode 
 }) => {
   const getCycleIcon = (type) => {
     switch (type) {
@@ -20,10 +21,25 @@ const PomodoroCycleTracker = ({
     }
   };
 
+  const getSessionModeLabel = (mode) => {
+    switch (mode) {
+      case 'writing':
+        return 'Writing Session';
+      case 'researching':
+        return 'Research Session';
+      case 'creative':
+        return 'Creative Session';
+      case 'roaming':
+        return 'Rabbit-Holing';
+      default:
+        return 'Work Session';
+    }
+  };
+
   const getCycleLabel = (type) => {
     switch (type) {
       case 'work':
-        return 'Work Session';
+        return getSessionModeLabel(sessionMode);
       case 'shortBreak':
         return 'Short Break';
       case 'longBreak':

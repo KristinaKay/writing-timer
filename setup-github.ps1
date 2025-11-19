@@ -27,7 +27,7 @@ git commit -m "Initial commit: A Timer to Write with accessibility improvements
 - Multiple timer modes (Pomodoro, custom durations)
 - Task list with drag-and-drop
 - Session statistics tracking
-- Theme support (Dark, Light, Ocean, Sunset, Forest, Midnight)
+- Theme support (Dark, Light, Ocean, Dusty Rose, Dark Dusty Rose, Forest, Midnight, Blackberry Cream)
 - Full WCAG AA accessibility compliance
 - Export/Import functionality"
 

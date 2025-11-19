@@ -11,23 +11,86 @@
   margin: 0 0 0.5rem 0;
 }
 
-.theme-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
+/* Category Structure */
+.theme-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
+.theme-category {
+  width: 100%;
+}
+
+.category-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: var(--background-light);
+  border: 1px solid var(--overlay-10);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.category-header:hover {
+  background: var(--background-medium);
+  border-color: var(--overlay-20);
+}
+
+.category-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.category-arrow {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  transition: transform 0.3s ease;
+}
+
+.category-arrow.collapsed {
+  transform: rotate(-90deg);
+}
+
+.category-content {
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-top: 0.75rem; /* Reduced spacing */
+  padding-bottom: 0.25rem; /* Reduced bottom padding */
+}
+
+.category-content.collapsed {
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+}
+
+/* Horizontal 2-Column Theme Grid */
+.theme-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem; /* Reduced for more compact spacing */
+}
+
+/* Compact Horizontal Theme Cards */
 .theme-card {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background: var(--overlay-05);
   border: 2px solid var(--overlay-10);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
+  width: 100%;
+  min-height: 80px;
 }
 
 .theme-card:hover {
@@ -42,34 +105,63 @@
   box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.3);
 }
 
-.theme-preview {
-  width: 100%;
+/* Color Palette Section */
+.theme-color-palette {
+  width: 80px;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 0.5rem;
+  flex-shrink: 0;
 }
 
-.theme-circle {
-  width: 40px;
-  height: 40px;
-  border: 3px solid;
-  border-radius: 50%;
-  display: flex;
+.palette-swatches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
   align-items: center;
   justify-content: center;
 }
 
-.theme-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
+.swatch:hover {
+  transform: scale(1.1);
+}
+
+.swatch.primary {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.swatch.secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.swatch.background {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.swatch.text {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Theme Info Section */
 .theme-info {
-  padding: 0.8rem;
-  text-align: center;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .theme-name {
@@ -82,31 +174,119 @@
 .theme-desc {
   font-size: 0.75rem;
   color: var(--text-secondary);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .theme-check {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   background: var(--theme-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
-  font-size: 0.9rem;
+  color: white;
+  font-size: 0.7rem;
   font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive */
+/* Responsive Design */
+/* Light theme contrast fixes */
+:root[data-theme="dustyFloralLight"] .theme-card,
+:root[data-theme="dustyFloralMist"] .theme-card,
+:root[data-theme="dustyRose"] .theme-card,
+:root[data-theme="dustyFloralNeutral"] .theme-card,
+:root[data-theme="blackberryCream"] .theme-card,
+:root[data-theme="sageGreen"] .theme-card {
+  background: rgba(255,255,255,0.8) !important;
+  border: 1px solid rgba(42,27,31,0.2) !important;
+  color: #2A1B1F !important;
+}
+
+:root[data-theme="dustyFloralLight"] .theme-name,
+:root[data-theme="dustyFloralMist"] .theme-name,
+:root[data-theme="dustyRose"] .theme-name,
+:root[data-theme="dustyFloralNeutral"] .theme-name,
+:root[data-theme="blackberryCream"] .theme-name,
+:root[data-theme="sageGreen"] .theme-name {
+  color: #2A1B1F !important;
+}
+
+:root[data-theme="dustyFloralLight"] .theme-desc,
+:root[data-theme="dustyFloralMist"] .theme-desc,
+:root[data-theme="dustyRose"] .theme-desc,
+:root[data-theme="dustyFloralNeutral"] .theme-desc,
+:root[data-theme="blackberryCream"] .theme-desc,
+:root[data-theme="sageGreen"] .theme-desc {
+  color: rgba(42,27,31,0.7) !important;
+}
+
 @media (max-width: 768px) {
   .theme-grid {
     grid-template-columns: 1fr;
   }
+  
+  .theme-color-palette {
+    width: 70px;
+    height: 70px;
+    padding: 0.4rem;
+  }
+  
+  .swatch {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .palette-swatches {
+    gap: 2px;
+  }
+  
+  .theme-name {
+    font-size: 0.85rem;
+  }
+  
+  .theme-desc {
+    font-size: 0.7rem;
+  }
 }
 
+@media (max-width: 480px) {
+  .theme-color-palette {
+    height: 80px;
+    padding: 0.75rem;
+  }
+  
+  .swatch {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .palette-swatches {
+    gap: 0.4rem;
+  }
+  
+  .theme-info {
+    padding: 1rem;
+  }
+  
+  .theme-check {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Compact Toggle */
 .compact-toggle-row {
   display: flex;
   align-items: center;

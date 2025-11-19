@@ -5,9 +5,59 @@ All notable changes to A Timer to Write will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2025-11-19
 
 ### Added
+
+- **Getting Started Guide**: Interactive 5-step walkthrough for new users on first site load
+  - Step-by-step tour of App Settings, Session Setup, Timer Duration, Tasks, and Getting Started
+  - Progress tracking with localStorage persistence
+  - Responsive design with smooth animations and professional styling
+- **Enhanced Theme Management**: Unified theme configuration in App Settings sidebar
+  - Combined theme selection, quick light/dark toggle, and default theme configuration
+  - Streamlined theme switcher with settings panel integration
+  - Improved theme organization and user experience
+- **Session Mode Dropdown**: Converted session mode selection to compact dropdown menu
+  - Reduced UI footprint while maintaining full functionality
+  - Professional dropdown styling with proper accessibility
+  - Responsive design for all screen sizes
+- **Enhanced Toggle Styling**: Green/red color scheme for feature toggles
+  - Green (#28a745) for active/enabled states
+  - Red (#dc3545) for disabled/off states  
+  - Consistent styling across Pomodoro and Word Count toggles
+- **UI Improvements**: Multiple interface enhancements and refinements
+  - Removed duplicate App Settings sections
+  - Cleaned up Pomodoro mode labeling (removed emoji)
+  - Improved toggle switch design matching modern UI patterns
+  - Enhanced dropdown legibility with hardcoded dark backgrounds
+
+### Changed
+
+- **Sidebar Organization**: Moved theme configuration to centralized App Settings
+  - Quick light/dark toggle now located in sidebar App Settings > Themes
+  - Default theme preferences integrated into main theme management
+  - Removed standalone theme toggle from main timer area
+- **Session Mode Interface**: Streamlined session selection experience
+  - Changed from vertical button list to compact dropdown menu
+  - Maintained all functionality while reducing space usage
+  - Improved visual hierarchy and user experience
+- **Toggle Indicators**: Enhanced visual feedback for feature states
+  - Pomodoro and Word Count toggles use clear green/red indicators
+  - Active badges styled with green backgrounds and white text
+  - Consistent color language across all toggle interfaces
+
+### Technical Improvements
+
+- **Component Architecture**: Refactored theme management into unified component
+- **State Management**: Improved toggle state handling and persistence
+- **Accessibility**: Enhanced dropdown styling for better contrast in dark themes
+- **Code Organization**: Streamlined component structure and reduced duplication
+
+## [Unreleased]
+
+### Previously Added
+
+- Initial project setup with React and Vite
 - Initial project setup with React and Vite
 - Timer functionality with start, pause, stop, and reset controls
 - Circular progress indicator with visual countdown
@@ -15,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - Pomodoro timer with cycle tracking (25min work / 5min break)
 - Custom duration input for flexible timer settings
-- Six theme options (Dark, Light, Ocean, Sunset, Forest, Midnight)
+- Ten theme options (Dark, Light Elegance, Soft Mist, Ocean, Dusty Rose, Dark Dusty Rose, Sage & Green, Mauve Elegance, Balanced Neutral, Midnight, Blackberry Cream)
 - Theme persistence using localStorage
 - Session statistics tracking with task completion metrics
 - Export/Import functionality for session data
@@ -41,6 +91,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sidebar sections now collapsed by default for compact startup
 - Replaced always-visible sidebar with collapsible gear icon interface
 - Session statistics now track any 1+ minute session regardless of completion method
+- **New Theme**: Added Blackberry Cream theme with elegant cream backgrounds and rich blackberry accents
+  - Colors: Cream (#D3BDB0, #C1AE9F), Sage (#89937C), Blackberry (#715B64, #69385C)
+  - WCAG AA compliant with high contrast text (#2A1B1F, #3C1F25) 
+  - Features sophisticated gradient backgrounds and accessible button styling
+- **Theme Enhancement**: Added Dark Dusty Rose theme using high contrast colors from the dusty rose palette
+  - Dusty Rose: Warm neutrals with dusty rose highlights (#CC8B86, #F9EAE1, #D1BE9C, #AA998F, #7D4F50)
+  - Dark Dusty Rose: High contrast dark theme using smoky rose background with linen text
 
 ### Fixed
 

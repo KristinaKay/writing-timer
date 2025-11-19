@@ -10,7 +10,7 @@
 
 - **Flexible Timer Modes**: Pomodoro technique, custom durations, and multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - **Task Management**: Drag-and-drop task list with circular checkboxes for easy session tracking
-- **Beautiful Themes**: Six stunning themes (Dark, Light, Ocean, Sunset, Forest, Midnight)
+- **Ten Beautiful Themes**: Dark, Light Elegance, Soft Mist, Ocean, Dusty Rose, Dark Dusty Rose, Sage & Green, Mauve Elegance, Balanced Neutral, Midnight, and Blackberry Cream with full accessibility compliance
 - **Session Statistics**: Track your writing sessions with detailed productivity metrics
 - **WCAG AA Compliant**: Full accessibility support with keyboard navigation and reduced motion options
 - **Export/Import**: Save and restore your session data
@@ -105,7 +105,7 @@ Six carefully crafted themes for different moods and lighting conditions:
 - **Dark**: Easy on the eyes for long writing sessions
 - **Light**: Clean and bright for daytime writing
 - **Ocean**: Calming blue gradients
-- **Sunset**: Warm orange and pink tones
+- **Dusty Rose**: Soft rose tones with linen and taupe
 - **Forest**: Natural green hues
 - **Midnight**: Deep purple with accent colors
 

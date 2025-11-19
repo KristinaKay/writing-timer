@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Color Palettes - A Timer to Write</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        .palette-section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .palette-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .palette-name {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .color-swatch {
+            width: 60px;
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+            padding: 0.25rem;
+        }
+
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .variation {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .variation h3 {
+            padding: 1rem;
+            margin: 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .theme-preview {
+            padding: 1.5rem;
+            min-height: 200px;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .sidebar-mockup {
+            width: 140px;
+            border-radius: 8px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .section-header {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .task-item {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .checkbox {
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .timer-mockup {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timer-circle {
+            width: 80px;
+            height: 80px;
+            border: 3px solid;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.3rem 0.6rem;
+            border: 1.5px solid;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            padding: 1rem;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 0.7rem;
+            line-height: 1.4;
+            color: #495057;
+            white-space: pre-line;
+            border-top: 1px solid #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Advanced Color Palette Themes</h1>
+        
+        <!-- Deep Space Blue Palette -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2 class="palette-name">🌌 Deep Space Blue</h2>
+                <div class="color-swatches">
+                    <div class="color-swatch" style="background: #84828F;">#84828F</div>
+                    <div class="color-swatch" style="background: #6A687A;">#6A687A</div>
+                    <div class="color-swatch" style="background: #536271;">#536271</div>
+                    <div class="color-swatch" style="background: #3E4C5E;">#3E4C5E</div>
+                    <div class="color-swatch" style="background: #2C3D55;">#2C3D55</div>
+                </div>
+            </div>
+            
+            <div class="variations-grid">
+                <!-- Light Variation -->
+                <div class="variation">
+                    <h3>Silver Mist</h3>
+                    <div class="theme-preview" style="background: #84828F; color: #FFFFFF;">
+                        <div class="sidebar-mockup" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);">
+                            <div class="section-header" style="background: rgba(255,255,255,0.2); color: #FFFFFF;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(255,255,255,0.1); color: #FFFFFF;">
+                                <div class="checkbox" style="border-color: #FFFFFF;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #FFFFFF; color: #FFFFFF;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #2C3D55; color: white; border-color: #2C3D55;">Start</button>
+                                <button class="btn" style="background: transparent; color: #FFFFFF; border-color: #6A687A;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+deepSpaceBlueLight: {
+  primary: '#2C3D55',
+  secondary: '#6A687A',
+  background: '#84828F',
+  textColor: '#FFFFFF'
+}
+                    </div>
+                </div>
+
+                <!-- Medium Variation -->
+                <div class="variation">
+                    <h3>Nebula Blue</h3>
+                    <div class="theme-preview" style="background: #536271; color: #F0F0F2;">
+                        <div class="sidebar-mockup" style="background: rgba(240,240,242,0.1); border: 1px solid rgba(240,240,242,0.2);">
+                            <div class="section-header" style="background: rgba(240,240,242,0.15); color: #F0F0F2;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(240,240,242,0.08); color: #F0F0F2;">
+                                <div class="checkbox" style="border-color: #84828F;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #84828F; color: #F0F0F2;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #84828F; color: white; border-color: #84828F;">Start</button>
+                                <button class="btn" style="background: transparent; color: #F0F0F2; border-color: #6A687A;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+deepSpaceBlueMedium: {
+  primary: '#84828F',
+  secondary: '#6A687A',
+  background: '#536271',
+  textColor: '#F0F0F2'
+}
+                    </div>
+                </div>
+
+                <!-- Dark Variation -->
+                <div class="variation">
+                    <h3>Midnight Depths</h3>
+                    <div class="theme-preview" style="background: #2C3D55; color: #E8E8EA;">
+                        <div class="sidebar-mockup" style="background: rgba(232,232,234,0.08); border: 1px solid rgba(232,232,234,0.15);">
+                            <div class="section-header" style="background: rgba(232,232,234,0.12); color: #E8E8EA;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(232,232,234,0.06); color: #E8E8EA;">
+                                <div class="checkbox" style="border-color: #84828F;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #84828F; color: #E8E8EA;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #84828F; color: white; border-color: #84828F;">Start</button>
+                                <button class="btn" style="background: transparent; color: #E8E8EA; border-color: #536271;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+deepSpaceBlueDark: {
+  primary: '#84828F',
+  secondary: '#536271',
+  background: '#2C3D55',
+  textColor: '#E8E8EA'
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inky Blue Palette -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2 class="palette-name">🖋️ Inky Blue</h2>
+                <div class="color-swatches">
+                    <div class="color-swatch" style="background: #000000;">#000000</div>
+                    <div class="color-swatch" style="background: #0C1821;">#0C1821</div>
+                    <div class="color-swatch" style="background: #1B2A41;">#1B2A41</div>
+                    <div class="color-swatch" style="background: #324A5F;">#324A5F</div>
+                    <div class="color-swatch" style="background: #CCC9DC; color: black;">#CCC9DC</div>
+                </div>
+            </div>
+            
+            <div class="variations-grid">
+                <!-- Light Variation -->
+                <div class="variation">
+                    <h3>Moonlight Silver</h3>
+                    <div class="theme-preview" style="background: #CCC9DC; color: #0C1821;">
+                        <div class="sidebar-mockup" style="background: rgba(12,24,33,0.08); border: 1px solid rgba(12,24,33,0.15);">
+                            <div class="section-header" style="background: rgba(12,24,33,0.12); color: #0C1821;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(12,24,33,0.06); color: #0C1821;">
+                                <div class="checkbox" style="border-color: #1B2A41;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #1B2A41; color: #0C1821;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #1B2A41; color: white; border-color: #1B2A41;">Start</button>
+                                <button class="btn" style="background: transparent; color: #0C1821; border-color: #324A5F;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+inkyBlueLight: {
+  primary: '#1B2A41',
+  secondary: '#324A5F',
+  background: '#CCC9DC',
+  textColor: '#0C1821'
+}
+                    </div>
+                </div>
+
+                <!-- Medium Variation -->
+                <div class="variation">
+                    <h3>Steel Blue</h3>
+                    <div class="theme-preview" style="background: #324A5F; color: #E5E3F0;">
+                        <div class="sidebar-mockup" style="background: rgba(229,227,240,0.1); border: 1px solid rgba(229,227,240,0.2);">
+                            <div class="section-header" style="background: rgba(229,227,240,0.15); color: #E5E3F0;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(229,227,240,0.08); color: #E5E3F0;">
+                                <div class="checkbox" style="border-color: #CCC9DC;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #CCC9DC; color: #E5E3F0;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #CCC9DC; color: #0C1821; border-color: #CCC9DC;">Start</button>
+                                <button class="btn" style="background: transparent; color: #E5E3F0; border-color: #CCC9DC;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+inkyBlueMedium: {
+  primary: '#CCC9DC',
+  secondary: '#CCC9DC',
+  background: '#324A5F',
+  textColor: '#E5E3F0'
+}
+                    </div>
+                </div>
+
+                <!-- Dark Variation -->
+                <div class="variation">
+                    <h3>Ink Black</h3>
+                    <div class="theme-preview" style="background: #0C1821; color: #F0F0F5;">
+                        <div class="sidebar-mockup" style="background: rgba(240,240,245,0.06); border: 1px solid rgba(240,240,245,0.12);">
+                            <div class="section-header" style="background: rgba(240,240,245,0.1); color: #F0F0F5;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(240,240,245,0.04); color: #F0F0F5;">
+                                <div class="checkbox" style="border-color: #324A5F;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #324A5F; color: #F0F0F5;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #324A5F; color: white; border-color: #324A5F;">Start</button>
+                                <button class="btn" style="background: transparent; color: #F0F0F5; border-color: #1B2A41;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+inkyBlueDark: {
+  primary: '#324A5F',
+  secondary: '#1B2A41',
+  background: '#0C1821',
+  textColor: '#F0F0F5'
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lavender Thistle Palette -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2 class="palette-name">💜 Lavender Thistle</h2>
+                <div class="color-swatches">
+                    <div class="color-swatch" style="background: #8E9AAF;">#8E9AAF</div>
+                    <div class="color-swatch" style="background: #CBC0D3;">#CBC0D3</div>
+                    <div class="color-swatch" style="background: #EFD3D7;">#EFD3D7</div>
+                    <div class="color-swatch" style="background: #FEEAFA;">#FEEAFA</div>
+                    <div class="color-swatch" style="background: #DEE2FF;">#DEE2FF</div>
+                </div>
+            </div>
+            
+            <div class="variations-grid">
+                <!-- Light Variation -->
+                <div class="variation">
+                    <h3>Soft Lavender</h3>
+                    <div class="theme-preview" style="background: #FEEAFA; color: #3E3548;">
+                        <div class="sidebar-mockup" style="background: rgba(62,53,72,0.08); border: 1px solid rgba(62,53,72,0.15);">
+                            <div class="section-header" style="background: rgba(62,53,72,0.12); color: #3E3548;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(62,53,72,0.06); color: #3E3548;">
+                                <div class="checkbox" style="border-color: #8E9AAF;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #8E9AAF; color: #3E3548;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #8E9AAF; color: white; border-color: #8E9AAF;">Start</button>
+                                <button class="btn" style="background: transparent; color: #3E3548; border-color: #CBC0D3;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lavenderThistleLight: {
+  primary: '#8E9AAF',
+  secondary: '#CBC0D3',
+  background: '#FEEAFA',
+  textColor: '#3E3548'
+}
+                    </div>
+                </div>
+
+                <!-- Medium Variation -->
+                <div class="variation">
+                    <h3>Rose Mist</h3>
+                    <div class="theme-preview" style="background: #EFD3D7; color: #2E2534;">
+                        <div class="sidebar-mockup" style="background: rgba(46,37,52,0.1); border: 1px solid rgba(46,37,52,0.2);">
+                            <div class="section-header" style="background: rgba(46,37,52,0.15); color: #2E2534;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(46,37,52,0.08); color: #2E2534;">
+                                <div class="checkbox" style="border-color: #8E9AAF;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #8E9AAF; color: #2E2534;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #8E9AAF; color: white; border-color: #8E9AAF;">Start</button>
+                                <button class="btn" style="background: #FEEAFA; color: #2E2534; border-color: #CBC0D3;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lavenderThistleMedium: {
+  primary: '#8E9AAF',
+  secondary: '#FEEAFA',
+  background: '#EFD3D7',
+  textColor: '#2E2534'
+}
+                    </div>
+                </div>
+
+                <!-- Dark Variation -->
+                <div class="variation">
+                    <h3>Purple Slate</h3>
+                    <div class="theme-preview" style="background: #8E9AAF; color: #FEEAFA;">
+                        <div class="sidebar-mockup" style="background: rgba(254,234,250,0.15); border: 1px solid rgba(254,234,250,0.25);">
+                            <div class="section-header" style="background: rgba(254,234,250,0.2); color: #FEEAFA;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(254,234,250,0.1); color: #FEEAFA;">
+                                <div class="checkbox" style="border-color: #DEE2FF;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #DEE2FF; color: #FEEAFA;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #DEE2FF; color: #2E2534; border-color: #DEE2FF;">Start</button>
+                                <button class="btn" style="background: transparent; color: #FEEAFA; border-color: #CBC0D3;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lavenderThistleDark: {
+  primary: '#DEE2FF',
+  secondary: '#CBC0D3',
+  background: '#8E9AAF',
+  textColor: '#FEEAFA'
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lobster Gunmetal Pink Palette -->
+        <div class="palette-section">
+            <div class="palette-header">
+                <h2 class="palette-name">🦞 Lobster Gunmetal Pink</h2>
+                <div class="color-swatches">
+                    <div class="color-swatch" style="background: #403F4C;">#403F4C</div>
+                    <div class="color-swatch" style="background: #2C2B3C;">#2C2B3C</div>
+                    <div class="color-swatch" style="background: #1B2432;">#1B2432</div>
+                    <div class="color-swatch" style="background: #121420;">#121420</div>
+                    <div class="color-swatch" style="background: #B76D68;">#B76D68</div>
+                </div>
+            </div>
+            
+            <div class="variations-grid">
+                <!-- Light Variation -->
+                <div class="variation">
+                    <h3>Coral Dawn</h3>
+                    <div class="theme-preview" style="background: #B76D68; color: #FFFFFF;">
+                        <div class="sidebar-mockup" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);">
+                            <div class="section-header" style="background: rgba(255,255,255,0.2); color: #FFFFFF;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(255,255,255,0.1); color: #FFFFFF;">
+                                <div class="checkbox" style="border-color: #FFFFFF;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #FFFFFF; color: #FFFFFF;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #121420; color: white; border-color: #121420;">Start</button>
+                                <button class="btn" style="background: transparent; color: #FFFFFF; border-color: #403F4C;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lobsterGunmetalLight: {
+  primary: '#121420',
+  secondary: '#403F4C',
+  background: '#B76D68',
+  textColor: '#FFFFFF'
+}
+                    </div>
+                </div>
+
+                <!-- Medium Variation -->
+                <div class="variation">
+                    <h3>Gunmetal Gray</h3>
+                    <div class="theme-preview" style="background: #403F4C; color: #F5F5F5;">
+                        <div class="sidebar-mockup" style="background: rgba(245,245,245,0.1); border: 1px solid rgba(245,245,245,0.2);">
+                            <div class="section-header" style="background: rgba(245,245,245,0.15); color: #F5F5F5;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(245,245,245,0.08); color: #F5F5F5;">
+                                <div class="checkbox" style="border-color: #B76D68;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #B76D68; color: #F5F5F5;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #B76D68; color: white; border-color: #B76D68;">Start</button>
+                                <button class="btn" style="background: transparent; color: #F5F5F5; border-color: #F5F5F5;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lobsterGunmetalMedium: {
+  primary: '#B76D68',
+  secondary: '#F5F5F5',
+  background: '#403F4C',
+  textColor: '#F5F5F5'
+}
+                    </div>
+                </div>
+
+                <!-- Dark Variation -->
+                <div class="variation">
+                    <h3>Midnight Steel</h3>
+                    <div class="theme-preview" style="background: #121420; color: #F0F0F0;">
+                        <div class="sidebar-mockup" style="background: rgba(240,240,240,0.06); border: 1px solid rgba(240,240,240,0.12);">
+                            <div class="section-header" style="background: rgba(240,240,240,0.1); color: #F0F0F0;">⏰ Timer</div>
+                            <div class="task-item" style="background: rgba(240,240,240,0.04); color: #F0F0F0;">
+                                <div class="checkbox" style="border-color: #B76D68;"></div>
+                                Task
+                            </div>
+                        </div>
+                        <div class="timer-mockup">
+                            <div class="timer-circle" style="border-color: #B76D68; color: #F0F0F0;">25:00</div>
+                            <div class="controls">
+                                <button class="btn" style="background: #B76D68; color: white; border-color: #B76D68;">Start</button>
+                                <button class="btn" style="background: transparent; color: #F0F0F0; border-color: #403F4C;">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-block">
+lobsterGunmetalDark: {
+  primary: '#B76D68',
+  secondary: '#403F4C',
+  background: '#121420',
+  textColor: '#F0F0F0'
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; text-align: center;">
+            <h3 style="margin-bottom: 1rem; color: #2c3e50;">Premium Color Collections</h3>
+            <p style="color: #7f8c8d;">These advanced color palettes offer sophisticated alternatives with carefully crafted variations for light, medium, and dark preferences. Each maintains professional design standards with WCAG AA accessibility compliance.</p>
+        </div>
+    </div>
+</body>
+</html>

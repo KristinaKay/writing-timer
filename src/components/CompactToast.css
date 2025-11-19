@@ -15,12 +15,12 @@
 }
 
 .compact-toast.on {
-  background: linear-gradient(90deg, rgba(100,255,200,0.08), rgba(100,255,200,0.04));
+  background: rgba(100,255,200,0.12);
   color: var(--text-color);
 }
 
 .compact-toast.off {
-  background: linear-gradient(90deg, rgba(255,100,100,0.08), rgba(255,100,100,0.04));
+  background: rgba(255,100,100,0.12);
   color: var(--text-color);
 }
 

@@ -4,14 +4,14 @@ import { themes } from '../lib/themeUtils';
 
 /**
  * Theme Selector Component
- * Allows switching between different color themes
+ * Allows switching between different color themes organized by brightness
  */
 const ThemeSelector = () => {
   const [currentTheme, setCurrentTheme] = useState(() => {
     try {
-      return localStorage.getItem('mercurial-theme') || 'dark';
+      return localStorage.getItem('mercurial-theme') || 'midnightSteel';
     } catch {
-      return 'dark';
+      return 'midnightSteel';
     }
   });
 
@@ -23,7 +23,26 @@ const ThemeSelector = () => {
     }
   });
 
-  // use `themes` imported from lib/themeUtils
+  // Collapsible states for categories
+  const [collapsedCategories, setCollapsedCategories] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('theme-categories-collapsed')) || {};
+    } catch {
+      return {};
+    }
+  });
+
+  // Organize themes by actual brightness (background color lightness)
+  const themeCategories = {
+    light: {
+      name: '☀️ Light Themes',
+      themes: ['softLavender', 'dustyFloralLight', 'dustyFloralMist', 'blackberryCream', 'dustyFloralNeutral', 'moonlightSilver', 'dustyRose', 'sageGreen', 'dustyFloralMauve']
+    },
+    dark: {
+      name: '🌙 Dark Themes',
+      themes: ['coralDawn', 'darkDustyRose', 'silverMist', 'purpleSlate', 'nebulaBlue', 'gunmetalGray', 'midnightDepths', 'midnightSteel', 'inkBlack']
+    }
+  };
 
   // Apply theme
   useEffect(() => {
@@ -68,8 +87,22 @@ const ThemeSelector = () => {
     } catch {}
   }, [compactMode]);
 
+  // Save collapsed states
+  useEffect(() => {
+    try {
+      localStorage.setItem('theme-categories-collapsed', JSON.stringify(collapsedCategories));
+    } catch {}
+  }, [collapsedCategories]);
+
   const handleThemeChange = (themeKey) => {
     setCurrentTheme(themeKey);
+  };
+
+  const toggleCategory = (categoryKey) => {
+    setCollapsedCategories(prev => ({
+      ...prev,
+      [categoryKey]: !prev[categoryKey]
+    }));
   };
 
   return (
@@ -88,39 +121,57 @@ const ThemeSelector = () => {
         Choose your visual theme
       </p>
 
-      <div className="theme-grid">
-        {Object.keys(themes).map(themeKey => {
-          const theme = themes[themeKey];
-          return (
-            <button
-              key={themeKey}
-              className={`theme-card ${currentTheme === themeKey ? 'active' : ''}`}
-              onClick={() => handleThemeChange(themeKey)}
+      <div className="theme-categories">
+        {Object.entries(themeCategories).map(([categoryKey, category]) => (
+          <div key={categoryKey} className="theme-category">
+            <button 
+              className="category-header"
+              onClick={() => toggleCategory(categoryKey)}
+              aria-expanded={!collapsedCategories[categoryKey]}
             >
-              <div 
-                className="theme-preview"
-                style={{ background: theme.background }}
-              >
-                <div 
-                  className="theme-circle"
-                  style={{ borderColor: theme.primary }}
-                >
-                  <div 
-                    className="theme-dot"
-                    style={{ background: theme.secondary }}
-                  ></div>
-                </div>
-              </div>
-              <div className="theme-info">
-                <div className="theme-name">{theme.name}</div>
-                <div className="theme-desc">{theme.description}</div>
-              </div>
-              {currentTheme === themeKey && (
-                <div className="theme-check">✓</div>
-              )}
+              <span className="category-name">{category.name}</span>
+              <span className={`category-arrow ${collapsedCategories[categoryKey] ? 'collapsed' : ''}`}>
+                ▼
+              </span>
             </button>
-          );
-        })}
+            
+            <div className={`category-content ${collapsedCategories[categoryKey] ? 'collapsed' : ''}`}>
+              <div className="theme-grid">
+                {category.themes.map(themeKey => {
+                  const theme = themes[themeKey];
+                  if (!theme) return null;
+                  
+                  return (
+                    <button
+                      key={themeKey}
+                      className={`theme-card ${currentTheme === themeKey ? 'active' : ''}`}
+                      onClick={() => handleThemeChange(themeKey)}
+                    >
+                      <div 
+                        className="theme-color-palette"
+                        style={{ background: theme.background }}
+                      >
+                        <div className="palette-swatches">
+                          <div className="swatch primary" style={{ background: theme.primary }}></div>
+                          <div className="swatch secondary" style={{ background: theme.secondary }}></div>
+                          <div className="swatch background" style={{ background: theme.background }}></div>
+                          <div className="swatch text" style={{ background: theme.textColor }}></div>
+                        </div>
+                        {currentTheme === themeKey && (
+                          <div className="theme-check" style={{ background: theme.primary }}>✓</div>
+                        )}
+                      </div>
+                      <div className="theme-info">
+                        <div className="theme-name">{theme.name}</div>
+                        <div className="theme-desc">{theme.description}</div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

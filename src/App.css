@@ -7,7 +7,8 @@
 :root {
   --theme-primary: #E91E63;
   --theme-secondary: #00D4FF;
-  --theme-background: linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 100%);
+  --background-dark: #1a1a1a;
+  --background-light: #f5f5f5;
   --text-color: #ffffff;
   /* centralized overlay definitions for white overlays (use variables instead of literals) */
   --overlay-03: rgba(255,255,255,0.03);
@@ -68,17 +69,61 @@ body {
 
 .App {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d1a2d 100%);
+  background: var(--background-dark);
   color: var(--text-color);
-  /* Use responsive horizontal padding so content can reach edges on small screens but stay spaced on large screens */
-  padding: 2rem clamp(1rem, 4vw, 4rem);
+  /* Reduced padding for more compact design */
+  padding: 2rem clamp(1rem, 3vw, 3rem);
   width: 100%;
 }
 
 /* Light theme overrides using data-theme attribute set on the document element */
 :root[data-theme="light"] .App {
-  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  background: var(--background-light);
   color: #213547; /* darker text for readability */
+}
+
+/* Light Theme Overrides for ALL Actual Light Themes */
+:root[data-theme="dustyFloralLight"],
+:root[data-theme="dustyFloralMist"], 
+:root[data-theme="dustyRose"],
+:root[data-theme="dustyFloralNeutral"],
+:root[data-theme="blackberryCream"],
+:root[data-theme="sageGreen"] {
+  --text-color: #2A1B1F; /* Much darker for better contrast */
+  --text-secondary: rgba(42,27,31,0.75); /* Dark secondary text with good contrast */
+  --background-light: rgba(255,255,255,0.8);
+  --background-medium: rgba(255,255,255,0.6);
+  --theme-primary: #E91E63;
+  --theme-secondary: #00D4FF;
+  --text-color-inverse: #ffffff;
+}
+
+:root[data-theme="dustyFloralLight"] .sidebar,
+:root[data-theme="dustyFloralMist"] .sidebar,
+:root[data-theme="dustyRose"] .sidebar,
+:root[data-theme="dustyFloralNeutral"] .sidebar,
+:root[data-theme="blackberryCream"] .sidebar,
+:root[data-theme="sageGreen"] .sidebar,
+:root[data-theme="dustyFloralLight"] .sidebar-section,
+:root[data-theme="dustyFloralMist"] .sidebar-section,
+:root[data-theme="dustyRose"] .sidebar-section,
+:root[data-theme="dustyFloralNeutral"] .sidebar-section,
+:root[data-theme="blackberryCream"] .sidebar-section,
+:root[data-theme="sageGreen"] .sidebar-section,
+:root[data-theme="dustyFloralLight"] .section-header,
+:root[data-theme="dustyFloralMist"] .section-header,
+:root[data-theme="dustyRose"] .section-header,
+:root[data-theme="dustyFloralNeutral"] .section-header,
+:root[data-theme="blackberryCream"] .section-header,
+:root[data-theme="sageGreen"] .section-header,
+:root[data-theme="dustyFloralLight"] .section-content,
+:root[data-theme="dustyFloralMist"] .section-content,
+:root[data-theme="dustyRose"] .section-content,
+:root[data-theme="dustyFloralNeutral"] .section-content,
+:root[data-theme="blackberryCream"] .section-content,
+:root[data-theme="sageGreen"] .section-content {
+  background: rgba(255,255,255,0.4);
+  color: #2A1B1F;
 }
 
 /* Define theme variables specifically for light theme so components render correctly
@@ -86,7 +131,7 @@ body {
    readable defaults used throughout component CSS. */
 :root[data-theme="light"] {
   --text-color: #213547;
-  --text-secondary: rgba(33,53,71,0.56);
+  --text-secondary: rgba(33,53,71,0.85);
   --background-light: var(--overlay-96);
   --background-medium: var(--overlay-92);
   --theme-primary: #E91E63;
@@ -328,7 +373,7 @@ body {
 :root[data-theme="light"] .section-header,
 :root[data-theme="light"] .section-content,
 :root[data-theme="light"] .debug-info {
-  background: var(--overlay-60);
+  background: var(--overlay-92);
   color: #213547;
   box-shadow: none;
 }
@@ -347,8 +392,42 @@ body {
 
 :root[data-theme="light"] .section-header.active,
 :root[data-theme="light"] .section-header:focus-visible {
-  background: linear-gradient(90deg, rgba(100,108,255,0.12), rgba(100,108,255,0.06));
+  background: rgba(100,108,255,0.12);
   border-left: 4px solid rgba(100,108,255,0.9);
+}
+
+/* Light theme button and input contrast fixes */
+:root[data-theme="dustyFloralLight"] .btn-primary,
+:root[data-theme="dustyFloralMist"] .btn-primary,
+:root[data-theme="dustyRose"] .btn-primary,
+:root[data-theme="dustyFloralNeutral"] .btn-primary,
+:root[data-theme="blackberryCream"] .btn-primary,
+:root[data-theme="sageGreen"] .btn-primary {
+  background: #B91651 !important; /* Darker primary color for better contrast */
+  color: white !important;
+  border: 1px solid #8B1538 !important;
+}
+
+:root[data-theme="dustyFloralLight"] .btn-secondary,
+:root[data-theme="dustyFloralMist"] .btn-secondary,
+:root[data-theme="dustyRose"] .btn-secondary,
+:root[data-theme="dustyFloralNeutral"] .btn-secondary,
+:root[data-theme="blackberryCream"] .btn-secondary,
+:root[data-theme="sageGreen"] .btn-secondary {
+  background: #0099CC !important;
+  color: white !important;
+  border: 1px solid #007AA3 !important;
+}
+
+:root[data-theme="dustyFloralLight"] input,
+:root[data-theme="dustyFloralMist"] input,
+:root[data-theme="dustyRose"] input,
+:root[data-theme="dustyFloralNeutral"] input,
+:root[data-theme="blackberryCream"] input,
+:root[data-theme="sageGreen"] input {
+  background: rgba(255,255,255,0.9) !important;
+  border: 1px solid rgba(42,27,31,0.3) !important;
+  color: #2A1B1F !important;
 }
 
 /* Force commonly white text to use theme text color in light mode */
@@ -454,7 +533,7 @@ h1 {
 button {
   font-family: inherit;
   font-size: 1.02rem;
-  padding: 0.56rem 1.1rem;
+  padding: 0.5rem 1rem; /* Reduced padding */
   min-height: 44px; /* WCAG 2.5.5: minimum touch target */
   border: none;
   border-radius: 10px;
@@ -462,17 +541,16 @@ button {
   transition: all 0.22s ease;
   font-weight: 500;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.16);
+  /* Reduced margin for more compact spacing */
+  margin: 0.125rem;
 }
 
 .btn-primary {
-  background: 
-    linear-gradient(135deg, 
-      color-mix(in srgb, var(--theme-primary) 85%, var(--theme-secondary)) 0%, 
-      color-mix(in srgb, var(--theme-secondary) 85%, var(--theme-primary)) 100%
-    );
+  background: var(--theme-primary);
   color: var(--text-color-inverse);
   min-width: 120px;
-  padding: 0.56rem 1.2rem;
+  /* Reduced padding for more compact appearance */
+  padding: 0.5rem 1rem;
   filter: blur(0.3px);
   backdrop-filter: blur(4px);
 }
@@ -559,13 +637,15 @@ button {
 
 /* Sidebar */
 .sidebar {
-  width: 380px;
+  width: 360px;
   background: var(--background-medium);
   border-radius: 16px;
   padding: 1rem;
   position: relative;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  /* Reduced margin for more compact spacing */
+  margin-left: 0.5rem;
 }
 
 .sidebar.closed {
@@ -683,6 +763,54 @@ button {
   border-radius: 2px;
 }
 
+/* Light theme overrides for sidebar group headers - must come after base styles */
+:root[data-theme="dustyFloralLight"] .sidebar-group-header,
+:root[data-theme="dustyFloralMist"] .sidebar-group-header,
+:root[data-theme="dustyRose"] .sidebar-group-header,
+:root[data-theme="dustyFloralNeutral"] .sidebar-group-header,
+:root[data-theme="blackberryCream"] .sidebar-group-header,
+:root[data-theme="sageGreen"] .sidebar-group-header {
+  color: #213547 !important;
+}
+
+:root[data-theme="dustyFloralLight"] .sidebar-group-header.clickable,
+:root[data-theme="dustyFloralMist"] .sidebar-group-header.clickable,
+:root[data-theme="dustyRose"] .sidebar-group-header.clickable,
+:root[data-theme="dustyFloralNeutral"] .sidebar-group-header.clickable,
+:root[data-theme="blackberryCream"] .sidebar-group-header.clickable,
+:root[data-theme="sageGreen"] .sidebar-group-header.clickable {
+  border-bottom: 1px solid rgba(33,53,71,0.15) !important;
+  color: #213547 !important;
+}
+
+:root[data-theme="dustyFloralLight"] .sidebar-group-header.clickable:hover,
+:root[data-theme="dustyFloralMist"] .sidebar-group-header.clickable:hover,
+:root[data-theme="dustyRose"] .sidebar-group-header.clickable:hover,
+:root[data-theme="dustyFloralNeutral"] .sidebar-group-header.clickable:hover,
+:root[data-theme="blackberryCream"] .sidebar-group-header.clickable:hover,
+:root[data-theme="sageGreen"] .sidebar-group-header.clickable:hover {
+  background: rgba(33,53,71,0.08) !important;
+  color: var(--theme-primary) !important;
+}
+
+:root[data-theme="dustyFloralLight"] .sidebar-group-header.clickable .group-collapse-icon,
+:root[data-theme="dustyFloralMist"] .sidebar-group-header.clickable .group-collapse-icon,
+:root[data-theme="dustyRose"] .sidebar-group-header.clickable .group-collapse-icon,
+:root[data-theme="dustyFloralNeutral"] .sidebar-group-header.clickable .group-collapse-icon,
+:root[data-theme="blackberryCream"] .sidebar-group-header.clickable .group-collapse-icon,
+:root[data-theme="sageGreen"] .sidebar-group-header.clickable .group-collapse-icon {
+  color: rgba(33,53,71,0.7) !important;
+}
+
+:root[data-theme="dustyFloralLight"] .sidebar-group-header.clickable:hover .group-collapse-icon,
+:root[data-theme="dustyFloralMist"] .sidebar-group-header.clickable:hover .group-collapse-icon,
+:root[data-theme="dustyRose"] .sidebar-group-header.clickable:hover .group-collapse-icon,
+:root[data-theme="dustyFloralNeutral"] .sidebar-group-header.clickable:hover .group-collapse-icon,
+:root[data-theme="blackberryCream"] .sidebar-group-header.clickable:hover .group-collapse-icon,
+:root[data-theme="sageGreen"] .sidebar-group-header.clickable:hover .group-collapse-icon {
+  color: var(--theme-primary) !important;
+}
+
 /* Sidebar Sections */
 .sidebar-section {
   background: var(--background-medium);
@@ -739,7 +867,7 @@ button {
 .section-header.active,
 .section-header:focus-visible,
 .section-header[aria-expanded="true"] {
-  background: linear-gradient(90deg, rgba(100,108,255,0.12), rgba(100,108,255,0.06));
+  background: rgba(100,108,255,0.12);
   box-shadow: 0 6px 18px rgba(100,108,255,0.06);
   border-left: 4px solid rgba(100,108,255,0.9);
 }
@@ -1090,5 +1218,27 @@ textarea:focus-visible,
 select:focus-visible {
   outline: 3px solid var(--theme-primary);
   outline-offset: 2px;
+}
+
+/* Section Headers and Tooltips */
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-tooltip {
+  cursor: help;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.info-tooltip:hover {
+  color: var(--text-color);
 }
 

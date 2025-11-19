@@ -1,4 +1,4 @@
-export const updateStatistics = (sessionMode, minutes, isPomodoro) => {
+export const updateStatistics = (sessionMode, minutes, isPomodoro, projectName = '') => {
   try {
     const saved = localStorage.getItem('mercurial-statistics');
     const stats = saved ? JSON.parse(saved) : {
@@ -9,7 +9,8 @@ export const updateStatistics = (sessionMode, minutes, isPomodoro) => {
       completedPomodoros: 0,
       tasksCompleted: 0,
       lastReset: new Date().toISOString(),
-      sessionHistory: []
+      sessionHistory: [],
+      projectSessions: {}
     };
 
     stats.totalSessions += 1;
@@ -21,11 +22,32 @@ export const updateStatistics = (sessionMode, minutes, isPomodoro) => {
       stats.completedPomodoros += 1;
     }
 
+    // Track project sessions if project name is provided
+    if (projectName && projectName.trim()) {
+      const trimmedProjectName = projectName.trim();
+      if (!stats.projectSessions[trimmedProjectName]) {
+        stats.projectSessions[trimmedProjectName] = {
+          totalSessions: 0,
+          totalMinutes: 0,
+          sessionsByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
+          minutesByMode: { writing: 0, researching: 0, creative: 0, roaming: 0 },
+          lastSession: null
+        };
+      }
+      
+      stats.projectSessions[trimmedProjectName].totalSessions += 1;
+      stats.projectSessions[trimmedProjectName].totalMinutes += minutes;
+      stats.projectSessions[trimmedProjectName].sessionsByMode[sessionMode] += 1;
+      stats.projectSessions[trimmedProjectName].minutesByMode[sessionMode] += minutes;
+      stats.projectSessions[trimmedProjectName].lastSession = new Date().toISOString();
+    }
+
     stats.sessionHistory.unshift({
       mode: sessionMode,
       minutes: minutes,
       timestamp: new Date().toISOString(),
-      isPomodoro: isPomodoro
+      isPomodoro: isPomodoro,
+      projectName: projectName && projectName.trim() ? projectName.trim() : null
     });
     if (stats.sessionHistory.length > 10) {
       stats.sessionHistory = stats.sessionHistory.slice(0, 10);

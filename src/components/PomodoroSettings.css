@@ -28,7 +28,7 @@
 
 .toggle-slider {
   position: relative;
-  background: var(--background-medium);
+  background: #dc3545; /* Red for OFF state */
   width: 50px;
   height: 26px;
   border-radius: 50px;
@@ -48,6 +48,10 @@
   transition: transform 0.3s ease;
 }
 
+.pomodoro-toggle input:checked + .toggle-slider {
+  background: #28a745; /* Green for ON state */
+}
+
 .pomodoro-toggle input:checked + .toggle-slider::before {
   transform: translateX(24px);
 }
@@ -59,11 +63,12 @@
 
 .enabled-badge {
   font-size: 0.75rem;
-  background: rgba(233, 30, 99, 0.12);
-  color: var(--accent-danger);
+  background: #28a745 !important; /* Strong green background */
+  color: #ffffff !important; /* White text for contrast */
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
-  border: 1px solid rgba(233, 30, 99, 0.18);
+  border: 1px solid #28a745;
+  font-weight: 600;
 }
 
 .expand-btn {

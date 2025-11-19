@@ -1,10 +1,11 @@
-export const playSound = (soundType = 'bell', volume = 0.5) => {
+export const playSound = (soundType, volume) => {
   try {
     const enabled = localStorage.getItem('mercurial-sound-enabled') === 'true';
     if (!enabled) return;
 
-    const savedType = localStorage.getItem('mercurial-sound-type') || soundType;
-    const savedVolume = parseFloat(localStorage.getItem('mercurial-sound-volume') || volume);
+    // Use passed parameters or fallback to saved settings
+    const useType = soundType || localStorage.getItem('mercurial-sound-type') || 'bell';
+    const useVolume = volume !== undefined ? volume : parseFloat(localStorage.getItem('mercurial-sound-volume') || '0.5');
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
@@ -17,7 +18,7 @@ export const playSound = (soundType = 'bell', volume = 0.5) => {
       gentle: { freq: 600, duration: 0.4 }
     };
 
-    const sound = sounds[savedType] || sounds.bell;
+    const sound = sounds[useType] || sounds.bell;
 
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
@@ -26,7 +27,7 @@ export const playSound = (soundType = 'bell', volume = 0.5) => {
     oscillator.type = 'sine';
 
     gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.linearRampToValueAtTime(savedVolume, audioContext.currentTime + 0.01);
+    gainNode.gain.linearRampToValueAtTime(useVolume, audioContext.currentTime + 0.01);
     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + sound.duration);
 
     oscillator.start(audioContext.currentTime);
@@ -35,8 +36,8 @@ export const playSound = (soundType = 'bell', volume = 0.5) => {
     setTimeout(() => {
       audioContext.close();
     }, sound.duration * 1000 + 100);
-  } catch {
-    // ignore
+  } catch (error) {
+    console.warn('Sound playback failed:', error);
   }
 };
 

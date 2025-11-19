@@ -11,6 +11,8 @@ import { updateStatistics } from './lib/statisticsUtils'
 import SoundSettings from './components/SoundSettings'
 import ExportImport from './components/ExportImport'
 import ThemeSelector from './components/ThemeSelector'
+import ThemeManager from './components/ThemeManager'
+import GettingStarted from './components/GettingStarted'
 import CompactToast from './components/CompactToast'
 import { playSound } from './lib/soundUtils'
 import { initializeTheme } from './lib/themeUtils'
@@ -19,6 +21,7 @@ import './App.css'
 function App() {
   // Session mode state
   const [sessionMode, setSessionMode] = useState('writing');
+  const [projectName, setProjectName] = useState('');
   
   // Custom duration state
   const [customMinutes, setCustomMinutes] = useState('');
@@ -45,7 +48,18 @@ function App() {
     timerDuration: false,
     trackingTasks: false,
     appSettings: false
-  });  // Refs and keyboard navigation for accordion
+  });
+
+  // Getting Started guide state
+  const [showGettingStarted, setShowGettingStarted] = useState(() => {
+    try {
+      return !localStorage.getItem('mercurial-guide-completed');
+    } catch {
+      return true;
+    }
+  });
+
+  // Refs and keyboard navigation for accordion
   const headerRefs = useRef({ 
     sessionMode: null, 
     wordTracker: null,
@@ -57,6 +71,15 @@ function App() {
     export: null,
     themes: null
   });
+  const handleCloseGettingStarted = () => {
+    setShowGettingStarted(false);
+    try {
+      localStorage.setItem('mercurial-guide-completed', 'true');
+    } catch {
+      // Ignore storage errors
+    }
+  };
+
   const sectionOrder = ['sessionMode', 'wordTracker', 'pomodoro', 'presets', 'custom', 'statistics', 'sound', 'export', 'themes'];
 
   const handleHeaderKeyDown = (e, sectionId) => {
@@ -94,7 +117,7 @@ function App() {
   const trackSessionIfValid = () => {
     const sessionDuration = Math.round((timer.totalElapsed || 0) / 60); // minutes
     if (sessionDuration >= 1) {
-      updateStatistics(sessionMode, sessionDuration, pomodoroEnabled && cycleType === 'work');
+      updateStatistics(sessionMode, sessionDuration, pomodoroEnabled && cycleType === 'work', projectName);
       return true; // Session was tracked
     }
     return false; // Session too short to track
@@ -176,7 +199,18 @@ function App() {
     if (timer.isPaused) return '#00D4FF';
     if (pomodoroEnabled && cycleType === 'shortBreak') return '#FFA726';
     if (pomodoroEnabled && cycleType === 'longBreak') return '#9C27B0';
-    if (timer.isRunning) return '#E91E63';
+    
+    // Use session mode colors when timer is running
+    if (timer.isRunning) {
+      const sessionModeColors = {
+        'writing': '#E91E63',       // Hot Pink - Creative writing
+        'researching': '#00D4FF',   // Cyan - Research and info gathering 
+        'creative': '#9C27B0',      // Purple - Brainstorming and ideation
+        'roaming': '#FF9800'        // Orange - Exploration and rabbit holes
+      };
+      return sessionModeColors[sessionMode] || '#E91E63';
+    }
+    
     return '#E91E63';
   };
 
@@ -190,8 +224,30 @@ function App() {
     }
   };
 
+  // Session mode default durations
+  const getModeDefaultDuration = (mode) => {
+    const durations = {
+      'writing': 25,      // Writing Sprint - Standard Pomodoro
+      'researching': 45,  // Deep Research - Extended Focus
+      'creative': 15,     // Creative Thinking - Quick Bursts
+      'roaming': 60       // Roaming/Exploration - Long Session
+    };
+    return durations[mode] || 25;
+  };
+
   const handleModeChange = (newMode) => {
     setSessionMode(newMode);
+    
+    // Auto-set duration based on session mode (only if timer is not running)
+    if (!timer.isRunning && !timer.isPaused && !pomodoroEnabled) {
+      const defaultDuration = getModeDefaultDuration(newMode);
+      timer.setDuration(defaultDuration);
+      setCustomMinutes(''); // Clear custom input
+    }
+  };
+
+  const handleProjectNameChange = (newProjectName) => {
+    setProjectName(newProjectName);
   };
 
   const handleCustomDuration = () => {
@@ -238,7 +294,7 @@ function App() {
       
       <div className="app-layout">
         {/* Main Timer Section */}
-        <div className="main-content">
+        <div className="main-content">          
           {/* Pomodoro Cycle Tracker */}
           {pomodoroEnabled && (
             <PomodoroCycleTracker
@@ -246,6 +302,7 @@ function App() {
               totalCycles={pomodoroConfig.sessionsBeforeLongBreak}
               completedSessions={completedSessions}
               cycleType={cycleType}
+              sessionMode={sessionMode}
             />
           )}
           
@@ -336,7 +393,75 @@ function App() {
 
           {sidebarOpen && (
             <div className="sidebar-content">
-            {/* GROUP 1: SESSION SETUP (before you start) */}
+            {/* GROUP 1: APP SETTINGS (moved above session setup) */}
+            <button 
+              className="sidebar-group-header clickable"
+              onClick={() => toggleSidebarGroup('appSettings')}
+              aria-expanded={openSidebarGroups.appSettings}
+            >
+              <span>APP SETTINGS</span>
+              <span className="group-collapse-icon">{openSidebarGroups.appSettings ? '▼' : '▶'}</span>
+            </button>
+
+            {openSidebarGroups.appSettings && (<>
+            {/* Sound Settings Section */}
+            <div className="sidebar-section">
+              <button 
+                ref={(el) => (headerRefs.current['sound'] = el)}
+                className="section-header"
+                onClick={() => setOpenSidebarSection(openSidebarSection === 'sound' ? null : 'sound')}
+                onKeyDown={(e) => handleHeaderKeyDown(e, 'sound')}
+                aria-expanded={openSidebarSection === 'sound'}
+                tabIndex={0}
+              >
+                <span>🔊 Sound</span>
+                <span className="collapse-icon">{openSidebarSection === 'sound' ? '▼' : '▶'}</span>
+              </button>
+              <div className={`section-content ${openSidebarSection === 'sound' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'sound'}>
+                <SoundSettings />
+              </div>
+            </div>
+
+            {/* Export/Import Section */}
+            <div className="sidebar-section">
+              <button 
+                ref={(el) => (headerRefs.current['export'] = el)}
+                className="section-header"
+                onClick={() => setOpenSidebarSection(openSidebarSection === 'export' ? null : 'export')}
+                onKeyDown={(e) => handleHeaderKeyDown(e, 'export')}
+                aria-expanded={openSidebarSection === 'export'}
+                tabIndex={0}
+              >
+                <span>💾 Backup</span>
+                <span className="collapse-icon">{openSidebarSection === 'export' ? '▼' : '▶'}</span>
+              </button>
+              <div className={`section-content ${openSidebarSection === 'export' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'export'}>
+                <ExportImport />
+              </div>
+            </div>
+
+            {/* Theme Selector Section with Toggle Switch */}
+            <div className="sidebar-section">
+              <button 
+                ref={(el) => (headerRefs.current['themes'] = el)}
+                className="section-header"
+                onClick={() => setOpenSidebarSection(openSidebarSection === 'themes' ? null : 'themes')}
+                onKeyDown={(e) => handleHeaderKeyDown(e, 'themes')}
+                aria-expanded={openSidebarSection === 'themes'}
+                tabIndex={0}
+              >
+                <span>🎨 Themes</span>
+                <span className="collapse-icon">{openSidebarSection === 'themes' ? '▼' : '▶'}</span>
+              </button>
+              <div className={`section-content ${openSidebarSection === 'themes' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'themes'}>
+                <ThemeManager />
+              </div>
+            </div>
+            <div className="sidebar-group-separator" />
+            </>
+            )}
+
+            {/* GROUP 2: SESSION SETUP (before you start) */}
             <button 
               className="sidebar-group-header clickable"
               onClick={() => toggleSidebarGroup('sessionSetup')}
@@ -365,6 +490,8 @@ function App() {
                     currentMode={sessionMode}
                     onModeChange={handleModeChange}
                     isTimerRunning={timer.isRunning || timer.isPaused}
+                    projectName={projectName}
+                    onProjectNameChange={handleProjectNameChange}
                   />
                 </div>
               </div>
@@ -414,20 +541,20 @@ function App() {
               </div>
 
               <div className="sidebar-group-separator" />
-              </>
-            )}
+              </>)}
 
-              {/* GROUP 2: TIMER DURATION (choose your time) */}
-              <button 
-                className="sidebar-group-header clickable"
-                onClick={() => toggleSidebarGroup('timerDuration')}
-                aria-expanded={openSidebarGroups.timerDuration}
-              >
-                <span>TIMER DURATION</span>
-                <span className="group-collapse-icon">{openSidebarGroups.timerDuration ? '▼' : '▶'}</span>
-              </button>
+            {/* GROUP 3: TIMER DURATION (choose your time) */}
+            <button 
+              className="sidebar-group-header clickable"
+              onClick={() => toggleSidebarGroup('timerDuration')}
+              aria-expanded={openSidebarGroups.timerDuration}
+            >
+              <span>TIMER DURATION</span>
+              <span className="group-collapse-icon">{openSidebarGroups.timerDuration ? '▼' : '▶'}</span>
+            </button>
 
-              {openSidebarGroups.timerDuration && (<>
+            {openSidebarGroups.timerDuration && (
+              <>
               {/* Quick Presets Section */}
               <div className="sidebar-section">
                 <button 
@@ -499,17 +626,18 @@ function App() {
               </>
             )}
 
-              {/* GROUP 3: TRACKING & TASKS (during/after session) */}
-              <button 
-                className="sidebar-group-header clickable"
-                onClick={() => toggleSidebarGroup('trackingTasks')}
-                aria-expanded={openSidebarGroups.trackingTasks}
-              >
-                <span>TRACKING & TASKS</span>
-                <span className="group-collapse-icon">{openSidebarGroups.trackingTasks ? '▼' : '▶'}</span>
-              </button>
+            {/* GROUP 4: TRACKING & TASKS (during session) */}
+            <button 
+              className="sidebar-group-header clickable"
+              onClick={() => toggleSidebarGroup('trackingTasks')}
+              aria-expanded={openSidebarGroups.trackingTasks}
+            >
+              <span>TRACKING & TASKS</span>
+              <span className="group-collapse-icon">{openSidebarGroups.trackingTasks ? '▼' : '▶'}</span>
+            </button>
 
-              {openSidebarGroups.trackingTasks && (<>
+            {openSidebarGroups.trackingTasks && (
+              <>
               {/* Statistics Section */}
               <div className="sidebar-section">
                 <button 
@@ -532,77 +660,14 @@ function App() {
               </>
             )}
 
-              {/* GROUP 4: APP SETTINGS (set once) */}
-              <button 
-                className="sidebar-group-header clickable"
-                onClick={() => toggleSidebarGroup('appSettings')}
-                aria-expanded={openSidebarGroups.appSettings}
-              >
-                <span>APP SETTINGS</span>
-                <span className="group-collapse-icon">{openSidebarGroups.appSettings ? '▼' : '▶'}</span>
-              </button>
-
-              {openSidebarGroups.appSettings && (<>
-              {/* Sound Settings Section */}
-              <div className="sidebar-section">
-                <button 
-                  ref={(el) => (headerRefs.current['sound'] = el)}
-                  className="section-header"
-                  onClick={() => setOpenSidebarSection(openSidebarSection === 'sound' ? null : 'sound')}
-                  onKeyDown={(e) => handleHeaderKeyDown(e, 'sound')}
-                  aria-expanded={openSidebarSection === 'sound'}
-                  tabIndex={0}
-                >
-                  <span>🔊 Sound</span>
-                  <span className="collapse-icon">{openSidebarSection === 'sound' ? '▼' : '▶'}</span>
-                </button>
-                <div className={`section-content ${openSidebarSection === 'sound' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'sound'}>
-                  <SoundSettings />
-                </div>
-              </div>
-
-              {/* Export/Import Section */}
-              <div className="sidebar-section">
-                <button 
-                  ref={(el) => (headerRefs.current['export'] = el)}
-                  className="section-header"
-                  onClick={() => setOpenSidebarSection(openSidebarSection === 'export' ? null : 'export')}
-                  onKeyDown={(e) => handleHeaderKeyDown(e, 'export')}
-                  aria-expanded={openSidebarSection === 'export'}
-                  tabIndex={0}
-                >
-                  <span>💾 Backup</span>
-                  <span className="collapse-icon">{openSidebarSection === 'export' ? '▼' : '▶'}</span>
-                </button>
-                <div className={`section-content ${openSidebarSection === 'export' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'export'}>
-                  <ExportImport />
-                </div>
-              </div>
-
-              {/* Theme Selector Section */}
-              <div className="sidebar-section">
-                <button 
-                  ref={(el) => (headerRefs.current['themes'] = el)}
-                  className="section-header"
-                  onClick={() => setOpenSidebarSection(openSidebarSection === 'themes' ? null : 'themes')}
-                  onKeyDown={(e) => handleHeaderKeyDown(e, 'themes')}
-                  aria-expanded={openSidebarSection === 'themes'}
-                  tabIndex={0}
-                >
-                  <span>🎨 Themes</span>
-                  <span className="collapse-icon">{openSidebarSection === 'themes' ? '▼' : '▶'}</span>
-                </button>
-                <div className={`section-content ${openSidebarSection === 'themes' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'themes'}>
-                  <ThemeSelector />
-                </div>
-              </div>
-              </>
-            )}
             </div>
           )}
         </div>
       </div>
       <CompactToast />
+      {showGettingStarted && (
+        <GettingStarted onClose={handleCloseGettingStarted} />
+      )}
     </div>
   )
 }

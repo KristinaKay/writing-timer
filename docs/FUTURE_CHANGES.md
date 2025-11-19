@@ -22,14 +22,21 @@ This document tracks planned improvements and features for A Timer to Write.
 - ✅ **Expected**: Should only increment once per task, or decrement when unchecked
 - ✅ **Priority**: Medium - affects statistics accuracy
 
-### 4. Simplify Button Styling
+### ✅ 4. Simplify Button Styling
 
-- Remove gradients from buttons
-- Set buttons to use solid secondary color (`var(--theme-secondary)`)
-- Adjust hover states to work with solid colors (brightness, opacity, or slight color shift)
-- Maintain accessibility contrast ratios
+- ✅ Remove gradients from buttons
+- ✅ Set buttons to use solid secondary color (`var(--theme-secondary)`)
+- ✅ Adjust hover states to work with solid colors (brightness, opacity, or slight color shift)
+- ✅ Maintain accessibility contrast ratios
 
-### 5. Rework "Compact Mode" for True Compactness
+### ✅ 5. Getting Started Guide
+
+- ✅ Add interactive onboarding guide for new users
+- ✅ Step-by-step walkthrough of all features
+- ✅ Professional modal interface with progress tracking
+- ✅ LocalStorage completion tracking to avoid repeated displaysos
+
+### 6. Rework "Compact Mode" for True Compactness
 
 Suggestions for making compact mode more space-efficient:
 
@@ -40,21 +47,21 @@ Suggestions for making compact mode more space-efficient:
 - Tighten spacing between elements
 - Consider removing non-essential UI elements entirely
 
-### 6. Connect Writing Modes to Preset Times
+### 7. Connect Writing Modes to Preset Times
 
 - Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Roaming) to default timer durations
 - Each mode could have a recommended/default time preset
 - Allow customization of mode-specific durations in settings
 - Automatically set timer duration when switching modes
 
-### 7. Connect Timer Elapsed Ring Color to the Session Mode
+### 8. Connect Timer Elapsed Ring Color to the Session Mode
 
 - Change the circular progress ring color based on selected Session Mode
 - Each mode could have its own distinct color palette
 - Visual reinforcement of current session type
 - Maintain accessibility contrast requirements
 
-### 8. Custom Theme Creator
+### 9. Custom Theme Creator
 
 - Allow users to create and save custom color themes
 - Color picker interface for primary, secondary, and background colors
@@ -62,7 +69,7 @@ Suggestions for making compact mode more space-efficient:
 - Import/export custom themes
 - Save multiple custom themes
 
-### 9. Add Music Player for Local Music Files
+### 10. Add Music Player for Local Music Files
 
 - Integrate music player to play local audio files during writing sessions
 - Support common formats (MP3, WAV, FLAC, etc.)
@@ -70,7 +77,7 @@ Suggestions for making compact mode more space-efficient:
 - Volume control
 - Background music to enhance focus
 
-### 10. Notes Area
+### 11. Notes Area
 
 - Quick notes section for capturing thoughts during sessions
 - Easy-to-access text area without disrupting timer
@@ -78,7 +85,7 @@ Suggestions for making compact mode more space-efficient:
 - Session-specific or general notes options
 - Export notes to file
 
-### 11. Inspirational Quotes Feature
+### 12. Inspirational Quotes Feature
 
 - Display motivational/writing quotes
 - Rotate quotes on timer completion or session start
@@ -88,7 +95,7 @@ Suggestions for making compact mode more space-efficient:
 
 ## Desktop & Deployment
 
-### 12. Desktop App Version
+### 13. Desktop App Version
 
 - Package as native desktop application using Electron or Tauri
 - Create Windows .exe installer

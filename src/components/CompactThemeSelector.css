@@ -1,0 +1,175 @@
+.compact-theme-selector {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Tab Headers */
+.theme-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--overlay-05);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.theme-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.theme-tab:hover {
+  background: var(--overlay-10);
+  color: var(--text-color);
+}
+
+.theme-tab.active {
+  background: var(--theme-primary);
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.tab-icon {
+  font-size: 1rem;
+}
+
+.tab-label {
+  white-space: nowrap;
+}
+
+/* Current Theme Display */
+.current-theme-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+}
+
+.current-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.current-name {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+/* Theme Swatch Grid */
+.theme-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  min-height: 80px;
+  transition: all 0.3s ease;
+}
+
+.theme-swatch {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  border: 2px solid var(--overlay-10);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-swatch:hover {
+  border-color: var(--overlay-25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-swatch.active {
+  border-color: var(--theme-primary);
+  border-width: 3px;
+  box-shadow: 0 0 0 1px var(--theme-primary);
+}
+
+/* Color indicators inside each swatch */
+.swatch-colors {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.color-primary {
+  flex: 1;
+  height: 100%;
+}
+
+.color-secondary {
+  flex: 1;
+  height: 100%;
+}
+
+/* Check mark for active theme */
+.swatch-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--theme-primary);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-swatch-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+  
+  .theme-swatch {
+    height: 32px;
+  }
+  
+  .theme-tab {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .tab-icon {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-swatch-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .current-theme-display {
+    font-size: 0.8rem;
+  }
+}

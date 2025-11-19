@@ -26,7 +26,7 @@
   position: relative;
   width: 50px;
   height: 26px;
-  background: var(--background-medium);
+  background: #dc3545; /* Red for OFF state */
   border-radius: 50px;
   transition: background 0.3s ease;
   flex-shrink: 0;
@@ -45,7 +45,7 @@
 }
 
 .word-tracker-toggle input:checked + .toggle-slider {
-  background: var(--theme-primary);
+  background: #28a745; /* Green for ON state */
 }
 
 .word-tracker-toggle input:checked + .toggle-slider::before {
@@ -63,11 +63,11 @@
 
 .enabled-badge {
   font-size: 0.75rem;
-  background: rgba(233, 30, 99, 0.18);
-  color: var(--accent-danger);
+  background: rgba(40, 167, 69, 0.15); /* Green background for on badge */
+  color: #28a745; /* Green text for on */
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
-  border: 1px solid rgba(233, 30, 99, 0.3);
+  border: 1px solid rgba(40, 167, 69, 0.3);
 }
 
 /* Input Fields */

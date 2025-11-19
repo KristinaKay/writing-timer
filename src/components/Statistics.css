@@ -126,11 +126,11 @@
   overflow: hidden;
 }
 
-.mode-bar-fill {
+.progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--theme-primary) 0%, #C2185B 100%);
-  border-radius: 3px;
-  transition: width 0.5s ease;
+  background: var(--theme-primary);
+  border-radius: inherit;
+  transition: width 0.3s ease;
 }
 
 /* Stats Footer */
@@ -216,6 +216,45 @@
 
 .reset-cancel-btn:hover {
   background: var(--background-light);
+}
+
+/* Light theme contrast overrides */
+:root[data-theme="dustyFloralLight"] .stats-container,
+:root[data-theme="dustyFloralMist"] .stats-container,
+:root[data-theme="dustyRose"] .stats-container,
+:root[data-theme="dustyFloralNeutral"] .stats-container,
+:root[data-theme="blackberryCream"] .stats-container,
+:root[data-theme="sageGreen"] .stats-container {
+  color: #2A1B1F !important;
+}
+
+:root[data-theme="dustyFloralLight"] .stat-card,
+:root[data-theme="dustyFloralMist"] .stat-card,
+:root[data-theme="dustyRose"] .stat-card,
+:root[data-theme="dustyFloralNeutral"] .stat-card,
+:root[data-theme="blackberryCream"] .stat-card,
+:root[data-theme="sageGreen"] .stat-card {
+  background: rgba(255,255,255,0.7) !important;
+  color: #2A1B1F !important;
+  border: 1px solid rgba(42,27,31,0.15) !important;
+}
+
+:root[data-theme="dustyFloralLight"] .stat-number,
+:root[data-theme="dustyFloralMist"] .stat-number,
+:root[data-theme="dustyRose"] .stat-number,
+:root[data-theme="dustyFloralNeutral"] .stat-number,
+:root[data-theme="blackberryCream"] .stat-number,
+:root[data-theme="sageGreen"] .stat-number {
+  color: #2A1B1F !important;
+}
+
+:root[data-theme="dustyFloralLight"] .stat-label,
+:root[data-theme="dustyFloralMist"] .stat-label,
+:root[data-theme="dustyRose"] .stat-label,
+:root[data-theme="dustyFloralNeutral"] .stat-label,
+:root[data-theme="blackberryCream"] .stat-label,
+:root[data-theme="sageGreen"] .stat-label {
+  color: rgba(42,27,31,0.7) !important;
 }
 
 /* Responsive */
