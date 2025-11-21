@@ -1,7 +1,7 @@
 export const themes = {
   // Lightest backgrounds first
   dustyFloralLight: {
-    name: '🌸 Light Elegance',
+    name: 'Light Elegance',
     description: 'Soft warm white with dusty mauve accents',
     primary: '#847577',
     secondary: '#A6A2A2',
@@ -9,7 +9,7 @@ export const themes = {
     textColor: '#4A3B3C'
   },
   dustyFloralMist: {
-    name: '🌸 Soft Mist',
+    name: 'Soft Mist',
     description: 'Soft gray base with warm highlights',
     primary: '#847577',
     secondary: '#FBFBF2',
@@ -17,7 +17,7 @@ export const themes = {
     textColor: '#3A2F30'
   },
   dustyRose: {
-    name: '🌹 Dusty Rose',
+    name: 'Dusty Rose',
     description: 'Warm neutrals with dusty rose highlights',
     primary: '#7D4F50',
     secondary: '#F9EAE1',
@@ -25,15 +25,15 @@ export const themes = {
     textColor: '#5A3B3C'
   },
   dustyFloralNeutral: {
-    name: '🌸 Balanced Neutral',
+    name: 'Balanced Neutral',
     description: 'Balanced sage-gray with warm accents',
-    primary: '#847577',
+    primary: '#7A6B6D',
     secondary: '#FBFBF2',
     background: '#CFD2CD',
     textColor: '#2F2426'
   },
   blackberryCream: {
-    name: '🫐 Blackberry Cream',
+    name: 'Blackberry Cream',
     description: 'Elegant cream base with rich blackberry accents',
     primary: '#69385C',
     secondary: '#89937C',
@@ -41,16 +41,16 @@ export const themes = {
     textColor: '#3C1F25'
   },
   sageGreen: {
-    name: '🌿 Sage & Green',
+    name: 'Sage & Green',
     description: 'Warm sage and cream with natural green highlights',
-    primary: '#69385C',
+    primary: '#5A2E4B',
     secondary: '#D3BDB0',
     background: '#89937C',
-    textColor: '#2A2F26'
+    textColor: '#1F241C'
   },
   // Medium backgrounds
   dustyFloralMauve: {
-    name: '🌸 Mauve Elegance',
+    name: 'Mauve Elegance',
     description: 'Rich dusty mauve with light accents',
     primary: '#E5E6E4',
     secondary: '#A6A2A2',
@@ -58,7 +58,7 @@ export const themes = {
     textColor: '#FBFBF2'
   },
   darkDustyRose: {
-    name: '🌹 Dark Dusty Rose',
+    name: 'Dark Dusty Rose',
     description: 'High contrast with bold dusty rose',
     primary: '#CC8B86',
     secondary: '#D1BE9C',
@@ -67,7 +67,7 @@ export const themes = {
   },
   // Advanced color palette themes - darkest backgrounds last
   silverMist: {
-    name: '🌌 Silver Mist',
+    name: 'Silver Mist',
     description: 'Elegant silver-gray with professional blue accents',
     primary: '#1F2B3E',
     secondary: '#6A687A',
@@ -75,7 +75,7 @@ export const themes = {
     textColor: '#FFFFFF'
   },
   nebulaBlue: {
-    name: '🌌 Nebula Blue',
+    name: 'Nebula Blue',
     description: 'Sophisticated mid-tone with cosmic feel',
     primary: '#B5B3C0',
     secondary: '#6A687A',
@@ -83,7 +83,7 @@ export const themes = {
     textColor: '#F0F0F2'
   },
   moonlightSilver: {
-    name: '🖋️ Moonlight Silver',
+    name: 'Moonlight Silver',
     description: 'Clean light theme with ink-inspired contrast',
     primary: '#1B2A41',
     secondary: '#324A5F',
@@ -91,7 +91,7 @@ export const themes = {
     textColor: '#0C1821'
   },
   softLavender: {
-    name: '💜 Soft Lavender',
+    name: 'Soft Lavender',
     description: 'Gentle pastels perfect for creative writing',
     primary: '#6B7489',
     secondary: '#CBC0D3',
@@ -99,23 +99,23 @@ export const themes = {
     textColor: '#3E3548'
   },
   coralDawn: {
-    name: '🦞 Coral Dawn',
+    name: 'Coral Dawn',
     description: 'Warm coral background with dark accents',
-    primary: '#121420',
+    primary: '#0C1018',
     secondary: '#403F4C',
     background: '#8A4E49',
     textColor: '#FFFFFF'
   },
   purpleSlate: {
-    name: '💜 Purple Slate',
+    name: 'Purple Slate',
     description: 'Rich purple-gray for sophisticated sessions',
-    primary: '#B4BBFF',
+    primary: '#B8BFFF',
     secondary: '#A8A6B3',
     background: '#6B6977',
     textColor: '#FFFFFF'
   },
   gunmetalGray: {
-    name: '🦞 Gunmetal Gray',
+    name: 'Gunmetal Gray',
     description: 'Industrial aesthetic with coral highlights',
     primary: '#E08B86',
     secondary: '#F5F5F5',
@@ -123,7 +123,7 @@ export const themes = {
     textColor: '#F5F5F5'
   },
   inkBlack: {
-    name: '🖋️ Ink Black',
+    name: 'Ink Black',
     description: 'Pure writer\'s aesthetic with deep blacks',
     primary: '#4A6B85',
     secondary: '#1B2A41',
@@ -131,15 +131,15 @@ export const themes = {
     textColor: '#F0F0F5'
   },
   midnightDepths: {
-    name: '🌌 Midnight Depths',
+    name: 'Midnight Depths',
     description: 'Rich deep blue perfect for nighttime writing',
-    primary: '#A5A3A9',
+    primary: '#A9A7AD',
     secondary: '#536271',
     background: '#2C3D55',
     textColor: '#E8E8EA'
   },
   midnightSteel: {
-    name: '🦞 Midnight Steel',
+    name: 'Midnight Steel',
     description: 'Deep metallic theme with coral energy',
     primary: '#E08B86',
     secondary: '#403F4C',

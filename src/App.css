@@ -87,8 +87,11 @@ body {
 :root[data-theme="dustyFloralMist"], 
 :root[data-theme="dustyRose"],
 :root[data-theme="dustyFloralNeutral"],
+:root[data-theme="dustyFloralMauve"],
 :root[data-theme="blackberryCream"],
-:root[data-theme="sageGreen"] {
+:root[data-theme="sageGreen"],
+:root[data-theme="softLavender"],
+:root[data-theme="moonlightSilver"] {
   --text-color: #2A1B1F; /* Much darker for better contrast */
   --text-secondary: rgba(42,27,31,0.75); /* Dark secondary text with good contrast */
   --background-light: rgba(255,255,255,0.8);
@@ -102,26 +105,38 @@ body {
 :root[data-theme="dustyFloralMist"] .sidebar,
 :root[data-theme="dustyRose"] .sidebar,
 :root[data-theme="dustyFloralNeutral"] .sidebar,
+:root[data-theme="dustyFloralMauve"] .sidebar,
 :root[data-theme="blackberryCream"] .sidebar,
 :root[data-theme="sageGreen"] .sidebar,
+:root[data-theme="softLavender"] .sidebar,
+:root[data-theme="moonlightSilver"] .sidebar,
 :root[data-theme="dustyFloralLight"] .sidebar-section,
 :root[data-theme="dustyFloralMist"] .sidebar-section,
 :root[data-theme="dustyRose"] .sidebar-section,
 :root[data-theme="dustyFloralNeutral"] .sidebar-section,
+:root[data-theme="dustyFloralMauve"] .sidebar-section,
 :root[data-theme="blackberryCream"] .sidebar-section,
 :root[data-theme="sageGreen"] .sidebar-section,
+:root[data-theme="softLavender"] .sidebar-section,
+:root[data-theme="moonlightSilver"] .sidebar-section,
 :root[data-theme="dustyFloralLight"] .section-header,
 :root[data-theme="dustyFloralMist"] .section-header,
 :root[data-theme="dustyRose"] .section-header,
 :root[data-theme="dustyFloralNeutral"] .section-header,
+:root[data-theme="dustyFloralMauve"] .section-header,
 :root[data-theme="blackberryCream"] .section-header,
 :root[data-theme="sageGreen"] .section-header,
+:root[data-theme="softLavender"] .section-header,
+:root[data-theme="moonlightSilver"] .section-header,
 :root[data-theme="dustyFloralLight"] .section-content,
 :root[data-theme="dustyFloralMist"] .section-content,
 :root[data-theme="dustyRose"] .section-content,
 :root[data-theme="dustyFloralNeutral"] .section-content,
+:root[data-theme="dustyFloralMauve"] .section-content,
 :root[data-theme="blackberryCream"] .section-content,
-:root[data-theme="sageGreen"] .section-content {
+:root[data-theme="sageGreen"] .section-content,
+:root[data-theme="softLavender"] .section-content,
+:root[data-theme="moonlightSilver"] .section-content {
   background: rgba(255,255,255,0.4);
   color: #2A1B1F;
 }
@@ -171,105 +186,96 @@ body {
   color: var(--control-text);
 }
 
-:root[data-theme="ocean"] {
-  --background-light: rgba(8,18,28,0.06);
-  --background-medium: rgba(8,18,28,0.12);
-  --text-secondary: rgba(255,255,255,0.5);
-  --control-background: rgba(8,18,28,0.12);
-  --control-border: rgba(255,255,255,0.06);
+/* Dark theme variable overrides for contrast and control styling */
+:root[data-theme="midnightSteel"],
+:root[data-theme="midnightDepths"],
+:root[data-theme="inkBlack"],
+:root[data-theme="gunmetalGray"],
+:root[data-theme="purpleSlate"],
+:root[data-theme="coralDawn"],
+:root[data-theme="darkDustyRose"],
+:root[data-theme="silverMist"],
+:root[data-theme="nebulaBlue"] {
+  --background-light: rgba(255,255,255,0.06);
+  --background-medium: rgba(255,255,255,0.12);
+  --text-secondary: rgba(255,255,255,0.6);
+  --control-background: rgba(255,255,255,0.12);
+  --control-border: rgba(255,255,255,0.2);
   --control-text: #ffffff;
-  --progress-track-stroke: rgba(255,255,255,0.06);
+  --progress-track-stroke: rgba(255,255,255,0.15);
 }
 
-:root[data-theme="ocean"] .section-header,
-:root[data-theme="ocean"] .preset-btn {
+:root[data-theme="midnightSteel"] .section-header,
+:root[data-theme="midnightSteel"] .preset-btn,
+:root[data-theme="midnightDepths"] .section-header,
+:root[data-theme="midnightDepths"] .preset-btn,
+:root[data-theme="inkBlack"] .section-header,
+:root[data-theme="inkBlack"] .preset-btn,
+:root[data-theme="gunmetalGray"] .section-header,
+:root[data-theme="gunmetalGray"] .preset-btn,
+:root[data-theme="purpleSlate"] .section-header,
+:root[data-theme="purpleSlate"] .preset-btn,
+:root[data-theme="coralDawn"] .section-header,
+:root[data-theme="coralDawn"] .preset-btn,
+:root[data-theme="darkDustyRose"] .section-header,
+:root[data-theme="darkDustyRose"] .preset-btn,
+:root[data-theme="silverMist"] .section-header,
+:root[data-theme="silverMist"] .preset-btn,
+:root[data-theme="nebulaBlue"] .section-header,
+:root[data-theme="nebulaBlue"] .preset-btn {
   background: var(--background-light);
   color: var(--control-text);
   border-color: var(--control-border);
 }
 
-:root[data-theme="ocean"] .sidebar,
-:root[data-theme="ocean"] .sidebar-section,
-:root[data-theme="ocean"] .section-header,
-:root[data-theme="ocean"] .section-content {
-  background: var(--background-medium);
-  color: var(--control-text);
-  box-shadow: none;
-}
-
-:root[data-theme="midnight"] {
-  --background-light: var(--overlay-black-06);
-  --background-medium: var(--overlay-black-12);
-  --text-secondary: var(--overlay-60);
-  --control-background: var(--overlay-black-12);
-  --control-border: var(--overlay-black-20);
-  --control-text: #ffffff;
-  --progress-track-stroke: var(--overlay-black-38);
-}
-
-:root[data-theme="midnight"] .section-header,
-:root[data-theme="midnight"] .preset-btn {
-  background: var(--background-light);
-  color: var(--control-text);
-  border-color: var(--control-border);
-}
-
-:root[data-theme="midnight"] .sidebar,
-:root[data-theme="midnight"] .sidebar-section,
-:root[data-theme="midnight"] .section-header,
-:root[data-theme="midnight"] .section-content {
-  background: var(--background-medium);
-  color: var(--control-text);
-}
-
-:root[data-theme="sunset"] {
-  --background-light: rgba(45,27,31,0.06);
-  --background-medium: rgba(45,27,31,0.12);
-  --text-secondary: rgba(255,255,255,0.5);
-  --control-background: rgba(45,27,31,0.12);
-  --control-border: rgba(255,255,255,0.06);
-  --control-text: #ffffff;
-  --progress-track-stroke: rgba(255,255,255,0.06);
-}
-
-:root[data-theme="sunset"] .section-header,
-:root[data-theme="sunset"] .preset-btn {
-  background: var(--background-light);
-  color: var(--control-text);
-  border-color: var(--control-border);
-}
-
-:root[data-theme="sunset"] .sidebar,
-:root[data-theme="sunset"] .sidebar-section,
-:root[data-theme="sunset"] .section-header,
-:root[data-theme="sunset"] .section-content {
+:root[data-theme="midnightSteel"] .sidebar,
+:root[data-theme="midnightSteel"] .sidebar-section,
+:root[data-theme="midnightSteel"] .section-header,
+:root[data-theme="midnightSteel"] .section-content,
+:root[data-theme="midnightDepths"] .sidebar,
+:root[data-theme="midnightDepths"] .sidebar-section,
+:root[data-theme="midnightDepths"] .section-header,
+:root[data-theme="midnightDepths"] .section-content,
+:root[data-theme="inkBlack"] .sidebar,
+:root[data-theme="inkBlack"] .sidebar-section,
+:root[data-theme="inkBlack"] .section-header,
+:root[data-theme="inkBlack"] .section-content,
+:root[data-theme="gunmetalGray"] .sidebar,
+:root[data-theme="gunmetalGray"] .sidebar-section,
+:root[data-theme="gunmetalGray"] .section-header,
+:root[data-theme="gunmetalGray"] .section-content,
+:root[data-theme="purpleSlate"] .sidebar,
+:root[data-theme="purpleSlate"] .sidebar-section,
+:root[data-theme="purpleSlate"] .section-header,
+:root[data-theme="purpleSlate"] .section-content,
+:root[data-theme="coralDawn"] .sidebar,
+:root[data-theme="coralDawn"] .sidebar-section,
+:root[data-theme="coralDawn"] .section-header,
+:root[data-theme="coralDawn"] .section-content,
+:root[data-theme="darkDustyRose"] .sidebar,
+:root[data-theme="darkDustyRose"] .sidebar-section,
+:root[data-theme="darkDustyRose"] .section-header,
+:root[data-theme="darkDustyRose"] .section-content,
+:root[data-theme="silverMist"] .sidebar,
+:root[data-theme="silverMist"] .sidebar-section,
+:root[data-theme="silverMist"] .section-header,
+:root[data-theme="silverMist"] .section-content,
+:root[data-theme="nebulaBlue"] .sidebar,
+:root[data-theme="nebulaBlue"] .sidebar-section,
+:root[data-theme="nebulaBlue"] .section-header,
+:root[data-theme="nebulaBlue"] .section-content {
   background: var(--background-medium);
   color: var(--control-text);
 }
 
-:root[data-theme="forest"] {
-  --background-light: rgba(16,32,16,0.06);
-  --background-medium: rgba(16,32,16,0.12);
-  --text-secondary: rgba(255,255,255,0.5);
-  --control-background: rgba(16,32,16,0.12);
-  --control-border: rgba(255,255,255,0.06);
-  --control-text: #ffffff;
-  --progress-track-stroke: rgba(255,255,255,0.06);
+/* Moonlight Silver theme overrides for better section header contrast */
+:root[data-theme="moonlightSilver"] .section-header {
+  color: #0C1821 !important;
 }
 
-:root[data-theme="forest"] .section-header,
-:root[data-theme="forest"] .preset-btn {
-  background: var(--background-light);
-  color: var(--control-text);
-  border-color: var(--control-border);
-}
-
-:root[data-theme="forest"] .sidebar,
-:root[data-theme="forest"] .sidebar-section,
-:root[data-theme="forest"] .section-header,
-:root[data-theme="forest"] .section-content {
-  background: var(--background-medium);
-  color: var(--control-text);
+/* Soft Lavender theme overrides for better section header contrast */
+:root[data-theme="softLavender"] .section-header {
+  color: #3E3548 !important;
 }
 
 /* Force common form controls and task inputs to use the light-theme text color */
@@ -401,8 +407,11 @@ body {
 :root[data-theme="dustyFloralMist"] .btn-primary,
 :root[data-theme="dustyRose"] .btn-primary,
 :root[data-theme="dustyFloralNeutral"] .btn-primary,
+:root[data-theme="dustyFloralMauve"] .btn-primary,
 :root[data-theme="blackberryCream"] .btn-primary,
-:root[data-theme="sageGreen"] .btn-primary {
+:root[data-theme="sageGreen"] .btn-primary,
+:root[data-theme="softLavender"] .btn-primary,
+:root[data-theme="moonlightSilver"] .btn-primary {
   background: #B91651 !important; /* Darker primary color for better contrast */
   color: white !important;
   border: 1px solid #8B1538 !important;
@@ -412,19 +421,56 @@ body {
 :root[data-theme="dustyFloralMist"] .btn-secondary,
 :root[data-theme="dustyRose"] .btn-secondary,
 :root[data-theme="dustyFloralNeutral"] .btn-secondary,
+:root[data-theme="dustyFloralMauve"] .btn-secondary,
 :root[data-theme="blackberryCream"] .btn-secondary,
-:root[data-theme="sageGreen"] .btn-secondary {
+:root[data-theme="sageGreen"] .btn-secondary,
+:root[data-theme="softLavender"] .btn-secondary,
+:root[data-theme="moonlightSilver"] .btn-secondary {
   background: #0099CC !important;
   color: white !important;
   border: 1px solid #007AA3 !important;
+}
+
+/* Dark theme button overrides for consistency */
+:root[data-theme="dark"] .btn-primary,
+:root[data-theme="midnightSteel"] .btn-primary,
+:root[data-theme="midnightDepths"] .btn-primary,
+:root[data-theme="inkBlack"] .btn-primary,
+:root[data-theme="gunmetalGray"] .btn-primary,
+:root[data-theme="purpleSlate"] .btn-primary,
+:root[data-theme="coralDawn"] .btn-primary,
+:root[data-theme="darkDustyRose"] .btn-primary,
+:root[data-theme="silverMist"] .btn-primary,
+:root[data-theme="nebulaBlue"] .btn-primary {
+  background: #FF4081 !important; /* Hot pink for high contrast on dark backgrounds */
+  color: white !important;
+  border: 1px solid #E91E63 !important;
+}
+
+:root[data-theme="dark"] .btn-secondary,
+:root[data-theme="midnightSteel"] .btn-secondary,
+:root[data-theme="midnightDepths"] .btn-secondary,
+:root[data-theme="inkBlack"] .btn-secondary,
+:root[data-theme="gunmetalGray"] .btn-secondary,
+:root[data-theme="purpleSlate"] .btn-secondary,
+:root[data-theme="coralDawn"] .btn-secondary,
+:root[data-theme="darkDustyRose"] .btn-secondary,
+:root[data-theme="silverMist"] .btn-secondary,
+:root[data-theme="nebulaBlue"] .btn-secondary {
+  background: #26C6DA !important; /* Light cyan for excellent contrast and distinction */
+  color: white !important;
+  border: 1px solid #00ACC1 !important;
 }
 
 :root[data-theme="dustyFloralLight"] input,
 :root[data-theme="dustyFloralMist"] input,
 :root[data-theme="dustyRose"] input,
 :root[data-theme="dustyFloralNeutral"] input,
+:root[data-theme="dustyFloralMauve"] input,
 :root[data-theme="blackberryCream"] input,
-:root[data-theme="sageGreen"] input {
+:root[data-theme="sageGreen"] input,
+:root[data-theme="softLavender"] input,
+:root[data-theme="moonlightSilver"] input {
   background: rgba(255,255,255,0.9) !important;
   border: 1px solid rgba(42,27,31,0.3) !important;
   color: #2A1B1F !important;
@@ -519,6 +565,10 @@ h1 {
   color: var(--text-secondary);
   font-weight: 300;
   min-height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 /* Control Buttons */
@@ -651,6 +701,7 @@ button {
 .sidebar.closed {
   width: 60px;
   padding: 0.5rem;
+  background: none !important;
 }
 
 .sidebar-toggle {

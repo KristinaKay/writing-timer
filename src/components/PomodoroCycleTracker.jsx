@@ -1,4 +1,5 @@
 import React from 'react';
+import { Timer, Coffee, Star, Circle } from 'lucide-react';
 import './PomodoroCycleTracker.css';
 
 const PomodoroCycleTracker = ({ 
@@ -11,13 +12,13 @@ const PomodoroCycleTracker = ({
   const getCycleIcon = (type) => {
     switch (type) {
       case 'work':
-        return '🍅';
+        return <Circle size={16} />;
       case 'shortBreak':
-        return '☕';
+        return <Coffee size={16} />;
       case 'longBreak':
-        return '🌟';
+        return <Star size={16} />;
       default:
-        return '⏱️';
+        return <Timer size={16} />;
     }
   };
 

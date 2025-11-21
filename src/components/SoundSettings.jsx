@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Volume2, VolumeX, Smartphone } from 'lucide-react';
 import './SoundSettings.css';
-import { playSound } from '../lib/soundUtils';
+import { playSound, initializeAudio, isAudioAvailable } from '../lib/soundUtils';
 
 /**
  * Sound Settings Component
@@ -34,6 +35,28 @@ const SoundSettings = () => {
     }
   });
 
+  const [audioInitialized, setAudioInitialized] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+    };
+    setIsMobile(checkMobile());
+  }, []);
+
+  // Check audio initialization status
+  useEffect(() => {
+    const checkAudio = () => {
+      setAudioInitialized(isAudioAvailable());
+    };
+    checkAudio();
+    const interval = setInterval(checkAudio, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
 
   // Save settings to localStorage
   useEffect(() => {
@@ -56,14 +79,36 @@ const SoundSettings = () => {
     gentle: { name: '🌊 Gentle', freq: 600 }
   };
 
-  // Play test sound
-  const playTestSound = () => {
+  // Play test sound with mobile support
+  const playTestSound = async () => {
     if (!soundEnabled) return;
-    playSound(soundType, volume);
+    
+    try {
+      // Initialize audio on user interaction (required for mobile)
+      const initialized = await initializeAudio();
+      if (!initialized) {
+        alert('Audio initialization failed. Please ensure your device supports Web Audio API.');
+        return;
+      }
+      
+      await playSound(soundType, volume);
+      setAudioInitialized(true);
+    } catch (error) {
+      console.warn('Test sound failed:', error);
+      alert('Sound test failed. This may be due to browser restrictions on mobile devices.');
+    }
   };
 
   return (
     <div className="sound-settings-container">
+      {/* Mobile Audio Notice */}
+      {isMobile && !audioInitialized && soundEnabled && (
+        <div className="mobile-audio-notice">
+          <Smartphone size={16} style={{ marginRight: '0.5rem' }} />
+          <span>Tap "Test Sound" to enable audio on mobile devices</span>
+        </div>
+      )}
+      
       {/* Enable/Disable Toggle */}
       <div className="sound-toggle-section">
         <label className="sound-toggle">
@@ -74,8 +119,17 @@ const SoundSettings = () => {
           />
           <span className="toggle-slider"></span>
           <span className="toggle-label">
-            🔊 Sound Notifications
-            {soundEnabled && <span className="enabled-badge">On</span>}
+            {soundEnabled ? (
+              <Volume2 size={16} style={{ marginRight: '0.5rem' }} />
+            ) : (
+              <VolumeX size={16} style={{ marginRight: '0.5rem' }} />
+            )}
+            Sound Notifications
+            {soundEnabled && (
+              <span className={`enabled-badge ${audioInitialized ? 'initialized' : 'pending'}`}>
+                {audioInitialized ? 'Ready' : 'Tap Test'}
+              </span>
+            )}
           </span>
         </label>
       </div>
@@ -117,10 +171,10 @@ const SoundSettings = () => {
 
           {/* Test Button */}
           <button 
-            className="test-sound-btn"
+            className={`test-sound-btn ${!audioInitialized && isMobile ? 'mobile-init' : ''}`}
             onClick={playTestSound}
           >
-            🎵 Test Sound
+            🎵 {!audioInitialized && isMobile ? 'Enable Audio' : 'Test Sound'}
           </button>
         </>
       )}

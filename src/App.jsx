@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Play, Pause, Square, RotateCcw, Timer, Volume2, Settings, BarChart3, ChevronDown, ChevronRight, HardDrive, PenTool, Clock, Zap, Palette } from 'lucide-react'
 import { useTimer } from './hooks/useTimer'
 import CircularProgress from './components/CircularProgress'
 import SessionModeSelector from './components/SessionModeSelector'
@@ -11,10 +12,10 @@ import { updateStatistics } from './lib/statisticsUtils'
 import SoundSettings from './components/SoundSettings'
 import ExportImport from './components/ExportImport'
 import ThemeSelector from './components/ThemeSelector'
-import ThemeManager from './components/ThemeManager'
+import ProgressiveThemeManager from './components/ProgressiveThemeManager'
 import GettingStarted from './components/GettingStarted'
 import CompactToast from './components/CompactToast'
-import { playSound } from './lib/soundUtils'
+import { playSound, initializeAudio, cleanupAudio } from './lib/soundUtils'
 import { initializeTheme } from './lib/themeUtils'
 import './App.css'
 
@@ -124,9 +125,13 @@ function App() {
   };
 
   // Handle timer completion with Pomodoro logic
-  const handleTimerComplete = () => {
-    // Play sound notification
-    playSound();
+  const handleTimerComplete = async () => {
+    // Play sound notification (mobile-compatible)
+    try {
+      await playSound();
+    } catch (error) {
+      console.warn('Sound notification failed:', error);
+    }
 
     // Track the completed session
     const wasTracked = trackSessionIfValid();
@@ -148,11 +153,11 @@ function App() {
         }
         setCurrentCycle(currentCycle + 1);
       } else if (cycleType === 'shortBreak') {
-        alert('Short break complete! Ready for another session? 🍅');
+        alert('Short break complete! Ready for another session?');
         setCycleType('work');
         timer.setDuration(pomodoroConfig.workDuration);
       } else if (cycleType === 'longBreak') {
-        alert('Long break complete! Great work! Starting new cycle. 🎉');
+        alert('Long break complete! Great work! Starting new cycle.');
         setCycleType('work');
         setCurrentCycle(1);
         setCompletedSessions(0);
@@ -182,6 +187,43 @@ function App() {
   };
 
   const timer = useTimer(25, handleTimerComplete);
+
+  // Mobile-compatible timer toggle with audio initialization
+  const handleTimerToggle = async () => {
+    try {
+      // Initialize audio on user interaction for mobile compatibility
+      await initializeAudio();
+    } catch (error) {
+      console.warn('Audio initialization failed:', error);
+    }
+    timer.toggle();
+  };
+
+  // Mobile-compatible timer stop with audio initialization
+  const handleTimerStop = async () => {
+    try {
+      await initializeAudio();
+      trackSessionIfValid();
+      timer.stop();
+    } catch (error) {
+      console.warn('Timer stop failed:', error);
+      trackSessionIfValid();
+      timer.stop();
+    }
+  };
+
+  // Mobile-compatible timer reset with audio initialization
+  const handleTimerReset = async () => {
+    try {
+      await initializeAudio();
+      trackSessionIfValid();
+      timer.reset();
+    } catch (error) {
+      console.warn('Timer reset failed:', error);
+      trackSessionIfValid();
+      timer.reset();
+    }
+  };
 
   // Dispatch an event when the timer starts so components (like WordTracker) can react
   useEffect(() => {
@@ -320,9 +362,17 @@ function App() {
                 </div>
                 <div className="progress-info">
                   {timer.isRunning && !timer.isPaused && '⏳ Running...'}
-                  {timer.isPaused && '⏸️ Paused'}
-                  {!timer.isRunning && !timer.isComplete && '⏱️ Ready to start'}
-                  {timer.isComplete && '✅ Complete!'}
+                  {timer.isPaused && (
+                    <>
+                      <Pause size={16} />Paused
+                    </>
+                  )}
+                  {!timer.isRunning && !timer.isComplete && (
+                    <>
+                      <Timer size={16} />Ready to start
+                    </>
+                  )}
+                  {timer.isComplete && '✓ Complete!'}
                 </div>
               </div>
             </CircularProgress>
@@ -331,31 +381,31 @@ function App() {
           {/* Control Buttons */}
           <div className="controls">
             <button 
-              onClick={timer.toggle}
+              onClick={handleTimerToggle}
               className="btn-primary"
             >
-              {!timer.isRunning ? '▶️ Start' : timer.isPaused ? '▶️ Resume' : '⏸️ Pause'}
+              {!timer.isRunning ? (
+                <><Play size={16} style={{ marginRight: '0.5rem' }} />Start</>
+              ) : timer.isPaused ? (
+                <><Play size={16} style={{ marginRight: '0.5rem' }} />Resume</>
+              ) : (
+                <><Pause size={16} style={{ marginRight: '0.5rem' }} />Pause</>
+              )}
             </button>
             
             <button 
-              onClick={() => {
-                trackSessionIfValid();
-                timer.stop();
-              }}
+              onClick={handleTimerStop}
               className="btn-secondary"
               disabled={!timer.isRunning && !timer.isPaused}
             >
-              ⏹️ Stop
+              <Square size={16} style={{ marginRight: '0.5rem' }} />Stop
             </button>
             
             <button 
-              onClick={() => {
-                trackSessionIfValid();
-                timer.reset();
-              }}
+              onClick={handleTimerReset}
               className="btn-secondary"
             >
-              🔄 Reset
+              <RotateCcw size={16} style={{ marginRight: '0.5rem' }} />Reset
             </button>
           </div>
 
@@ -387,7 +437,9 @@ function App() {
             aria-label={sidebarOpen ? 'Close settings panel' : 'Open settings panel'}
             aria-expanded={sidebarOpen}
           >
-            <span className="gear-icon" aria-hidden="true">⚙️</span>
+            <span className="gear-icon" aria-hidden="true">
+              <Settings size={14} />
+            </span>
             <span className="sr-only">{sidebarOpen ? 'Close' : 'Open'} Settings</span>
           </button>
 
@@ -400,7 +452,9 @@ function App() {
               aria-expanded={openSidebarGroups.appSettings}
             >
               <span>APP SETTINGS</span>
-              <span className="group-collapse-icon">{openSidebarGroups.appSettings ? '▼' : '▶'}</span>
+              <span className="group-collapse-icon">
+                {openSidebarGroups.appSettings ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              </span>
             </button>
 
             {openSidebarGroups.appSettings && (<>
@@ -414,8 +468,12 @@ function App() {
                 aria-expanded={openSidebarSection === 'sound'}
                 tabIndex={0}
               >
-                <span>🔊 Sound</span>
-                <span className="collapse-icon">{openSidebarSection === 'sound' ? '▼' : '▶'}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Volume2 size={16} />Sound
+                </span>
+                <span className="collapse-icon">
+                  {openSidebarSection === 'sound' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                </span>
               </button>
               <div className={`section-content ${openSidebarSection === 'sound' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'sound'}>
                 <SoundSettings />
@@ -432,8 +490,12 @@ function App() {
                 aria-expanded={openSidebarSection === 'export'}
                 tabIndex={0}
               >
-                <span>💾 Backup</span>
-                <span className="collapse-icon">{openSidebarSection === 'export' ? '▼' : '▶'}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <HardDrive size={16} />Backup
+                </span>
+                <span className="collapse-icon">
+                  {openSidebarSection === 'export' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                </span>
               </button>
               <div className={`section-content ${openSidebarSection === 'export' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'export'}>
                 <ExportImport />
@@ -450,11 +512,13 @@ function App() {
                 aria-expanded={openSidebarSection === 'themes'}
                 tabIndex={0}
               >
-                <span>🎨 Themes</span>
-                <span className="collapse-icon">{openSidebarSection === 'themes' ? '▼' : '▶'}</span>
+                <span><Palette size={16} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Themes</span>
+                <span className="collapse-icon">
+                  {openSidebarSection === 'themes' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                </span>
               </button>
               <div className={`section-content ${openSidebarSection === 'themes' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'themes'}>
-                <ThemeManager />
+                <ProgressiveThemeManager />
               </div>
             </div>
             <div className="sidebar-group-separator" />
@@ -468,7 +532,9 @@ function App() {
               aria-expanded={openSidebarGroups.sessionSetup}
             >
               <span>SESSION SETUP</span>
-              <span className="group-collapse-icon">{openSidebarGroups.sessionSetup ? '▼' : '▶'}</span>
+              <span className="group-collapse-icon">
+                {openSidebarGroups.sessionSetup ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              </span>
             </button>
 
             {openSidebarGroups.sessionSetup && (<>
@@ -482,8 +548,12 @@ function App() {
                   aria-expanded={openSidebarSection === 'sessionMode'}
                   tabIndex={0}
                 >
-                  <span>📝 Session Mode</span>
-                  <span className="collapse-icon">{openSidebarSection === 'sessionMode' ? '▼' : '▶'}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <PenTool size={16} />Session Mode
+                  </span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'sessionMode' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'sessionMode' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'sessionMode'}>
                   <SessionModeSelector 
@@ -506,8 +576,12 @@ function App() {
                   aria-expanded={openSidebarSection === 'wordTracker'}
                   tabIndex={0}
                 >
-                  <span>📝 Track Word Count</span>
-                  <span className="collapse-icon">{openSidebarSection === 'wordTracker' ? '▼' : '▶'}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <PenTool size={16} />Track Word Count
+                  </span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'wordTracker' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'wordTracker' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'wordTracker'}>
                   <div className="wordtracker-sidebar-wrap">
@@ -526,8 +600,12 @@ function App() {
                   aria-expanded={openSidebarSection === 'pomodoro'}
                   tabIndex={0}
                 >
-                  <span>🍅 Pomodoro Mode</span>
-                  <span className="collapse-icon">{openSidebarSection === 'pomodoro' ? '▼' : '▶'}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Clock size={16} />Pomodoro Mode
+                  </span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'pomodoro' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'pomodoro' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'pomodoro'}>
                   <PomodoroSettings
@@ -550,7 +628,9 @@ function App() {
               aria-expanded={openSidebarGroups.timerDuration}
             >
               <span>TIMER DURATION</span>
-              <span className="group-collapse-icon">{openSidebarGroups.timerDuration ? '▼' : '▶'}</span>
+              <span className="group-collapse-icon">
+                {openSidebarGroups.timerDuration ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              </span>
             </button>
 
             {openSidebarGroups.timerDuration && (
@@ -565,8 +645,12 @@ function App() {
                   aria-expanded={openSidebarSection === 'presets'}
                   tabIndex={0}
                 >
-                  <span>⚡ Quick Presets</span>
-                  <span className="collapse-icon">{openSidebarSection === 'presets' ? '▼' : '▶'}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Zap size={16} />Quick Presets
+                  </span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'presets' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'presets' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'presets'}>
                   <div className="presets">
@@ -596,8 +680,10 @@ function App() {
                   aria-expanded={openSidebarSection === 'custom'}
                   tabIndex={0}
                 >
-                  <span>🎨 Custom Timer</span>
-                  <span className="collapse-icon">{openSidebarSection === 'custom' ? '▼' : '▶'}</span>
+                  <span><Clock size={16} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Custom Timer</span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'custom' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'custom' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'custom'}>
                   <div className="custom-duration">
@@ -633,7 +719,9 @@ function App() {
               aria-expanded={openSidebarGroups.trackingTasks}
             >
               <span>TRACKING & TASKS</span>
-              <span className="group-collapse-icon">{openSidebarGroups.trackingTasks ? '▼' : '▶'}</span>
+              <span className="group-collapse-icon">
+                {openSidebarGroups.trackingTasks ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              </span>
             </button>
 
             {openSidebarGroups.trackingTasks && (
@@ -648,8 +736,12 @@ function App() {
                   aria-expanded={openSidebarSection === 'statistics'}
                   tabIndex={0}
                 >
-                  <span>📊 Statistics</span>
-                  <span className="collapse-icon">{openSidebarSection === 'statistics' ? '▼' : '▶'}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <BarChart3 size={16} />Statistics
+                  </span>
+                  <span className="collapse-icon">
+                    {openSidebarSection === 'statistics' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </span>
                 </button>
                 <div className={`section-content ${openSidebarSection === 'statistics' ? 'open' : ''}`} aria-hidden={openSidebarSection !== 'statistics'}>
                   <Statistics />

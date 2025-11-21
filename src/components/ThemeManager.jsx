@@ -19,20 +19,21 @@ const ThemeManager = () => {
   
   const [defaultDarkTheme, setDefaultDarkTheme] = useState(() => {
     try {
-      return localStorage.getItem('mercurial-default-dark') || 'inkBlack';
+      return localStorage.getItem('mercurial-default-dark') || 'midnightSteel';
     } catch {
-      return 'inkBlack';
+      return 'midnightSteel';
     }
   });
 
-  // Organize themes by brightness
+  // Organize themes by brightness - corrected to match actual themes
   const lightThemes = [
-    'softLavender', 'dustyFloralLight', 'dustyFloralMist', 'blackberryCream', 
-    'dustyFloralNeutral', 'moonlightSilver', 'dustyRose', 'sageGreen', 'dustyFloralMauve'
+    'dustyFloralLight', 'dustyFloralMist', 'dustyFloralNeutral', 'blackberryCream', 
+    'moonlightSilver', 'dustyRose', 'sageGreen', 'softLavender'
   ];
   
   const darkThemes = [
-    'inkBlack', 'midnightSteel', 'charcoalMist', 'darkOlive', 'deepTeal', 'slateGray'
+    'dustyFloralMauve', 'darkDustyRose', 'silverMist', 'nebulaBlue', 'coralDawn', 
+    'purpleSlate', 'gunmetalGray', 'inkBlack', 'midnightDepths', 'midnightSteel'
   ];
 
   // Save default theme preferences

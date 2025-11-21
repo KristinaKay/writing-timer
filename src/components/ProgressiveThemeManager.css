@@ -1,0 +1,373 @@
+/* Progressive Disclosure Theme Manager - Uses Main Sidebar Structure */
+.theme-manager.progressive {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Content areas within sidebar sections */
+
+.section-description {
+  font-size: 0.8rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 0;
+  font-style: italic;
+  padding: 0.5rem 0;
+}
+
+.advanced-content {
+  animation: slideDown 0.3s ease;
+  /* No extra padding - let section-content handle it */
+}
+
+.expert-content {
+  animation: slideDown 0.3s ease;
+  /* No extra padding - let section-content handle it */
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Default Theme Settings */
+.default-theme-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.label-icon {
+  font-size: 0.7rem;
+}
+
+.setting-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theme-select {
+  flex: 1;
+  background: var(--theme-background);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.65rem;
+  color: var(--text-color);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.theme-select:hover {
+  border-color: var(--theme-primary);
+}
+
+.theme-select:focus {
+  outline: none;
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 2px rgba(128, 128, 128, 0.1);
+}
+
+/* Dark mode dropdown styling - Fixed backgrounds */
+[data-theme="midnightSteel"] .theme-select,
+[data-theme="midnightDepths"] .theme-select,
+[data-theme="inkBlack"] .theme-select,
+[data-theme="gunmetalGray"] .theme-select,
+[data-theme="purpleHaze"] .theme-select,
+[data-theme="darkDustyRose"] .theme-select,
+[data-theme="silverMist"] .theme-select,
+[data-theme="nebulaBlue"] .theme-select,
+[data-theme="coralDawn"] .theme-select,
+[data-theme="purpleSlate"] .theme-select,
+[data-theme="dustyFloralMauve"] .theme-select,
+[data-theme="dark"] .theme-select {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+  border-color: #555 !important;
+}
+
+[data-theme="midnightSteel"] .theme-select option,
+[data-theme="midnightDepths"] .theme-select option,
+[data-theme="inkBlack"] .theme-select option,
+[data-theme="gunmetalGray"] .theme-select option,
+[data-theme="purpleHaze"] .theme-select option,
+[data-theme="darkDustyRose"] .theme-select option,
+[data-theme="silverMist"] .theme-select option,
+[data-theme="nebulaBlue"] .theme-select option,
+[data-theme="coralDawn"] .theme-select option,
+[data-theme="purpleSlate"] .theme-select option,
+[data-theme="dustyFloralMauve"] .theme-select option,
+[data-theme="dark"] .theme-select option {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+/* Additional browser-specific dropdown styling for dark themes */
+[data-theme="midnightSteel"] select,
+[data-theme="midnightDepths"] select,
+[data-theme="inkBlack"] select,
+[data-theme="gunmetalGray"] select,
+[data-theme="purpleHaze"] select,
+[data-theme="darkDustyRose"] select,
+[data-theme="silverMist"] select,
+[data-theme="nebulaBlue"] select,
+[data-theme="coralDawn"] select,
+[data-theme="purpleSlate"] select,
+[data-theme="dustyFloralMauve"] select,
+[data-theme="dark"] select {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+  border: 1px solid #555 !important;
+}
+
+[data-theme="midnightSteel"] select option,
+[data-theme="midnightDepths"] select option,
+[data-theme="inkBlack"] select option,
+[data-theme="gunmetalGray"] select option,
+[data-theme="purpleHaze"] select option,
+[data-theme="darkDustyRose"] select option,
+[data-theme="silverMist"] select option,
+[data-theme="nebulaBlue"] select option,
+[data-theme="coralDawn"] select option,
+[data-theme="purpleSlate"] select option,
+[data-theme="dustyFloralMauve"] select option,
+[data-theme="dark"] select option {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+/* Light theme dropdown styling */
+[data-theme="light"] .theme-select,
+[data-theme="dustyFloralLight"] .theme-select,
+[data-theme="dustyFloralMist"] .theme-select,
+[data-theme="dustyRose"] .theme-select,
+[data-theme="dustyFloralNeutral"] .theme-select,
+[data-theme="dustyFloralMauve"] .theme-select,
+[data-theme="blackberryCream"] .theme-select,
+[data-theme="sageGreen"] .theme-select,
+[data-theme="moonlightSilver"] .theme-select,
+[data-theme="softLavender"] .theme-select {
+  background: #ffffff !important;
+  color: #333333 !important;
+  border-color: #cccccc !important;
+}
+
+[data-theme="light"] .theme-select option,
+[data-theme="dustyFloralLight"] .theme-select option,
+[data-theme="dustyFloralMist"] .theme-select option,
+[data-theme="dustyRose"] .theme-select option,
+[data-theme="dustyFloralNeutral"] .theme-select option,
+[data-theme="dustyFloralMauve"] .theme-select option,
+[data-theme="blackberryCream"] .theme-select option,
+[data-theme="sageGreen"] .theme-select option,
+[data-theme="moonlightSilver"] .theme-select option,
+[data-theme="softLavender"] .theme-select option {
+  background: #ffffff !important;
+  color: #333333 !important;
+}
+
+/* Light theme browser-specific select styling */
+[data-theme="light"] select,
+[data-theme="dustyFloralLight"] select,
+[data-theme="dustyFloralMist"] select,
+[data-theme="dustyRose"] select,
+[data-theme="dustyFloralNeutral"] select,
+[data-theme="dustyFloralMauve"] select,
+[data-theme="blackberryCream"] select,
+[data-theme="sageGreen"] select,
+[data-theme="moonlightSilver"] select,
+[data-theme="softLavender"] select {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+  border: 1px solid #cccccc !important;
+}
+
+[data-theme="light"] select option,
+[data-theme="dustyFloralLight"] select option,
+[data-theme="dustyFloralMist"] select option,
+[data-theme="dustyRose"] select option,
+[data-theme="dustyFloralNeutral"] select option,
+[data-theme="dustyFloralMauve"] select option,
+[data-theme="blackberryCream"] select option,
+[data-theme="sageGreen"] select option,
+[data-theme="moonlightSilver"] select option,
+[data-theme="softLavender"] select option {
+  background-color: #ffffff !important;
+  color: #333333 !important;
+}
+
+/* Multi-color Theme Preview Swatch */
+.theme-preview-swatch {
+  display: flex;
+  width: 30px;
+  height: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.swatch-color {
+  flex: 1;
+  height: 100%;
+}
+
+/* Apply Notification */
+.apply-note {
+  font-size: 0.6rem;
+  color: var(--theme-primary);
+  font-weight: 500;
+  padding: 0.125rem 0.25rem;
+  background: rgba(128, 128, 128, 0.1);
+  border-radius: 3px;
+  border-left: 2px solid var(--theme-primary);
+}
+
+/* Save Controls */
+.save-controls {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  padding-top: 0.125rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.save-button.primary {
+  background: var(--theme-primary);
+  color: var(--theme-background);
+  border: 1px solid var(--theme-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button.primary:hover:not(:disabled) {
+  background: var(--theme-background);
+  color: var(--theme-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.save-button.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel-button.secondary,
+.reset-button.tertiary {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button.secondary:hover:not(:disabled),
+.reset-button.tertiary:hover {
+  border-color: var(--theme-primary);
+  background: rgba(128, 128, 128, 0.1);
+}
+
+.cancel-button.secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Expert Features */
+.expert-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-placeholder {
+  padding: 1rem;
+  border: 1px dashed rgba(128, 128, 128, 0.4);
+  border-radius: 6px;
+  background: rgba(128, 128, 128, 0.05);
+}
+
+.feature-placeholder h5 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+  font-size: 0.85rem;
+}
+
+.feature-placeholder p {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.feature-button {
+  background: rgba(128, 128, 128, 0.2);
+  color: var(--text-color);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .theme-manager.progressive {
+    gap: 1rem;
+  }
+  
+  .save-controls {
+    flex-direction: column;
+  }
+  
+  .save-button.primary,
+  .cancel-button.secondary,
+  .reset-button.tertiary {
+    width: 100%;
+  }
+  
+  .setting-control {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .theme-preview-swatch {
+    align-self: flex-start;
+    width: 80px;
+    height: 30px;
+  }
+}

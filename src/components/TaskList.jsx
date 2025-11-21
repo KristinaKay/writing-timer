@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Check, Circle, Info, Lightbulb } from 'lucide-react';
 import { updateTaskCompletion } from '../lib/statisticsUtils';
 import './TaskList.css';
 
@@ -170,7 +171,7 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
           className="info-tooltip" 
           title="You can export your task lists via App Settings > Backup"
         >
-          ℹ️
+          <Info size={14} />
         </span>
       </div>
       
@@ -184,7 +185,9 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
               className="clear-completed-btn"
               title="Clear completed tasks"
             >
-              Clear ✓
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                Clear <Check size={14} />
+              </span>
             </button>
           )}
         </div>
@@ -241,9 +244,9 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
                 aria-label={task.completed ? 'Mark as incomplete' : 'Mark as complete'}
               >
                 {task.completed ? (
-                  <span className="checkmark">✓</span>
+                  <Check size={16} className="checkmark" />
                 ) : (
-                  <span className="empty-circle">○</span>
+                  <Circle size={16} className="empty-circle" />
                 )}
               </button>
 
@@ -280,7 +283,7 @@ const TaskList = ({ sessionMode, isTimerRunning }) => {
       {/* Timer Warning */}
       {isTimerRunning && tasks.filter(t => !t.completed).length > 0 && (
         <div className="timer-reminder">
-          <small>💡 Focus on your tasks during this session!</small>
+          <small><Lightbulb size={14} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Focus on your tasks during this session!</small>
         </div>
       )}
     </div>

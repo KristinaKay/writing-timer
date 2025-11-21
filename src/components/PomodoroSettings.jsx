@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChevronDown, ChevronRight, AlertTriangle } from 'lucide-react';
 import './PomodoroSettings.css';
 
 /**
@@ -44,7 +45,7 @@ const PomodoroSettings = ({
             className="expand-btn"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? '▼' : '▶'} Settings
+            {isExpanded ? <ChevronDown size={14} style={{marginRight: '4px'}} /> : <ChevronRight size={14} style={{marginRight: '4px'}} />} Settings
           </button>
         )}
       </div>
@@ -120,7 +121,7 @@ const PomodoroSettings = ({
 
           {isTimerActive && (
             <p className="settings-locked">
-              <small>⚠️ Stop timer to change Pomodoro settings</small>
+              <small><AlertTriangle size={14} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Stop timer to change Pomodoro settings</small>
             </p>
           )}
         </div>

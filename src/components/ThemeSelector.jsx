@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Sun, Moon, Palette, Flower, Rose, Users, Leaf, Brush, Heart, Mountain, Sunset, Star, Pen, Sunrise, Waves, Shield, Trees, Sparkles, ChevronDown, ChevronRight } from 'lucide-react';
 import './ThemeSelector.css';
 import { themes } from '../lib/themeUtils';
 
@@ -35,13 +36,42 @@ const ThemeSelector = () => {
   // Organize themes by actual brightness (background color lightness)
   const themeCategories = {
     light: {
-      name: '☀️ Light Themes',
+      name: 'Light Themes',
+      icon: Sun,
       themes: ['softLavender', 'dustyFloralLight', 'dustyFloralMist', 'blackberryCream', 'dustyFloralNeutral', 'moonlightSilver', 'dustyRose', 'sageGreen', 'dustyFloralMauve']
     },
     dark: {
-      name: '🌙 Dark Themes',
+      name: 'Dark Themes',
+      icon: Moon,
       themes: ['coralDawn', 'darkDustyRose', 'silverMist', 'purpleSlate', 'nebulaBlue', 'gunmetalGray', 'midnightDepths', 'midnightSteel', 'inkBlack']
     }
+  };
+
+  // Get icon for each theme
+  const getThemeIcon = (themeKey) => {
+    const iconMap = {
+      // Light themes
+      'dustyFloralLight': Flower,
+      'dustyFloralMist': Brush,
+      'dustyRose': Rose,
+      'dustyFloralNeutral': Palette,
+      'blackberryCream': Heart,
+      'sageGreen': Leaf,
+      'dustyFloralMauve': Flower,
+      'moonlightSilver': Pen,
+      'softLavender': Star,
+      // Dark themes
+      'coralDawn': Sunrise,
+      'darkDustyRose': Rose,
+      'silverMist': Mountain,
+      'nebulaBlue': Sparkles,
+      'purpleSlate': Shield,
+      'gunmetalGray': Shield,
+      'inkBlack': Pen,
+      'midnightDepths': Waves,
+      'midnightSteel': Mountain
+    };
+    return iconMap[themeKey] || Palette;
   };
 
   // Apply theme
@@ -129,9 +159,12 @@ const ThemeSelector = () => {
               onClick={() => toggleCategory(categoryKey)}
               aria-expanded={!collapsedCategories[categoryKey]}
             >
-              <span className="category-name">{category.name}</span>
+              <span className="category-name">
+                <category.icon size={16} style={{ marginRight: '0.5rem' }} />
+                {category.name}
+              </span>
               <span className={`category-arrow ${collapsedCategories[categoryKey] ? 'collapsed' : ''}`}>
-                ▼
+                {collapsedCategories[categoryKey] ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
               </span>
             </button>
             
@@ -162,7 +195,10 @@ const ThemeSelector = () => {
                         )}
                       </div>
                       <div className="theme-info">
-                        <div className="theme-name">{theme.name}</div>
+                        <div className="theme-name">
+                          {React.createElement(getThemeIcon(themeKey), { size: 14, style: { marginRight: '0.5rem' } })}
+                          {theme.name}
+                        </div>
                         <div className="theme-desc">{theme.description}</div>
                       </div>
                     </button>

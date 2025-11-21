@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Save, Trash2, BarChart3, Palette, Settings, CheckSquare, X } from 'lucide-react';
 import './ExportImport.css';
 
 /**
@@ -35,10 +36,10 @@ const ExportImport = () => {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      setImportStatus('✅ Export successful!');
+      setImportStatus('✓ Export successful!');
       setTimeout(() => setImportStatus(''), 3000);
     } catch {
-      setImportStatus('❌ Export failed. Please try again.');
+      setImportStatus('✗ Export failed. Please try again.');
       setTimeout(() => setImportStatus(''), 3000);
     }
   };
@@ -67,9 +68,9 @@ const ExportImport = () => {
         if (data.theme) localStorage.setItem('mercurial-theme', data.theme);
         if (data.openSidebarSection) localStorage.setItem('openSidebarSection', data.openSidebarSection);
 
-        setImportStatus('✅ Import successful! Refresh page to see changes.');
+        setImportStatus('✓ Import successful! Refresh page to see changes.');
       } catch {
-        setImportStatus('❌ Import failed. Invalid file.');
+        setImportStatus('✗ Import failed. Invalid file.');
         setTimeout(() => setImportStatus(''), 3000);
       }
     };
@@ -90,9 +91,9 @@ const ExportImport = () => {
         localStorage.removeItem('mercurial-theme');
         localStorage.removeItem('openSidebarSection');
         
-        setImportStatus('✅ All data cleared! Refresh page.');
+        setImportStatus('✓ All data cleared! Refresh page.');
       } catch {
-        setImportStatus('❌ Failed to clear data.');
+        setImportStatus('✗ Failed to clear data.');
         setTimeout(() => setImportStatus(''), 3000);
       }
     }
@@ -109,7 +110,7 @@ const ExportImport = () => {
         className="export-btn"
         onClick={handleExport}
       >
-        💾 Export Data
+        <Save size={16} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Export Data
       </button>
 
       {/* Import Button */}
@@ -130,12 +131,12 @@ const ExportImport = () => {
         className="clear-all-btn"
         onClick={handleClearAll}
       >
-        🗑️ Clear All Data
+        <Trash2 size={16} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Clear All Data
       </button>
 
       {/* Status Message */}
       {importStatus && (
-        <div className={`import-status ${importStatus.includes('❌') ? 'error' : 'success'}`}>
+        <div className={`import-status ${importStatus.includes('✗') ? 'error' : 'success'}`}>
           {importStatus}
         </div>
       )}
@@ -144,11 +145,11 @@ const ExportImport = () => {
       <div className="data-info">
         <h5>What's Included:</h5>
         <ul>
-          <li>📊 Statistics & Session History</li>
+          <li><BarChart3 size={14} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Statistics & Session History</li>
           <li>📋 Tasks & Task History</li>
           <li>🔊 Sound Settings</li>
-          <li>🎨 Theme Preference</li>
-          <li>⚙️ UI Preferences</li>
+          <li><Palette size={14} style={{verticalAlign: 'middle', marginRight: '6px'}} /> Theme Preference</li>
+          <li><Settings size={14} style={{verticalAlign: 'middle', marginRight: '6px'}} /> UI Preferences</li>
         </ul>
       </div>
     </div>

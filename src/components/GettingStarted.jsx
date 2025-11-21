@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { PenTool, Palette, Settings, Target, Zap, Clock, CheckSquare, Lightbulb, Circle, FileText, MapPin, Star, Rocket, BarChart3, Play, Pause } from 'lucide-react';
 import './GettingStarted.css';
 
 /**
@@ -9,23 +10,36 @@ const GettingStarted = ({ onClose }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 5;
 
+  // Helper function to get step icons
+  const getStepIcon = (iconName) => {
+    switch (iconName) {
+      case 'party': return <Star size={24} />;
+      case 'settings': return <Settings size={24} />;
+      case 'target': return <Target size={24} />;
+      case 'clock': return <Clock size={24} />;
+      case 'filetext': return <FileText size={24} />;
+      case 'rocket': return <Rocket size={24} />;
+      default: return <PenTool size={24} />;
+    }
+  };
+
   const steps = [
     {
       title: "Welcome to Writing Timer!",
       content: (
         <div className="welcome-step">
-          <div className="welcome-icon">✍️</div>
+          <div className="welcome-icon"><PenTool size={48} /></div>
           <p>This focused writing timer helps you stay productive with customizable sessions, task tracking, and detailed statistics.</p>
           <p><strong>Let's get you set up in 5 simple steps!</strong></p>
         </div>
       ),
-      icon: "🎉"
+      icon: "party"
     },
     {
       title: "Step 1: Configure App Settings",
       content: (
         <div className="step-content">
-          <p><strong>📍 Location:</strong> Sidebar → App Settings</p>
+          <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Sidebar → App Settings</p>
           <div className="feature-list">
             <div className="feature-item">
               <span className="feature-icon">🔊</span>
@@ -34,39 +48,39 @@ const GettingStarted = ({ onClose }) => {
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🎨</span>
+              <span className="feature-icon"><Palette size={20} /></span>
               <div>
-                <strong>Themes:</strong> Pick your preferred color scheme and set up quick light/dark toggle
+                <strong>Quick Theme Toggle:</strong> Switch between light and dark modes instantly
               </div>
             </div>
           </div>
           <div className="tip">
-            💡 <strong>Tip:</strong> Set up your default light and dark themes for the quick toggle switch
+            <Lightbulb size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> <strong>Tip:</strong> Advanced users can expand "Configure Quick Toggle Defaults" to set which specific themes the toggle switches between
           </div>
         </div>
       ),
-      icon: "⚙️"
+      icon: "settings"
     },
     {
       title: "Step 2: Choose Your Session Setup",
       content: (
         <div className="step-content">
-          <p><strong>📍 Location:</strong> Sidebar → Session Setup</p>
+          <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Sidebar → Session Setup</p>
           <div className="feature-list">
             <div className="feature-item">
-              <span className="feature-icon">🎯</span>
+              <span className="feature-icon"><Target size={20} /></span>
               <div>
                 <strong>Session Mode:</strong> Select from Writing, Researching, Creative Thinking, or Rabbit-Holing
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🍅</span>
+              <span className="feature-icon"><Circle size={20} /></span>
               <div>
                 <strong>Pomodoro (Optional):</strong> Enable structured work/break cycles for better focus
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">📝</span>
+              <span className="feature-icon"><FileText size={20} /></span>
               <div>
                 <strong>Word Tracking (Optional):</strong> Track your word count progress during sessions
               </div>
@@ -74,74 +88,74 @@ const GettingStarted = ({ onClose }) => {
           </div>
         </div>
       ),
-      icon: "🎯"
+      icon: "target"
     },
     {
       title: "Step 3: Set Your Timer Duration",
       content: (
         <div className="step-content">
-          <p><strong>📍 Location:</strong> Sidebar → Timer Duration</p>
+          <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Sidebar → Timer Duration</p>
           <div className="feature-list">
             <div className="feature-item">
-              <span className="feature-icon">⚡</span>
+              <span className="feature-icon"><Zap size={20} /></span>
               <div>
                 <strong>Quick Presets:</strong> Choose from 25min (Pomodoro), 45min, 60min, or 90min sessions
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🎨</span>
+              <span className="feature-icon"><Clock size={20} /></span>
               <div>
                 <strong>Custom Timer:</strong> Set any duration from 1-999 minutes for your specific needs
               </div>
             </div>
           </div>
           <div className="tip">
-            💡 <strong>Tip:</strong> Start with 25-45 minute sessions if you're new to focused writing
+            <Lightbulb size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> <strong>Tip:</strong> Start with 25-45 minute sessions if you're new to focused writing
           </div>
         </div>
       ),
-      icon: "⏰"
+      icon: "clock"
     },
     {
       title: "Step 4: Add Tasks (Optional)",
       content: (
         <div className="step-content">
-          <p><strong>📍 Location:</strong> Sidebar → Tracking & Tasks</p>
+          <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Sidebar → Tracking & Tasks</p>
           <div className="feature-list">
             <div className="feature-item">
-              <span className="feature-icon">✅</span>
+              <span className="feature-icon"><CheckSquare size={20} /></span>
               <div>
                 <strong>Task List:</strong> Add specific goals or tasks to focus on during your session
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">📊</span>
+              <span className="feature-icon"><BarChart3 size={20} /></span>
               <div>
                 <strong>Statistics:</strong> View your writing progress, completed sessions, and productivity trends
               </div>
             </div>
           </div>
           <div className="tip">
-            💡 <strong>Tip:</strong> Tasks help maintain focus, but they're optional - you can just start a timer anytime!
+            <Lightbulb size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> <strong>Tip:</strong> Tasks help maintain focus, but they're optional - you can just start a timer anytime!
           </div>
         </div>
       ),
-      icon: "📝"
+      icon: "filetext"
     },
     {
       title: "Step 5: Start Writing!",
       content: (
         <div className="step-content">
-          <p><strong>📍 Location:</strong> Main Timer (center of screen)</p>
+          <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Main Timer (center of screen)</p>
           <div className="feature-list">
             <div className="feature-item">
-              <span className="feature-icon">▶️</span>
+              <span className="feature-icon"><Play size={20} /></span>
               <div>
                 <strong>Start Timer:</strong> Click the large play button to begin your focused writing session
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">⏸️</span>
+              <span className="feature-icon"><Pause size={20} /></span>
               <div>
                 <strong>Pause/Resume:</strong> Take breaks when needed without losing your progress
               </div>
@@ -154,11 +168,11 @@ const GettingStarted = ({ onClose }) => {
             </div>
           </div>
           <div className="success-message">
-            🎉 <strong>You're all set!</strong> Start your first focused writing session and watch your productivity soar!
+            <Star size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> <strong>You're all set!</strong> Start your first focused writing session and watch your productivity soar!
           </div>
         </div>
       ),
-      icon: "🚀"
+      icon: "rocket"
     }
   ];
 
@@ -185,11 +199,11 @@ const GettingStarted = ({ onClose }) => {
       <div className="getting-started-modal">
         <div className="modal-header">
           <div className="step-indicator">
-            <span className="step-icon">{steps[currentStep - 1].icon}</span>
+            <span className="step-icon">{getStepIcon(steps[currentStep - 1].icon)}</span>
             <span className="step-counter">Step {currentStep} of {totalSteps}</span>
           </div>
           <button className="close-btn" onClick={onClose} title="Close guide">
-            ✕
+            ×
           </button>
         </div>
 

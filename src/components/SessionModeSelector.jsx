@@ -1,4 +1,5 @@
 import React from 'react';
+import { Folder, AlertTriangle, PenTool, Search, Lightbulb, Shuffle } from 'lucide-react';
 import './SessionModeSelector.css';
 
 /**
@@ -9,25 +10,29 @@ import './SessionModeSelector.css';
 const SESSION_MODES = [
   { 
     id: 'writing', 
-    label: '✍️ Writing', 
+    label: 'Writing',
+    icon: PenTool, 
     color: '#E91E63',
     description: 'Creative writing, blogging, drafting, journaling, and freeform writing.'
   },
   { 
     id: 'researching', 
-    label: '🔍 Researching', 
+    label: 'Researching',
+    icon: Search, 
     color: '#00D4FF',
     description: 'Gathering information and sources, fact-checking, note-taking, and data collection.'
   },
   { 
     id: 'creative', 
-    label: '💡 Creative Thinking', 
+    label: 'Creative Thinking',
+    icon: Lightbulb, 
     color: '#9C27B0',
     description: 'Brainstorming and ideation, mind mapping, and conceptual development.'
   },
   { 
     id: 'roaming', 
-    label: '🌀 Rabbit-Holing', 
+    label: 'Rabbit-Holing',
+    icon: Shuffle, 
     color: '#FF9800',
     description: 'Deep exploration and rabbit holes; idea generation; inspiration gathering.'
   }
@@ -45,9 +50,9 @@ const SessionModeSelector = ({ currentMode, onModeChange, isTimerRunning, projec
       {/* Current Mode Badge */}
       <div className="current-mode-badge" style={{ borderColor: currentModeData.color }}>
         <span className="mode-icon" style={{ color: currentModeData.color }}>
-          {currentModeData.label.split(' ')[0]}
+          {React.createElement(currentModeData.icon, { size: 16 })}
         </span>
-        <span className="mode-label">{currentModeData.label.split(' ').slice(1).join(' ')}</span>
+        <span className="mode-label">{currentModeData.label}</span>
         {isTimerRunning && (
           <span className="mode-status" style={{ color: currentModeData.color }}>●</span>
         )}
@@ -81,8 +86,8 @@ const SessionModeSelector = ({ currentMode, onModeChange, isTimerRunning, projec
         
         {/* Project Name Field */}
         <div className="project-name-field">
-          <label htmlFor="project-name">
-            📂 Project Name <span className="optional">(optional)</span>
+          <label htmlFor="project-name" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Folder size={16} />Project Name <span className="optional">(optional)</span>
           </label>
           <input
             id="project-name"
@@ -98,7 +103,9 @@ const SessionModeSelector = ({ currentMode, onModeChange, isTimerRunning, projec
         
         {isTimerRunning && (
           <p className="mode-lock-message">
-            <small>⚠️ Stop the timer to change session mode or project name</small>
+            <small style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <AlertTriangle size={14} />Stop the timer to change session mode or project name
+            </small>
           </p>
         )}
       </div>

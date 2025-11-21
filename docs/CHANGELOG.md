@@ -5,6 +5,34 @@ All notable changes to A Timer to Write will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-11-20
+
+### Fixed
+
+- **Theme System Cleanup**: Removed all obsolete theme CSS references
+  - Cleaned up legacy CSS rules for "sunset", "ocean", "forest", and old "midnight" themes
+  - Removed obsolete theme references from App.css and ProgressiveThemeManager.css
+  - Updated README.md to reflect current 18-theme system instead of outdated 10-theme list
+- **Dropdown Menu Styling**: Fixed theme selector dropdown contrast issues
+  - Added proper light theme dropdown styling (white background, dark text)
+  - Corrected theme categorization (moved moonlightSilver and softLavender to light themes)
+  - Fixed missing midnightDepths theme in dropdown styling rules
+  - Ensured all 18 themes have appropriate dropdown contrast and accessibility
+- **Button Styling**: Restored proper button styling for all current themes
+  - Added CSS variable overrides for dark themes needing better contrast
+  - Fixed missing theme styling that was accidentally removed during cleanup
+  - Maintained WCAG 2.1 AA compliance across all button states
+
+### Improved
+
+- **Code Maintainability**: Eliminated CSS pollution from removed themes
+  - Codebase now contains only styling for current 18 themes
+  - Improved CSS organization and reduced file sizes
+  - Enhanced theme consistency across all components
+- **Documentation**: Updated theme documentation to match current implementation
+  - README now lists accurate theme count and examples
+  - Removed references to discontinued themes
+
 ## [1.0.0] - 2025-11-19
 
 ### Added

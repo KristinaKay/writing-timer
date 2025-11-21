@@ -10,7 +10,7 @@
 
 - **Flexible Timer Modes**: Pomodoro technique, custom durations, and multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - **Task Management**: Drag-and-drop task list with circular checkboxes for easy session tracking
-- **Ten Beautiful Themes**: Dark, Light Elegance, Soft Mist, Ocean, Dusty Rose, Dark Dusty Rose, Sage & Green, Mauve Elegance, Balanced Neutral, Midnight, and Blackberry Cream with full accessibility compliance
+- **Eighteen Beautiful Themes**: Light Elegance, Soft Mist, Dusty Rose, Balanced Neutral, Blackberry Cream, Sage & Green, Mauve Elegance, Dark Dusty Rose, Silver Mist, Nebula Blue, Moonlight Silver, Soft Lavender, Coral Dawn, Purple Slate, Gunmetal Gray, Ink Black, Midnight Depths, and Midnight Steel with full WCAG 2.1 AA accessibility compliance
 - **Session Statistics**: Track your writing sessions with detailed productivity metrics
 - **WCAG AA Compliant**: Full accessibility support with keyboard navigation and reduced motion options
 - **Export/Import**: Save and restore your session data
@@ -102,12 +102,16 @@ The production files will be in the `dist/` directory.
 
 Six carefully crafted themes for different moods and lighting conditions:
 
-- **Dark**: Easy on the eyes for long writing sessions
-- **Light**: Clean and bright for daytime writing
-- **Ocean**: Calming blue gradients
-- **Dusty Rose**: Soft rose tones with linen and taupe
-- **Forest**: Natural green hues
-- **Midnight**: Deep purple with accent colors
+- **Light Elegance**: Clean and bright for daytime writing
+- **Dusty Rose**: Soft rose tones with linen and taupe  
+- **Sage & Green**: Natural green hues for focus
+- **Mauve Elegance**: Sophisticated purple tones
+- **Midnight Steel**: Deep blue-gray for evening sessions
+- **Ink Black**: Minimalist dark theme for distraction-free writing
+
+#### Additional Themes
+
+Plus 12 additional themes ranging from light to dark with full accessibility compliance.
 
 ### Statistics
 
@@ -274,12 +278,14 @@ For development patterns and architecture decisions, see `.github/copilot-instru
 This app can be deployed to any static hosting service. See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
 
 **Quick Deploy Options:**
+
 - **Netlify**: Drag `dist/` folder or connect GitHub repo
 - **Vercel**: Auto-deploys from GitHub with zero config
 - **GitHub Pages**: Free hosting on GitHub
 - **Self-hosted**: Copy `dist/` to any web server
 
 **Build for production:**
+
 ```bash
 npm run build
 ```
@@ -289,4 +295,3 @@ npm run build
 MIT License - see [LICENSE](LICENSE) file for details.
 
 Free to use, modify, and distribute. Created by [@KristinaKay](https://github.com/KristinaKay).
-

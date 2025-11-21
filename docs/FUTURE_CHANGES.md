@@ -29,6 +29,14 @@ This document tracks planned improvements and features for A Timer to Write.
 - ✅ Adjust hover states to work with solid colors (brightness, opacity, or slight color shift)
 - ✅ Maintain accessibility contrast ratios
 
+### ✅ 5. Theme System Cleanup
+
+- ✅ Remove obsolete theme CSS references (sunset, ocean, forest, old midnight)
+- ✅ Fix dropdown styling issues for theme selection
+- ✅ Ensure all current 18 themes have proper contrast and styling
+- ✅ Clean up CSS pollution from legacy themes
+- ✅ Update documentation to reflect current theme system
+
 ### ✅ 5. Getting Started Guide
 
 - ✅ Add interactive onboarding guide for new users

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
 import './CompactThemeSelector.css';
 import { themes } from '../lib/themeUtils';
 
@@ -21,12 +22,12 @@ const CompactThemeSelector = () => {
   const themeCategories = {
     light: {
       name: 'Light',
-      icon: '☀️',
+      icon: <Sun size={16} />,
       themes: ['softLavender', 'dustyFloralLight', 'dustyFloralMist', 'blackberryCream', 'dustyFloralNeutral', 'moonlightSilver', 'dustyRose', 'sageGreen', 'dustyFloralMauve']
     },
     dark: {
       name: 'Dark', 
-      icon: '🌙',
+      icon: <Moon size={16} />,
       themes: ['coralDawn', 'darkDustyRose', 'silverMist', 'purpleSlate', 'nebulaBlue', 'gunmetalGray', 'midnightDepths', 'midnightSteel', 'inkBlack']
     }
   };

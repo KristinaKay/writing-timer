@@ -1,13 +1,50 @@
-export const playSound = (soundType, volume) => {
+// Global AudioContext instance for mobile compatibility
+let audioContext = null;
+let isAudioInitialized = false;
+
+// Initialize audio context on user interaction
+export const initializeAudio = async () => {
+  if (isAudioInitialized) return true;
+  
+  try {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    // Resume AudioContext if it's suspended (required for mobile)
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+    
+    isAudioInitialized = true;
+    return true;
+  } catch (error) {
+    console.warn('Audio initialization failed:', error);
+    return false;
+  }
+};
+
+// Check if audio is supported and initialized
+export const isAudioAvailable = () => {
+  return isAudioInitialized && audioContext && audioContext.state === 'running';
+};
+
+export const playSound = async (soundType, volume) => {
   try {
     const enabled = localStorage.getItem('mercurial-sound-enabled') === 'true';
     if (!enabled) return;
+
+    // Initialize audio if needed
+    const audioReady = await initializeAudio();
+    if (!audioReady || !audioContext) {
+      console.warn('Audio not available');
+      return;
+    }
 
     // Use passed parameters or fallback to saved settings
     const useType = soundType || localStorage.getItem('mercurial-sound-type') || 'bell';
     const useVolume = volume !== undefined ? volume : parseFloat(localStorage.getItem('mercurial-sound-volume') || '0.5');
 
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 
@@ -33,8 +70,14 @@ export const playSound = (soundType, volume) => {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + sound.duration);
 
+    // Clean up oscillator nodes
     setTimeout(() => {
-      audioContext.close();
+      try {
+        oscillator.disconnect();
+        gainNode.disconnect();
+      } catch (e) {
+        // Ignore cleanup errors
+      }
     }, sound.duration * 1000 + 100);
   } catch (error) {
     console.warn('Sound playback failed:', error);
@@ -47,4 +90,13 @@ export const isSoundEnabled = () => {
   } catch {
     return false;
   }
+};
+
+// Cleanup function for when the app unmounts
+export const cleanupAudio = () => {
+  if (audioContext && audioContext.state !== 'closed') {
+    audioContext.close();
+  }
+  audioContext = null;
+  isAudioInitialized = false;
 };

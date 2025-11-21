@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Target, Clock, Check, PenTool, BarChart3, Trophy, Search, Lightbulb, Shuffle } from 'lucide-react';
 import './Statistics.css';
 
 /**
@@ -139,13 +140,14 @@ const Statistics = () => {
 
   // Get mode icon
   const getModeIcon = (mode) => {
-    const icons = {
-      writing: '✍️',
-      researching: '🔍',
-      creative: '💡',
-      roaming: '🌀'
+    const iconMap = {
+      writing: PenTool,
+      researching: Search,
+      creative: Lightbulb,
+      roaming: Shuffle
     };
-    return icons[mode] || '📝';
+    const IconComponent = iconMap[mode] || PenTool;
+    return <IconComponent size={16} />;
   };
 
   // Get mode label
@@ -171,7 +173,9 @@ const Statistics = () => {
       {/* Overview Stats */}
       <div className="stats-overview">
         <div className="stat-card">
-          <div className="stat-icon">🎯</div>
+          <div className="stat-icon">
+            <Target size={20} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{stats.totalSessions}</div>
             <div className="stat-label">Total Sessions</div>
@@ -179,7 +183,9 @@ const Statistics = () => {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">⏱️</div>
+          <div className="stat-icon">
+            <Clock size={20} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{formatTime(stats.totalMinutes)}</div>
             <div className="stat-label">Total Time</div>
@@ -187,7 +193,9 @@ const Statistics = () => {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">🍅</div>
+          <div className="stat-icon">
+            <Clock size={20} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{stats.completedPomodoros}</div>
             <div className="stat-label">Pomodoros</div>
@@ -195,7 +203,9 @@ const Statistics = () => {
         </div>
 
         <div className="stat-card">
-          <div className="stat-icon">✓</div>
+          <div className="stat-icon">
+            <Check size={20} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{stats.tasksCompleted}</div>
             <div className="stat-label">Tasks Done</div>
@@ -207,10 +217,14 @@ const Statistics = () => {
       {/* Word Count Stats (if present) */}
       {wordStats && (
         <div className="word-stats-section">
-          <h4>📝 Word Count</h4>
+          <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <PenTool size={16} />Word Count
+          </h4>
           <div className="stats-overview">
             <div className="stat-card">
-              <div className="stat-icon">📝</div>
+              <div className="stat-icon">
+                <PenTool size={20} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{wordStats.totalWordsWritten}</div>
                 <div className="stat-label">Total Words</div>
@@ -218,7 +232,9 @@ const Statistics = () => {
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon">📊</div>
+              <div className="stat-icon">
+                <BarChart3 size={20} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{wordStats.totalSessions > 0 ? Math.round(wordStats.totalWordsWritten / wordStats.totalSessions) : 0}</div>
                 <div className="stat-label">Avg/Session</div>
@@ -226,7 +242,9 @@ const Statistics = () => {
             </div>
 
             <div className="stat-card">
-              <div className="stat-icon">🏆</div>
+              <div className="stat-icon">
+                <Trophy size={20} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{wordStats.bestSession}</div>
                 <div className="stat-label">Best Session</div>
