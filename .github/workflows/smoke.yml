@@ -30,7 +30,7 @@ jobs:
         run: |
           npm run preview &
           echo "Waiting for preview to start..."
-          npx wait-on http://localhost:4173/
+          npx wait-on http://localhost:4173/ --timeout 60000
 
       - name: Install Chromium (for puppeteer-core)
         run: |

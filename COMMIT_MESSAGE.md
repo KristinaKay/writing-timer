@@ -7,6 +7,8 @@
 - Redesign Midnight Mauve as true dark theme
 - Implement comprehensive mobile audio fixes
 - Add automated commit workflow script
+- Fix all ESLint errors (52 errors → 0)
+- Fix smoke test timeout issues
 
 ## Detailed Changes
 
@@ -55,6 +57,22 @@
 - **Section Text**: Fixed readability issues with semi-transparent black color
 - **Sidebar Styling**: Proper dark backgrounds for dark themes
 
+### Code Quality Fixes
+
+- **ESLint Cleanup**: Fixed all 52 linting errors (49 errors, 3 warnings)
+  - Added Node.js environment configuration for scripts folder
+  - Removed 12 unused `err` variables from catch blocks
+  - Added proper error logging with `console.error()` to empty catch blocks
+  - Removed unused imports: `cleanupAudio`, `useEffect`, `fs`, `darkThemes`
+  - Fixed React fast refresh issues with explicit exports
+  - Added proper eslint-disable comments for intentional dependency exclusions
+- **Smoke Test Fixes**: Resolved timeout issues in CI pipeline
+  - Added missing `Volume2` and `Music` imports to GettingStarted.jsx
+  - Improved error reporting with console and page error capture
+  - Increased selector timeout from 10s to 20s
+  - Enhanced port connection retry logic with better diagnostics
+  - Added wait-on timeout to GitHub Actions workflow
+
 ### Development Tools
 
 - **Commit Workflow**: Added PowerShell automation script
@@ -89,12 +107,31 @@
 - `src/lib/soundUtils.js` - Improved AudioContext state checking
 - `src/App.jsx` - Added visibility change listener and forced re-initialization
 
+### Code Quality
+
+- `eslint.config.js` - Added Node.js environment for scripts
+- `addons/Statistics-WITH-WORDS.jsx` - Fixed export syntax for fast refresh
+- `addons/Statistics.jsx` - Removed unused variables, added error logging
+- `addons/WordTracker.jsx` - Fixed all 12 ESLint errors
+- `src/App.jsx` - Removed unused imports and variables
+- `src/components/GettingStarted.jsx` - Added missing Volume2 and Music imports
+- `src/components/QuickThemeToggle.jsx` - Removed unused darkThemes array
+- `src/components/ThemeManager.jsx` - Added error logging to catch blocks
+- `src/components/ThemeSelector.jsx` - Added proper error handling
+- `src/hooks/useTimer.js` - Removed unused variable, added dependency comment
+- `src/lib/compactToggle.js` - Added error logging
+- `src/lib/soundUtils.js` - Removed unused variable
+- `src/lib/themeUtils.js` - Added error logging
+- `scripts/smoke-runner.js` - Removed unused fs import
+- `scripts/smoke-screenshot.js` - Enhanced error reporting and retry logic
+
 ### Documentation & Tools
 
 - `README.md` - Updated "Mauve Elegance" to "Midnight Mauve"
 - `docs/CHANGELOG.md` - Added comprehensive 2025-11-24 update
 - `accessibility-checker-final.cjs` - Fixed theme parsing from ES6 modules
 - `commit-workflow.ps1` - New automated commit workflow script
+- `.github/workflows/smoke.yml` - Added wait-on timeout for reliability
 
 ## Testing
 
@@ -105,6 +142,9 @@
 - ✅ Theme toggle and selection function properly
 - ✅ Section description text readable on all themes
 - ✅ Commit workflow script executes successfully
+- ✅ ESLint passes with 0 errors
+- ✅ Build completes successfully
+- ✅ Smoke test screenshot captures correctly
 
 ## Breaking Changes
 

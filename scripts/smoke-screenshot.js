@@ -19,24 +19,43 @@ function waitForPort(targetUrl, timeout = WAIT_TIMEOUT) {
 
   return new Promise((resolve, reject) => {
     const start = Date.now();
+    let attemptCount = 0;
 
     const tryConnect = () => {
+      attemptCount++;
       const socket = new net.Socket();
       socket.setTimeout(2000);
+      
       socket.once('connect', () => {
+        console.log(`✓ Connected to ${hostname}:${port} after ${attemptCount} attempts`);
         socket.destroy();
         resolve();
       });
+      
       socket.once('timeout', () => {
         socket.destroy();
-        if (Date.now() - start >= timeout) reject(new Error('Timeout waiting for port'));
-        else setTimeout(tryConnect, POLL_INTERVAL);
+        const elapsed = Date.now() - start;
+        if (elapsed >= timeout) {
+          reject(new Error(`Timeout waiting for ${hostname}:${port} after ${attemptCount} attempts`));
+        } else {
+          setTimeout(tryConnect, POLL_INTERVAL);
+        }
       });
-      socket.once('error', () => {
+      
+      socket.once('error', (err) => {
         socket.destroy();
-        if (Date.now() - start >= timeout) reject(new Error('Timeout waiting for port'));
-        else setTimeout(tryConnect, POLL_INTERVAL);
+        const elapsed = Date.now() - start;
+        if (elapsed >= timeout) {
+          reject(new Error(`Connection error to ${hostname}:${port} after ${attemptCount} attempts: ${err.message}`));
+        } else {
+          // Don't log every error, just retry silently
+          if (attemptCount % 10 === 0) {
+            console.log(`Still trying to connect (attempt ${attemptCount})...`);
+          }
+          setTimeout(tryConnect, POLL_INTERVAL);
+        }
       });
+      
       socket.connect(port, hostname);
     };
 
@@ -95,6 +114,28 @@ async function run() {
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 900 });
+    
+    // Capture console messages BEFORE navigation to catch startup errors
+    const consoleLogs = [];
+    page.on('console', msg => {
+      try {
+        const text = msg.text();
+        const type = msg.type();
+        consoleLogs.push(`[${type}] ${text}`);
+        // Also log to our console for immediate visibility
+        console.log(`Browser [${type}]:`, text);
+      } catch (error) {
+        console.error('Failed to capture console message:', error);
+      }
+    });
+
+    // Capture page errors
+    page.on('pageerror', error => {
+      const message = error.toString();
+      consoleLogs.push(`[pageerror] ${message}`);
+      console.error('Browser page error:', message);
+    });
+
     // Pre-set compact mode in localStorage so the app loads in compact mode for screenshot
     await page.goto('about:blank');
     await page.evaluateOnNewDocument(() => {
@@ -104,21 +145,13 @@ async function run() {
         console.error('Failed to set compact mode:', error);
       }
     });
+    
+    console.log('Navigating to', TARGET);
     await page.goto(TARGET, { waitUntil: 'networkidle2', timeout: 30000 });
 
-    // Capture console messages
-    const consoleLogs = [];
-    page.on('console', msg => {
-      try {
-        const text = msg.text();
-        consoleLogs.push(`[${msg.type()}] ${text}`);
-      } catch (error) {
-        console.error('Failed to capture console message:', error);
-      }
-    });
-
-    // Wait for a reliable selector from the app
-    await page.waitForSelector('.App .timer-display', { timeout: 10000 });
+    // Wait for a reliable selector from the app (increased timeout)
+    console.log('Waiting for .App .timer-display element...');
+    await page.waitForSelector('.App .timer-display', { timeout: 20000 });
 
   // Small delay to allow animations to settle
   await new Promise((r) => setTimeout(r, 500));

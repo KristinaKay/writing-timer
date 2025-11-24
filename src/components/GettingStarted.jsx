@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PenTool, Palette, Settings, Target, Zap, Clock, CheckSquare, Lightbulb, Circle, FileText, MapPin, Star, Rocket, BarChart3, Play, Pause } from 'lucide-react';
+import { PenTool, Palette, Settings, Target, Zap, Clock, CheckSquare, Lightbulb, Circle, FileText, MapPin, Star, Rocket, BarChart3, Play, Pause, Volume2, Music } from 'lucide-react';
 import './GettingStarted.css';
 
 /**
