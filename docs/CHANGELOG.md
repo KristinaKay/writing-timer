@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.1] - 2025-11-20
 
+### 2025-11-24
+- style(themes): complete icon migration, achieve 100 accessibility, add workflow automation
+
 ### Fixed
 
 - **Theme System Cleanup**: Removed all obsolete theme CSS references
@@ -83,6 +86,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### 2025-11-24
+
+### New Features
+
+- **Commit Workflow Script**: Added automated commit workflow with error checking, changelog updates, and commit message generation
+  - PowerShell script for standardized git commits
+  - Auto-detects commit type and scope based on changed files
+  - Runs ESLint and build checks before committing
+  - Automatically updates CHANGELOG with commit messages
+  - Prioritizes staged files when analyzing changes
+
+### Theme Updates
+
+- **Midnight Mauve Theme**: Renamed from "Mauve Elegance" to "Midnight Mauve" with updated dark color palette
+  - Changed from medium-tone (#7A6B6D) to very dark burgundy (#26191b) background
+  - Updated primary color to dusty mauve (#847577)
+  - Now properly categorized as a dark theme with dark sidebar styling
+  - Improved WCAG AA compliance with white text on dark background
+
+- **Icon System**: Completed migration to Lucide React icons (100% emoji-free)
+  - Replaced all emoji icons with professional stroke-based Lucide React components
+  - Updated Sound Settings, Backup section, Theme selectors, Status indicators
+  - Added FileText icon to Word Tracker toggle
+  - Improved icon consistency and accessibility across all themes
+  - Fixed missing icon imports (Bell, Music, Radio, Waves)
+
+- **Theme Accessibility**: All 18 themes now achieve 100% WCAG 2.1 AA compliance
+  - Fixed Dusty Rose by removing gradient background
+  - Adjusted Dark Dusty Rose, Silver Mist, and Coral Dawn contrast ratios
+  - All themes now meet text readability (≥4.5:1) and UI element contrast (≥3.0:1) requirements
+
+### Bug Fixes
+
+- **Mobile Audio**: Implemented comprehensive mobile audio initialization fixes
+  - Added visibility change listener to re-initialize audio when page regains focus
+  - Force audio re-initialization before timer completion sounds
+  - Improved AudioContext state checking and recovery
+  - Better handling of suspended/closed AudioContext states on mobile browsers
+
+- **Theme System**: Fixed theme toggle and selection functionality
+  - Corrected QuickThemeToggle theme arrays to match current 18-theme system
+  - Changed default dark theme from 'inkBlack' to 'midnightSteel'
+  - Fixed broken theme switching caused by outdated theme categorization
+
+- **Section Description Text**: Fixed readability issues in sidebar sections
+  - Changed from theme-inherited text color to readable semi-transparent black
+  - Improved contrast on light section backgrounds across all themes
+  - Fixed white text appearing on light backgrounds in dark themes
+
+- **Accessibility Checker**: Updated to properly parse and test current theme definitions
+  - Fixed theme parsing from ES6 modules
+  - Now correctly tests all 18 themes including updated Midnight Mauve
+
 ### Previously Added
 
 - Initial project setup with React and Vite
@@ -109,25 +165,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Touch target sizes meeting 44×44px minimum
 - Reduced motion support for animations
 - Comprehensive documentation in docs/ directory
-
-### Changed
-
-- Renamed project from "Writing Timer" to "A Timer to Write"
-- Improved text contrast ratios to meet WCAG AA standards
-- Updated README with complete feature documentation
-- Enhanced task checkbox styling with theme-aware colors and visual indicators
-- Sidebar sections now collapsed by default for compact startup
-- Replaced always-visible sidebar with collapsible gear icon interface
-- Session statistics now track any 1+ minute session regardless of completion method
 - **New Theme**: Added Blackberry Cream theme with elegant cream backgrounds and rich blackberry accents
   - Colors: Cream (#D3BDB0, #C1AE9F), Sage (#89937C), Blackberry (#715B64, #69385C)
-  - WCAG AA compliant with high contrast text (#2A1B1F, #3C1F25) 
+  - WCAG AA compliant with high contrast text (#2A1B1F, #3C1F25)
   - Features sophisticated gradient backgrounds and accessible button styling
 - **Theme Enhancement**: Added Dark Dusty Rose theme using high contrast colors from the dusty rose palette
   - Dusty Rose: Warm neutrals with dusty rose highlights (#CC8B86, #F9EAE1, #D1BE9C, #AA998F, #7D4F50)
   - Dark Dusty Rose: High contrast dark theme using smoky rose background with linen text
 
-### Fixed
+### Previously Fixed
+
+- Theme persistence on page reload
+- Input field visibility when not focused
+- Progress ring visibility across all themes
+- Task input background contrast
+- Task completion counter bug preventing duplicate statistics counting
+- Replaced always-visible sidebar with collapsible gear icon interface
+- Session statistics now track any 1+ minute session regardless of completion method
+
+### Accessibility
 
 - Theme persistence on page reload
 - Input field visibility when not focused
@@ -139,9 +195,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Task completion state synchronization with visual feedback
 - Task completion increment/decrement logic for accurate statistics
 - JSX syntax errors in sidebar component structure
-
-### Accessibility
-
 - Increased text-secondary alpha from 0.38 to 0.5-0.6 for better contrast
 - Added prefers-reduced-motion media queries
 - Expanded touch targets to 44×44px minimum

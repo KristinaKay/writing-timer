@@ -41,7 +41,9 @@ const ThemeManager = () => {
     try {
       localStorage.setItem('mercurial-default-light', defaultLightTheme);
       localStorage.setItem('mercurial-default-dark', defaultDarkTheme);
-    } catch {}
+    } catch (error) {
+      console.error('Failed to save default themes:', error);
+    }
   }, [defaultLightTheme, defaultDarkTheme]);
 
   return (

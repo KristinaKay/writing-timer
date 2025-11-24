@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Check } from 'lucide-react';
 import './CompactThemeSelector.css';
 import { themes } from '../lib/themeUtils';
 
@@ -151,7 +151,7 @@ const CompactThemeSelector = () => {
                 ></div>
               </div>
               {currentTheme === themeKey && (
-                <div className="swatch-check" aria-hidden="true">✓</div>
+                <div className="swatch-check" aria-hidden="true"><Check size={10} color="white" /></div>
               )}
             </button>
           );

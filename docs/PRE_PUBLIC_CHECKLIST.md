@@ -38,9 +38,9 @@ Complete these steps before making the repository public.
 
 ## 🌐 Making Repository Public
 
-### On GitHub:
+### On GitHub
 
-1. Go to: https://github.com/KristinaKay/writing-timer
+1. Go to: <https://github.com/KristinaKay/writing-timer>
 2. Click **Settings** (top right)
 3. Scroll to bottom → **Danger Zone**
 4. Click **Change visibility**
@@ -48,7 +48,7 @@ Complete these steps before making the repository public.
 6. Type repository name to confirm
 7. Click **I understand, make this repository public**
 
-### After Making Public:
+### After Making Public
 
 - [ ] Add repository description on GitHub
 - [ ] Add topics/tags (e.g., `writing`, `timer`, `productivity`, `react`, `vite`)
@@ -80,6 +80,7 @@ Once public, consider sharing on:
 ## 🔒 Privacy Note
 
 Remember:
+
 - All commit history becomes public
 - Collaborators list is visible
 - Issues and discussions are public

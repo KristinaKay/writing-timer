@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Palette, Flower, Rose, Users, Leaf, Brush, Heart, Mountain, Sunset, Star, Pen, Sunrise, Waves, Shield, Trees, Sparkles, ChevronDown, ChevronRight } from 'lucide-react';
+import { Sun, Moon, Palette, Flower, Rose, Users, Leaf, Brush, Heart, Mountain, Sunset, Star, Pen, Sunrise, Waves, Shield, Trees, Sparkles, ChevronDown, ChevronRight, Check } from 'lucide-react';
 import './ThemeSelector.css';
 import { themes } from '../lib/themeUtils';
 
@@ -101,27 +101,35 @@ const ThemeSelector = () => {
     // Mark the document with a data-theme attribute so CSS selectors react immediately
     try {
       document.documentElement.setAttribute('data-theme', currentTheme);
-    } catch {}
+    } catch (error) {
+      console.error('Failed to set data-theme attribute:', error);
+    }
   }, [currentTheme]);
 
   // Apply compact mode class to the document element
   useEffect(() => {
     try {
       localStorage.setItem('mercurial-compact', compactMode ? 'true' : 'false');
-    } catch {}
+    } catch (error) {
+      console.error('Failed to save compact mode:', error);
+    }
     if (compactMode) document.documentElement.classList.add('compact');
     else document.documentElement.classList.remove('compact');
     // Notify other parts of the app (toast / listeners)
     try {
       window.dispatchEvent(new CustomEvent('compact-mode-changed', { detail: { enabled: compactMode } }));
-    } catch {}
+    } catch (error) {
+      console.error('Failed to dispatch compact-mode-changed event:', error);
+    }
   }, [compactMode]);
 
   // Save collapsed states
   useEffect(() => {
     try {
       localStorage.setItem('theme-categories-collapsed', JSON.stringify(collapsedCategories));
-    } catch {}
+    } catch (error) {
+      console.error('Failed to save collapsed categories:', error);
+    }
   }, [collapsedCategories]);
 
   const handleThemeChange = (themeKey) => {
@@ -191,7 +199,7 @@ const ThemeSelector = () => {
                           <div className="swatch text" style={{ background: theme.textColor }}></div>
                         </div>
                         {currentTheme === themeKey && (
-                          <div className="theme-check" style={{ background: theme.primary }}>✓</div>
+                          <div className="theme-check" style={{ background: theme.primary }}><Check size={12} color="white" /></div>
                         )}
                       </div>
                       <div className="theme-info">

@@ -124,7 +124,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 
 ### Commit Format
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>
@@ -170,7 +170,7 @@ a11y(buttons): Increase touch target sizes to 44px minimum
 
 Use the same format as commit messages:
 
-```
+```text
 feat: Add custom timer duration input
 fix: Resolve theme persistence issue on reload
 ```

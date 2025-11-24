@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Smartphone } from 'lucide-react';
+import { Volume2, VolumeX, Smartphone, Bell, Music, Radio, Waves } from 'lucide-react';
 import './SoundSettings.css';
 import { playSound, initializeAudio, isAudioAvailable } from '../lib/soundUtils';
 
@@ -73,10 +73,10 @@ const SoundSettings = () => {
 
   // Sound types with frequencies
   const sounds = {
-    bell: { name: '🔔 Bell', freq: 800 },
-    chime: { name: '🎵 Chime', freq: 1200 },
-    beep: { name: '📢 Beep', freq: 440 },
-    gentle: { name: '🌊 Gentle', freq: 600 }
+    bell: { name: 'Bell', freq: 800, icon: Bell },
+    chime: { name: 'Chime', freq: 1200, icon: Music },
+    beep: { name: 'Beep', freq: 440, icon: Radio },
+    gentle: { name: 'Gentle', freq: 600, icon: Waves }
   };
 
   // Play test sound with mobile support
@@ -140,15 +140,19 @@ const SoundSettings = () => {
           <div className="sound-type-section">
             <label className="section-label">Sound Type</label>
             <div className="sound-type-buttons">
-              {Object.keys(sounds).map(type => (
-                <button
-                  key={type}
-                  className={`sound-type-btn ${soundType === type ? 'active' : ''}`}
-                  onClick={() => setSoundType(type)}
-                >
-                  {sounds[type].name}
-                </button>
-              ))}
+              {Object.keys(sounds).map(type => {
+                const IconComponent = sounds[type].icon;
+                return (
+                  <button
+                    key={type}
+                    className={`sound-type-btn ${soundType === type ? 'active' : ''}`}
+                    onClick={() => setSoundType(type)}
+                  >
+                    <IconComponent size={16} />
+                    {sounds[type].name}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -174,7 +178,8 @@ const SoundSettings = () => {
             className={`test-sound-btn ${!audioInitialized && isMobile ? 'mobile-init' : ''}`}
             onClick={playTestSound}
           >
-            🎵 {!audioInitialized && isMobile ? 'Enable Audio' : 'Test Sound'}
+            <Music size={16} />
+            {!audioInitialized && isMobile ? 'Enable Audio' : 'Test Sound'}
           </button>
         </>
       )}

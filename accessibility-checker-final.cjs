@@ -18,19 +18,20 @@ const themeFilePath = path.join(process.cwd(), 'src', 'lib', 'themeUtils.js');
 const themeFileContent = fs.readFileSync(themeFilePath, 'utf8');
 
 // Extract theme definitions using regex
-const themesMatch = themeFileContent.match(/export const themes = \{([\s\S]*?)\};/);
+const themesMatch = themeFileContent.match(/export const themes = \{([\s\S]*?)\n\};/);
 if (!themesMatch) {
   console.error('Could not parse themes from themeUtils.js');
   process.exit(1);
 }
 
-// Parse the themes object
-const themesObjectString = 'const themes = {' + themesMatch[1] + '};';
+// Parse the themes object - use Function constructor to avoid eval issues
+const themesObjectString = '(function() { return {' + themesMatch[1] + '\n}; })()';
 let themes;
 try {
-  eval(themesObjectString);
+  themes = Function('"use strict"; return ' + themesObjectString)();
 } catch (error) {
   console.error('Error parsing themes object:', error.message);
+  console.error('Attempted to parse:', themesObjectString.substring(0, 200) + '...');
   process.exit(1);
 }
 

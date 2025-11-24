@@ -34,7 +34,6 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
     if (isRunning && !isPaused) {
       // Record start time if not already set
       if (!startTimeRef.current) {
-        const currentTimeInSeconds = minutes * 60 + seconds;
         startTimeRef.current = Date.now() - (totalElapsed * 1000);
       }
       
@@ -93,6 +92,8 @@ export const useTimer = (initialMinutes = 25, onComplete = () => {}) => {
         clearInterval(intervalRef.current);
       }
     };
+    // minutes, seconds, totalElapsed are intentionally excluded to prevent reset loops
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRunning, isPaused, onComplete, initialTime]);
 
   // Start the timer

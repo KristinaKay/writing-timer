@@ -4,5 +4,4 @@
 // - Statistics.css
 // Keep a lightweight re-export so old imports still work.
 
-export { default } from './Statistics.jsx';
-export * from './Statistics.jsx';
+export { default, updateStatistics, updateTaskCompletion } from './Statistics.jsx';

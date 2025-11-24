@@ -100,7 +100,9 @@ async function run() {
     await page.evaluateOnNewDocument(() => {
       try {
         localStorage.setItem('mercurial-compact', 'true');
-      } catch {}
+      } catch (error) {
+        console.error('Failed to set compact mode:', error);
+      }
     });
     await page.goto(TARGET, { waitUntil: 'networkidle2', timeout: 30000 });
 
@@ -110,7 +112,9 @@ async function run() {
       try {
         const text = msg.text();
         consoleLogs.push(`[${msg.type()}] ${text}`);
-      } catch {}
+      } catch (error) {
+        console.error('Failed to capture console message:', error);
+      }
     });
 
     // Wait for a reliable selector from the app

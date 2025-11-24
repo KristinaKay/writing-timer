@@ -51,6 +51,7 @@ Visit `http://localhost:4173` to test the production build.
 4. Click "Deploy"
 
 **Features:**
+
 - Automatic deployments on Git push
 - Free SSL certificates
 - Built-in analytics
@@ -59,11 +60,13 @@ Visit `http://localhost:4173` to test the production build.
 ### Option 3: GitHub Pages
 
 1. Install GitHub Pages plugin:
+
    ```bash
    npm install --save-dev gh-pages
    ```
 
 2. Add to `package.json`:
+
    ```json
    "scripts": {
      "predeploy": "npm run build",
@@ -72,6 +75,7 @@ Visit `http://localhost:4173` to test the production build.
    ```
 
 3. Update `vite.config.js`:
+
    ```javascript
    export default defineConfig({
      plugins: [react()],
@@ -80,6 +84,7 @@ Visit `http://localhost:4173` to test the production build.
    ```
 
 4. Deploy:
+
    ```bash
    npm run deploy
    ```
@@ -91,6 +96,7 @@ Your app will be at: `https://KristinaKay.github.io/writing-timer/`
 ### Option 4: Self-Hosted
 
 Copy the `dist/` folder to any web server:
+
 - Apache
 - Nginx
 - Your own hosting service
@@ -137,16 +143,19 @@ See [Future Changes](FUTURE_CHANGES.md) for roadmap.
 ## 🐛 Troubleshooting
 
 **Build fails:**
+
 - Run `npm install` to ensure dependencies are installed
 - Check for any TypeScript/ESLint errors
 - Review error messages in terminal
 
 **Blank page after deployment:**
+
 - Check browser console for errors
 - Verify `base` path in `vite.config.js` matches your URL
 - Ensure files are in correct directory
 
 **Timer not working:**
+
 - Check browser compatibility (requires modern browser with ES6+ support)
 - Verify JavaScript is enabled
 - Check for Content Security Policy issues
@@ -154,6 +163,7 @@ See [Future Changes](FUTURE_CHANGES.md) for roadmap.
 ## 📊 Analytics (Optional)
 
 Consider adding:
+
 - Google Analytics
 - Plausible (privacy-friendly)
 - Netlify Analytics
@@ -161,6 +171,7 @@ Consider adding:
 ## 🔐 Security
 
 The app runs entirely client-side with no backend:
+
 - All data stored in browser localStorage
 - No user authentication required
 - No sensitive data collected

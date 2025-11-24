@@ -25,20 +25,16 @@ const QuickThemeToggle = () => {
   
   const [defaultDarkTheme] = useState(() => {
     try {
-      return localStorage.getItem('mercurial-default-dark') || 'inkBlack';
+      return localStorage.getItem('mercurial-default-dark') || 'midnightSteel';
     } catch {
-      return 'inkBlack';
+      return 'midnightSteel';
     }
   });
 
-  // Organize themes by brightness
+  // Organize themes by brightness - must match ProgressiveThemeManager
   const lightThemes = [
-    'softLavender', 'dustyFloralLight', 'dustyFloralMist', 'blackberryCream', 
-    'dustyFloralNeutral', 'moonlightSilver', 'dustyRose', 'sageGreen', 'dustyFloralMauve'
-  ];
-  
-  const darkThemes = [
-    'inkBlack', 'midnightSteel', 'charcoalMist', 'darkOlive', 'deepTeal', 'slateGray'
+    'dustyFloralLight', 'dustyFloralMist', 'dustyFloralNeutral', 'blackberryCream', 
+    'moonlightSilver', 'dustyRose', 'sageGreen', 'softLavender'
   ];
   
   // Determine if we're currently in light mode

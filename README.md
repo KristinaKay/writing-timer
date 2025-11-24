@@ -10,7 +10,7 @@
 
 - **Flexible Timer Modes**: Pomodoro technique, custom durations, and multiple session modes (Writing, Researching, Creative Thinking, Roaming)
 - **Task Management**: Drag-and-drop task list with circular checkboxes for easy session tracking
-- **Eighteen Beautiful Themes**: Light Elegance, Soft Mist, Dusty Rose, Balanced Neutral, Blackberry Cream, Sage & Green, Mauve Elegance, Dark Dusty Rose, Silver Mist, Nebula Blue, Moonlight Silver, Soft Lavender, Coral Dawn, Purple Slate, Gunmetal Gray, Ink Black, Midnight Depths, and Midnight Steel with full WCAG 2.1 AA accessibility compliance
+- **Eighteen Beautiful Themes**: Light Elegance, Soft Mist, Dusty Rose, Balanced Neutral, Blackberry Cream, Sage & Green, Midnight Mauve, Dark Dusty Rose, Silver Mist, Nebula Blue, Moonlight Silver, Soft Lavender, Coral Dawn, Purple Slate, Gunmetal Gray, Ink Black, Midnight Depths, and Midnight Steel with full WCAG 2.1 AA accessibility compliance
 - **Session Statistics**: Track your writing sessions with detailed productivity metrics
 - **WCAG AA Compliant**: Full accessibility support with keyboard navigation and reduced motion options
 - **Export/Import**: Save and restore your session data
@@ -105,7 +105,7 @@ Six carefully crafted themes for different moods and lighting conditions:
 - **Light Elegance**: Clean and bright for daytime writing
 - **Dusty Rose**: Soft rose tones with linen and taupe  
 - **Sage & Green**: Natural green hues for focus
-- **Mauve Elegance**: Sophisticated purple tones
+- **Midnight Mauve**: Sophisticated dark burgundy with mauve accents
 - **Midnight Steel**: Deep blue-gray for evening sessions
 - **Ink Black**: Minimalist dark theme for distraction-free writing
 

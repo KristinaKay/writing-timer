@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Play, Pause, Square, RotateCcw, Timer, Volume2, Settings, BarChart3, ChevronDown, ChevronRight, HardDrive, PenTool, Clock, Zap, Palette } from 'lucide-react'
+import { Play, Pause, Square, RotateCcw, Timer, Volume2, Settings, BarChart3, ChevronDown, ChevronRight, HardDrive, PenTool, Clock, Zap, Palette, Check } from 'lucide-react'
 import { useTimer } from './hooks/useTimer'
 import CircularProgress from './components/CircularProgress'
 import SessionModeSelector from './components/SessionModeSelector'
@@ -15,7 +15,7 @@ import ThemeSelector from './components/ThemeSelector'
 import ProgressiveThemeManager from './components/ProgressiveThemeManager'
 import GettingStarted from './components/GettingStarted'
 import CompactToast from './components/CompactToast'
-import { playSound, initializeAudio, cleanupAudio } from './lib/soundUtils'
+import { playSound, initializeAudio } from './lib/soundUtils'
 import { initializeTheme } from './lib/themeUtils'
 import './App.css'
 
@@ -81,8 +81,6 @@ function App() {
     }
   };
 
-  const sectionOrder = ['sessionMode', 'wordTracker', 'pomodoro', 'presets', 'custom', 'statistics', 'sound', 'export', 'themes'];
-
   const handleHeaderKeyDown = (e, sectionId) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -128,13 +126,19 @@ function App() {
   const handleTimerComplete = async () => {
     // Play sound notification (mobile-compatible)
     try {
-      await playSound();
+      // Force audio re-initialization before playing (critical for mobile)
+      const audioReady = await initializeAudio();
+      if (audioReady) {
+        await playSound();
+      } else {
+        console.warn('Audio initialization failed before timer completion sound');
+      }
     } catch (error) {
       console.warn('Sound notification failed:', error);
     }
 
     // Track the completed session
-    const wasTracked = trackSessionIfValid();
+    trackSessionIfValid();
     
     if (pomodoroEnabled) {
       if (cycleType === 'work') {
@@ -231,10 +235,26 @@ function App() {
       if (timer.isRunning && !timer.isPaused) {
         window.dispatchEvent(new CustomEvent('timer-start', { detail: { timestamp: Date.now() } }));
       }
-    } catch (err) {
+    } catch {
       // ignore
     }
   }, [timer.isRunning, timer.isPaused]);
+
+  // Re-initialize audio when page becomes visible (critical for mobile)
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible') {
+        try {
+          await initializeAudio();
+        } catch (error) {
+          console.warn('Audio re-initialization on visibility change failed:', error);
+        }
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
 
   const getProgressColor = () => {
     if (timer.isComplete) return '#66bb6a';
@@ -372,7 +392,7 @@ function App() {
                       <Timer size={16} />Ready to start
                     </>
                   )}
-                  {timer.isComplete && '✓ Complete!'}
+                  {timer.isComplete && <><Check size={16} style={{marginRight: '4px'}} />Complete!</>}
                 </div>
               </div>
             </CircularProgress>
@@ -577,7 +597,8 @@ function App() {
                   tabIndex={0}
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <PenTool size={16} />Track Word Count
+                    <PenTool size={16} />
+                    Track Word Count
                   </span>
                   <span className="collapse-icon">
                     {openSidebarSection === 'wordTracker' ? <ChevronDown size={14} /> : <ChevronRight size={14} />}

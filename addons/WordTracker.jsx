@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FileText } from 'lucide-react';
 import './WordTracker.css';
 
 /**
@@ -33,7 +34,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
       if (s !== null) setWordsAtStart(s);
       if (e !== null) setWordsAtEnd(e);
       if (t !== null) setTargetWords(t);
-    } catch (err) {
+    } catch {
       // ignore
     }
   }, []);
@@ -51,6 +52,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
       }
       setSessionActive(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTimerRunning]);
 
   // Calculate words written
@@ -122,7 +124,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
         localStorage.removeItem('mercurial-word-start');
         localStorage.removeItem('mercurial-word-end');
         localStorage.removeItem('mercurial-word-target');
-      } catch (err) {
+      } catch {
         // ignore
       }
 
@@ -140,7 +142,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
       // Notify listeners that word statistics have been updated
       try {
         window.dispatchEvent(new CustomEvent('word-statistics-updated', { detail: stats }));
-      } catch (err) {
+      } catch {
         // ignore
       }
     } catch (err) {
@@ -169,18 +171,19 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
 
     window.addEventListener('save-word-session', handler);
     return () => window.removeEventListener('save-word-session', handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackingEnabled, wordsAtStart, wordsAtEnd, targetWords]);
 
   // Listen for timer-start so we can auto-fill the starting word count if available
   useEffect(() => {
-    const onTimerStart = (e) => {
+    const onTimerStart = () => {
       try {
         // If an external auto-start value is present in localStorage, use it
         const autoStart = localStorage.getItem('mercurial-word-auto-start');
         if (autoStart !== null && autoStart !== undefined) {
           setWordsAtStart(String(autoStart));
         }
-      } catch (err) {
+      } catch {
         // ignore
       }
     };
@@ -222,7 +225,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
       if (wordsAtStart !== undefined) localStorage.setItem('mercurial-word-start', String(wordsAtStart));
       if (wordsAtEnd !== undefined) localStorage.setItem('mercurial-word-end', String(wordsAtEnd));
       if (targetWords !== undefined) localStorage.setItem('mercurial-word-target', String(targetWords));
-    } catch (err) {
+    } catch {
       // ignore
     }
   }, [wordsAtStart, wordsAtEnd, targetWords]);
@@ -239,7 +242,8 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
           />
           <span className="toggle-slider"></span>
           <span className="toggle-label">
-            📝 Track Word Count
+            <FileText size={16} style={{marginRight: '6px'}} />
+            Track Word Count
             {trackingEnabled && <span className="enabled-badge">On</span>}
           </span>
         </label>
@@ -365,6 +369,7 @@ const WordTracker = ({ isTimerRunning, sessionMode }) => {
 export default WordTracker;
 
 // Export function to get word statistics (for Statistics component)
+// eslint-disable-next-line react-refresh/only-export-components
 export const getWordStatistics = () => {
   try {
     const saved = localStorage.getItem('mercurial-word-statistics');
@@ -389,6 +394,7 @@ export const getWordStatistics = () => {
 };
 
 // Export function to reset word statistics
+// eslint-disable-next-line react-refresh/only-export-components
 export const resetWordStatistics = () => {
   try {
     localStorage.removeItem('mercurial-word-statistics');

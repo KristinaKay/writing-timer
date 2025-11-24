@@ -6,7 +6,9 @@ export function initializeCompactToggle() {
   const applyCompact = (enabled) => {
     try {
       localStorage.setItem('mercurial-compact', enabled ? 'true' : 'false');
-    } catch {}
+    } catch (error) {
+      console.error('Failed to save compact mode:', error);
+    }
     if (enabled) document.documentElement.classList.add('compact');
     else document.documentElement.classList.remove('compact');
 
@@ -18,7 +20,9 @@ export function initializeCompactToggle() {
   try {
     const saved = localStorage.getItem('mercurial-compact');
     if (saved === 'true') document.documentElement.classList.add('compact');
-  } catch {}
+  } catch (error) {
+    console.error('Failed to load compact mode:', error);
+  }
 
   const handler = (e) => {
     // Ctrl+Shift+C (Cmd on mac will also include ctrlKey in many browsers; keep ctrl for Windows)

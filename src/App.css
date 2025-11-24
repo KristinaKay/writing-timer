@@ -84,10 +84,9 @@ body {
 
 /* Light Theme Overrides for ALL Actual Light Themes */
 :root[data-theme="dustyFloralLight"],
-:root[data-theme="dustyFloralMist"], 
+:root[data-theme="dustyFloralMist"],
 :root[data-theme="dustyRose"],
 :root[data-theme="dustyFloralNeutral"],
-:root[data-theme="dustyFloralMauve"],
 :root[data-theme="blackberryCream"],
 :root[data-theme="sageGreen"],
 :root[data-theme="softLavender"],
@@ -99,13 +98,10 @@ body {
   --theme-primary: #E91E63;
   --theme-secondary: #00D4FF;
   --text-color-inverse: #ffffff;
-}
-
-:root[data-theme="dustyFloralLight"] .sidebar,
+}:root[data-theme="dustyFloralLight"] .sidebar,
 :root[data-theme="dustyFloralMist"] .sidebar,
 :root[data-theme="dustyRose"] .sidebar,
 :root[data-theme="dustyFloralNeutral"] .sidebar,
-:root[data-theme="dustyFloralMauve"] .sidebar,
 :root[data-theme="blackberryCream"] .sidebar,
 :root[data-theme="sageGreen"] .sidebar,
 :root[data-theme="softLavender"] .sidebar,
@@ -114,7 +110,6 @@ body {
 :root[data-theme="dustyFloralMist"] .sidebar-section,
 :root[data-theme="dustyRose"] .sidebar-section,
 :root[data-theme="dustyFloralNeutral"] .sidebar-section,
-:root[data-theme="dustyFloralMauve"] .sidebar-section,
 :root[data-theme="blackberryCream"] .sidebar-section,
 :root[data-theme="sageGreen"] .sidebar-section,
 :root[data-theme="softLavender"] .sidebar-section,
@@ -123,7 +118,6 @@ body {
 :root[data-theme="dustyFloralMist"] .section-header,
 :root[data-theme="dustyRose"] .section-header,
 :root[data-theme="dustyFloralNeutral"] .section-header,
-:root[data-theme="dustyFloralMauve"] .section-header,
 :root[data-theme="blackberryCream"] .section-header,
 :root[data-theme="sageGreen"] .section-header,
 :root[data-theme="softLavender"] .section-header,
@@ -132,7 +126,6 @@ body {
 :root[data-theme="dustyFloralMist"] .section-content,
 :root[data-theme="dustyRose"] .section-content,
 :root[data-theme="dustyFloralNeutral"] .section-content,
-:root[data-theme="dustyFloralMauve"] .section-content,
 :root[data-theme="blackberryCream"] .section-content,
 :root[data-theme="sageGreen"] .section-content,
 :root[data-theme="softLavender"] .section-content,

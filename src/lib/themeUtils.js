@@ -21,7 +21,7 @@ export const themes = {
     description: 'Warm neutrals with dusty rose highlights',
     primary: '#7D4F50',
     secondary: '#F9EAE1',
-    background: 'linear-gradient(135deg, #D1BE9C 0%, #AA998F 100%)',
+    background: '#BFB29C',
     textColor: '#5A3B3C'
   },
   dustyFloralNeutral: {
@@ -50,17 +50,17 @@ export const themes = {
   },
   // Medium backgrounds
   dustyFloralMauve: {
-    name: 'Mauve Elegance',
-    description: 'Rich dusty mauve with light accents',
-    primary: '#E5E6E4',
-    secondary: '#A6A2A2',
-    background: '#847577',
-    textColor: '#FBFBF2'
+    name: 'Midnight Mauve',
+    description: 'Sophisticated dark burgundy with mauve accents',
+    primary: '#847577',
+    secondary: '#b2b8b7',
+    background: '#26191b',
+    textColor: '#FFFFFF'
   },
   darkDustyRose: {
     name: 'Dark Dusty Rose',
     description: 'High contrast with bold dusty rose',
-    primary: '#CC8B86',
+    primary: '#DCA9A4',
     secondary: '#D1BE9C',
     background: '#7D4F50',
     textColor: '#F9EAE1'
@@ -69,7 +69,7 @@ export const themes = {
   silverMist: {
     name: 'Silver Mist',
     description: 'Elegant silver-gray with professional blue accents',
-    primary: '#1F2B3E',
+    primary: '#0D1520',
     secondary: '#6A687A',
     background: '#6B6977',
     textColor: '#FFFFFF'
@@ -101,7 +101,7 @@ export const themes = {
   coralDawn: {
     name: 'Coral Dawn',
     description: 'Warm coral background with dark accents',
-    primary: '#0C1018',
+    primary: '#000000',
     secondary: '#403F4C',
     background: '#8A4E49',
     textColor: '#FFFFFF'
@@ -172,9 +172,13 @@ export const initializeTheme = () => {
       appElement.style.background = theme.background;
       appElement.style.color = theme.textColor || (theme.textColor === '#ffffff' ? '#ffffff' : '#000000');
     }
-  } catch {}
+  } catch (error) {
+    console.error('Failed to apply theme to app element:', error);
+  }
   // Mark the document with a data-theme attribute for CSS targeting
   try {
     document.documentElement.setAttribute('data-theme', currentTheme);
-  } catch {}
+  } catch (error) {
+    console.error('Failed to set data-theme attribute:', error);
+  }
 };

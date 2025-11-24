@@ -30,7 +30,7 @@ const Statistics = () => {
         lastReset: new Date().toISOString(),
         sessionHistory: []
       };
-    } catch (err) {
+    } catch {
       return {
         totalSessions: 0,
         totalMinutes: 0,
@@ -295,6 +295,7 @@ const Statistics = () => {
 export default Statistics;
 
 // Export function to update statistics (to be called from App.jsx)
+// eslint-disable-next-line react-refresh/only-export-components
 export const updateStatistics = (sessionMode, minutes, isPomodoro) => {
   try {
     const saved = localStorage.getItem('mercurial-statistics');
@@ -336,6 +337,7 @@ export const updateStatistics = (sessionMode, minutes, isPomodoro) => {
 };
 
 // Export function to update task completion count
+// eslint-disable-next-line react-refresh/only-export-components
 export const updateTaskCompletion = () => {
   try {
     const saved = localStorage.getItem('mercurial-statistics');

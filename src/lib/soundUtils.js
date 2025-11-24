@@ -34,7 +34,16 @@ export const playSound = async (soundType, volume) => {
     const enabled = localStorage.getItem('mercurial-sound-enabled') === 'true';
     if (!enabled) return;
 
-    // Initialize audio if needed
+    // Force re-initialization and check state (critical for mobile)
+    if (!audioContext || audioContext.state !== 'running') {
+      const audioReady = await initializeAudio();
+      if (!audioReady || !audioContext || audioContext.state !== 'running') {
+        console.warn('Audio re-initialization failed or context not running');
+        return;
+      }
+    }
+
+    // Double-check audio is ready
     const audioReady = await initializeAudio();
     if (!audioReady || !audioContext) {
       console.warn('Audio not available');
@@ -75,7 +84,7 @@ export const playSound = async (soundType, volume) => {
       try {
         oscillator.disconnect();
         gainNode.disconnect();
-      } catch (e) {
+      } catch {
         // Ignore cleanup errors
       }
     }, sound.duration * 1000 + 100);

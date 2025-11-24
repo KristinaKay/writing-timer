@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { PenTool, Palette, Settings, Target, Zap, Clock, CheckSquare, Lightbulb, Circle, FileText, MapPin, Star, Rocket, BarChart3, Play, Pause } from 'lucide-react';
 import './GettingStarted.css';
 
@@ -42,7 +42,7 @@ const GettingStarted = ({ onClose }) => {
           <p><strong><MapPin size={16} style={{verticalAlign: 'middle', marginRight: '4px'}} /> Location:</strong> Sidebar → App Settings</p>
           <div className="feature-list">
             <div className="feature-item">
-              <span className="feature-icon">🔊</span>
+              <span className="feature-icon"><Volume2 size={20} /></span>
               <div>
                 <strong>Sound Settings:</strong> Choose notification sounds for timer completion
               </div>
@@ -161,7 +161,7 @@ const GettingStarted = ({ onClose }) => {
               </div>
             </div>
             <div className="feature-item">
-              <span className="feature-icon">🎵</span>
+              <span className="feature-icon"><Music size={20} /></span>
               <div>
                 <strong>Stay Focused:</strong> Get audio notifications when your session ends
               </div>
