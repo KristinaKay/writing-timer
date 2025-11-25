@@ -57,10 +57,10 @@ Suggestions for making compact mode more space-efficient:
 
 ### 7. Connect Writing Modes to Preset Times
 
-- Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Roaming) to default timer durations
-- Each mode could have a recommended/default time preset
+- ✅ Link Session Modes (Writing Sprint, Deep Work, Research, Creative Thinking, Roaming) to default timer durations
+- ✅ Each mode could have a recommended/default time preset
 - Allow customization of mode-specific durations in settings
-- Automatically set timer duration when switching modes
+- ✅ Automatically set timer duration when switching modes
 
 ### 8. Connect Timer Elapsed Ring Color to the Session Mode
 
