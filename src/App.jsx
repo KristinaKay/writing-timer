@@ -378,10 +378,22 @@ function App() {
   return (
     <div className="App">
       <h1>A Timer to Write</h1>
-      
       <div className="app-layout">
         {/* Main Timer Section */}
-        <div className="main-content">          
+        <div className="main-content">  
+          {/* Show current session mode above timer, always */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+            <div>
+              <div className="current-mode-badge" style={{ borderColor: SessionModeSelector.SESSION_MODES?.find(m => m.id === sessionMode)?.color || '#E91E63' }}>
+                <span className="mode-icon" style={{ color: SessionModeSelector.SESSION_MODES?.find(m => m.id === sessionMode)?.color || '#E91E63' }}>
+                  {SessionModeSelector.SESSION_MODES?.find(m => m.id === sessionMode)?.icon ?
+                    (SessionModeSelector.SESSION_MODES.find(m => m.id === sessionMode).icon({ size: 16 })) : null}
+                </span>
+                <span className="mode-label">{SessionModeSelector.SESSION_MODES?.find(m => m.id === sessionMode)?.label || sessionMode}</span>
+              </div>
+            </div>
+          </div>
+          
           {/* Pomodoro Cycle Tracker */}
           {pomodoroEnabled && (
             <PomodoroCycleTracker

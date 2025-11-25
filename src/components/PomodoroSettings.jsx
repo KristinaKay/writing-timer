@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronRight, AlertTriangle } from 'lucide-react';
+import { ChevronDown, ChevronRight, AlertTriangle, Settings as SettingsIcon } from 'lucide-react';
 import './PomodoroSettings.css';
 
 /**
@@ -42,10 +42,13 @@ const PomodoroSettings = ({
         
         {pomodoroEnabled && (
           <button 
-            className="expand-btn"
+            className="expand-btn settings-icon-btn"
             onClick={() => setIsExpanded(!isExpanded)}
+            title="Pomodoro Settings"
+            style={{ padding: 4, width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            {isExpanded ? <ChevronDown size={14} style={{marginRight: '4px'}} /> : <ChevronRight size={14} style={{marginRight: '4px'}} />} Settings
+            {isExpanded ? <ChevronDown size={16} style={{marginRight: 0}} /> : <ChevronRight size={16} style={{marginRight: 0}} />}
+            <SettingsIcon size={16} />
           </button>
         )}
       </div>

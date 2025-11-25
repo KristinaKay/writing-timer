@@ -235,7 +235,7 @@
 }
 
 .test-sound-btn.mobile-init {
-  background: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+  background: #FF9800;
   animation: pulse 2s infinite;
 }
 

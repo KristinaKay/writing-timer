@@ -128,7 +128,7 @@
 
 .mode-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--theme-primary) 0%, var(--theme-secondary) 100%);
+  background: var(--theme-primary);
   border-radius: 3px;
   transition: width 0.5s ease;
 }

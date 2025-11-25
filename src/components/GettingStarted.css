@@ -158,7 +158,6 @@
   margin-bottom: 0.25rem;
 }
 
-.tip {
   background: linear-gradient(135deg, var(--theme-primary), color-mix(in srgb, var(--theme-primary) 80%, transparent));
   color: white;
   padding: 1rem;
@@ -208,6 +207,7 @@
   justify-content: space-between;
   align-items: center;
 }
+.tip {
 
 .nav-buttons {
   display: flex;
