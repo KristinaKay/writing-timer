@@ -138,11 +138,13 @@ WCAG AA compliant with:
 
 Found a bug or have a feature request? [Open an issue](https://github.com/KristinaKay/writing-timer/issues) on GitHub.
 
-Want to contribute? Pull requests are welcome! Please read the contribution guidelines in the [notes/](notes/) directory for development patterns and architecture decisions.
+Want to contribute? Pull requests are welcome! Please read [CONTRIBUTING.md](docs/CONTRIBUTING.md) for development guidelines and architecture decisions.
 
 ## 📝 License
 
-This project is private and not currently licensed for public use.
+MIT License - see [LICENSE](LICENSE) file for details.
+
+Free to use, modify, and distribute with attribution.
 
 ---
 
@@ -290,8 +292,8 @@ This app can be deployed to any static hosting service. See [DEPLOYMENT.md](docs
 npm run build
 ```
 
-## 📄 License
+---
 
-MIT License - see [LICENSE](LICENSE) file for details.
+**Made with ❤️ by [@KristinaKay](https://github.com/KristinaKay)**
 
-Free to use, modify, and distribute. Created by [@KristinaKay](https://github.com/KristinaKay).
+If you find this project helpful, please consider giving it a ⭐ on GitHub!

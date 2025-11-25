@@ -23,5 +23,22 @@ dist-ssr
 *.sln
 *.sw?
 
-# Project management files (local only)
+# Project management files (local only - not needed in public repo)
+project_manager/
 docs/project_manager/
+
+# Development scripts (local workflow automation)
+commit-workflow.ps1
+setup-github.ps1
+start-dev-server.bat
+start-dev.ps1
+COMMIT_MESSAGE.md
+
+# Accessibility testing (development only)
+accessibility-analysis.js
+accessibility-checker-current.js
+verify-quick-wins.cjs
+
+# Smoke test artifacts
+test/smoke/*.png
+test/smoke/*.log

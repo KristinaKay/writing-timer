@@ -1,7 +1,26 @@
 {
   "name": "a-timer-to-write",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A focused writing timer application with task management and productivity tracking",
+  "author": "KristinaKay",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KristinaKay/writing-timer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KristinaKay/writing-timer/issues"
+  },
+  "homepage": "https://github.com/KristinaKay/writing-timer#readme",
+  "keywords": [
+    "timer",
+    "writing",
+    "productivity",
+    "pomodoro",
+    "task-management",
+    "react",
+    "vite"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
