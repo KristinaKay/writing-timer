@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2025-11-20
 
 ### 2025-11-24
+- style: corrected all syntax errors, replaced linera0fradients bacgrounds with solid colors, removed broken rule to fix deployment issues at Netlify
+
+### 2025-11-24
 - docs(audio): 
 
 ### 2025-11-24 (Patch Release)

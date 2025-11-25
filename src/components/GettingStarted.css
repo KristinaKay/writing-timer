@@ -158,7 +158,7 @@
   margin-bottom: 0.25rem;
 }
 
-  background: linear-gradient(135deg, var(--theme-primary), color-mix(in srgb, var(--theme-primary) 80%, transparent));
+  background: var(--theme-primary);
   color: white;
   padding: 1rem;
   border-radius: 12px;
@@ -167,7 +167,7 @@
 }
 
 .success-message {
-  background: linear-gradient(135deg, #28a745, #20c997);
+  background: #28a745;
   color: white;
   padding: 1.25rem;
   border-radius: 12px;
@@ -197,7 +197,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--theme-primary), color-mix(in srgb, var(--theme-primary) 80%, #fff));
+  background: var(--theme-primary);
   transition: width 0.3s ease;
   border-radius: 2px;
 }
@@ -207,7 +207,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.tip {
+
 
 .nav-buttons {
   display: flex;
