@@ -1,53 +1,57 @@
 // Global AudioContext instance for mobile compatibility
 let audioContext = null;
-let isAudioInitialized = false;
+let audioUnlocked = false; // Track if user has interacted to unlock audio
 
 // Initialize audio context on user interaction
 export const initializeAudio = async () => {
-  if (isAudioInitialized) return true;
-  
   try {
+    // Create context if needed
     if (!audioContext) {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      console.log('AudioContext created, state:', audioContext.state);
     }
     
-    // Resume AudioContext if it's suspended (required for mobile)
+    // Always try to resume if suspended (critical for mobile)
     if (audioContext.state === 'suspended') {
+      console.log('Attempting to resume suspended AudioContext...');
       await audioContext.resume();
     }
     
-    isAudioInitialized = true;
-    return true;
+    // Mark as unlocked only if running
+    if (audioContext.state === 'running') {
+      audioUnlocked = true;
+      return true;
+    }
+    
+    console.warn('AudioContext state after initialization:', audioContext.state);
+    return false;
   } catch (error) {
-    console.warn('Audio initialization failed:', error);
+    console.error('Audio initialization failed:', error);
     return false;
   }
 };
 
-// Check if audio is supported and initialized
+// Check if audio is supported and ready
 export const isAudioAvailable = () => {
-  return isAudioInitialized && audioContext && audioContext.state === 'running';
+  return audioUnlocked && audioContext && audioContext.state === 'running';
 };
 
 export const playSound = async (soundType, volume) => {
   try {
     const enabled = localStorage.getItem('mercurial-sound-enabled') === 'true';
-    if (!enabled) return;
-
-    // Force re-initialization and check state (critical for mobile)
-    if (!audioContext || audioContext.state !== 'running') {
-      const audioReady = await initializeAudio();
-      if (!audioReady || !audioContext || audioContext.state !== 'running') {
-        console.warn('Audio re-initialization failed or context not running');
-        return;
-      }
+    if (!enabled) {
+      console.log('Sound disabled in settings');
+      return;
     }
 
-    // Double-check audio is ready
-    const audioReady = await initializeAudio();
-    if (!audioReady || !audioContext) {
-      console.warn('Audio not available');
-      return;
+    // Ensure AudioContext exists and is running
+    if (!audioContext || audioContext.state !== 'running') {
+      console.log('Audio not ready, attempting initialization...');
+      const audioReady = await initializeAudio();
+      if (!audioReady || !audioContext || audioContext.state !== 'running') {
+        console.warn('Cannot play sound: AudioContext state =', audioContext?.state || 'null');
+        return;
+      }
     }
 
     // Use passed parameters or fallback to saved settings
@@ -107,5 +111,15 @@ export const cleanupAudio = () => {
     audioContext.close();
   }
   audioContext = null;
-  isAudioInitialized = false;
+  audioUnlocked = false;
+};
+
+// Get current audio context state for debugging
+export const getAudioDebugInfo = () => {
+  return {
+    contextExists: !!audioContext,
+    contextState: audioContext?.state || 'null',
+    audioUnlocked,
+    isAvailable: isAudioAvailable()
+  };
 };

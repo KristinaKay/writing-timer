@@ -97,9 +97,34 @@ function App() {
     if (openSidebarGroups[groupId]) {
       setOpenSidebarSection(null);
     }
-  };  // Initialize theme on app load
+  };
+  
+  // Initialize theme on app load
   useEffect(() => {
     initializeTheme();
+  }, []);
+
+  // Aggressively unlock audio on ANY user interaction (critical for mobile)
+  useEffect(() => {
+    const unlockAudio = async () => {
+      try {
+        await initializeAudio();
+      } catch (error) {
+        console.warn('Audio unlock failed:', error);
+      }
+    };
+
+    // Listen for various user interaction events
+    const events = ['click', 'touchstart', 'keydown'];
+    events.forEach(event => {
+      document.addEventListener(event, unlockAudio, { once: true, passive: true });
+    });
+
+    return () => {
+      events.forEach(event => {
+        document.removeEventListener(event, unlockAudio);
+      });
+    };
   }, []);
 
   // Persist accordion state to localStorage

@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2025-11-20
 
 ### 2025-11-24
+- style(audio): fixed mobile sound feature and added visual indicators for function
+
+### 2025-11-24
 - feat: fix smoketest time out, complete icon migration, acheive 100% accessibility, add workflow automation
 
 ### 2025-11-24

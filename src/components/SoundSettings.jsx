@@ -101,11 +101,17 @@ const SoundSettings = () => {
 
   return (
     <div className="sound-settings-container">
-      {/* Mobile Audio Notice */}
-      {isMobile && !audioInitialized && soundEnabled && (
-        <div className="mobile-audio-notice">
+      {/* Audio Status Notice */}
+      {soundEnabled && (
+        <div className={`audio-status-notice ${audioInitialized ? 'ready' : 'pending'}`}>
           <Smartphone size={16} style={{ marginRight: '0.5rem' }} />
-          <span>Tap "Test Sound" to enable audio on mobile devices</span>
+          {audioInitialized ? (
+            <span>✓ Audio ready</span>
+          ) : isMobile ? (
+            <span>⚠️ Tap any button or "Test Sound" to unlock audio on mobile</span>
+          ) : (
+            <span>Click "Test Sound" to initialize audio</span>
+          )}
         </div>
       )}
       
@@ -175,11 +181,21 @@ const SoundSettings = () => {
 
           {/* Test Button */}
           <button 
-            className={`test-sound-btn ${!audioInitialized && isMobile ? 'mobile-init' : ''}`}
+            className={`test-sound-btn ${!audioInitialized ? 'mobile-init' : ''}`}
             onClick={playTestSound}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
           >
-            <Music size={16} />
-            {!audioInitialized && isMobile ? 'Enable Audio' : 'Test Sound'}
+            {audioInitialized ? (
+              <>
+                <Music size={16} />
+                Test Sound
+              </>
+            ) : (
+              <>
+                <Smartphone size={16} />
+                {isMobile ? 'Tap to Enable Audio' : 'Click to Enable Audio'}
+              </>
+            )}
           </button>
         </>
       )}
