@@ -6,18 +6,24 @@ Thank you for your interest in contributing! This guide will help you get starte
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/writing-timer.git
    cd writing-timer
    ```
+
 3. **Install dependencies**:
+
    ```bash
    npm install
    ```
+
 4. **Start the dev server**:
+
    ```bash
    npm run dev
    ```
+
 5. **Make your changes** and test them
 6. **Submit a pull request**
 
@@ -26,6 +32,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 ### Making Changes
 
 1. Create a new branch:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -33,17 +40,20 @@ Thank you for your interest in contributing! This guide will help you get starte
 2. Make your changes following our code style (see below)
 
 3. Test your changes:
+
    ```bash
    npm run lint    # Check for code quality issues
    npm run build   # Ensure it builds successfully
    ```
 
 4. Commit with clear messages:
+
    ```bash
    git commit -m "feat: add new feature description"
    ```
 
 5. Push to your fork:
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -90,7 +100,7 @@ Example: `feat(timer): add custom sound notifications`
 
 ### File Structure
 
-```
+```text
 src/
 ├── components/     # Reusable UI components
 ├── hooks/          # Custom React hooks
@@ -106,6 +116,7 @@ src/
 ### Bug Reports
 
 Include:
+
 - Clear description of the issue
 - Steps to reproduce
 - Expected vs actual behavior
@@ -115,6 +126,7 @@ Include:
 ### Feature Requests
 
 Describe:
+
 - The problem you're trying to solve
 - Proposed solution
 - Alternative solutions considered

@@ -9,12 +9,14 @@ Mobile browsers (especially iOS Safari and Chrome) have strict audio policies th
 ### Browser Restrictions
 
 **iOS Safari & Chrome:**
+
 - AudioContext starts in `suspended` state
 - Requires direct user interaction (tap/click) to resume
 - Cannot be initialized on page load or automatically
 - Loses initialization when app loses focus/visibility
 
 **Android Chrome:**
+
 - Similar restrictions but slightly more lenient
 - May allow audio after any user interaction
 - Better handling of visibility changes
@@ -67,7 +69,7 @@ The SoundSettings component provides clear status indicators:
 
 ## User Instructions
 
-### For iOS Users:
+### For iOS Users
 
 1. **Initial Setup:**
    - Navigate to Settings → Sound
@@ -84,7 +86,7 @@ The SoundSettings component provides clear status indicators:
    - Simply interact with the timer (play/pause) to unlock again
    - Or revisit Sound settings and tap the button
 
-### For Android Users:
+### For Android Users
 
 1. **Initial Setup:**
    - Same as iOS, but audio typically unlocks more easily
@@ -101,6 +103,7 @@ The SoundSettings component provides clear status indicators:
 **Symptoms:** Timer completes but no sound plays
 
 **Solutions:**
+
 1. Open Sound Settings and verify the status indicator
 2. If it says "pending" or shows orange warning, tap "Tap to Enable Audio"
 3. Try using Silent Mode toggle - some iOS versions block audio in silent mode
@@ -113,6 +116,7 @@ The SoundSettings component provides clear status indicators:
 **Cause:** iOS may suspend AudioContext when app loses focus
 
 **Solution:**
+
 1. This should be handled automatically by visibility listener
 2. If issue persists, tap Play button twice (pause then resume)
 3. Or revisit Sound Settings and tap the enable button
@@ -122,12 +126,14 @@ The SoundSettings component provides clear status indicators:
 **Symptoms:** Button clicked but no sound/feedback
 
 **Possible Causes:**
+
 1. Sound notifications disabled in settings
 2. Device volume at zero
 3. Device in silent/vibrate mode (iOS)
 4. Browser blocking audio (rare)
 
 **Solution:**
+
 1. Enable sound notifications toggle
 2. Check device volume
 3. Disable silent mode on iPhone
@@ -169,14 +175,14 @@ console.log(getAudioDebugInfo());
 
 ## Best Practices
 
-### For Users:
+### For Users
 
 1. **Enable audio early** - Visit Sound Settings when you first load the app
 2. **Use the test button** - Verify audio works before starting a long session
 3. **Keep app in focus** - Switching apps may suspend audio
 4. **Check device settings** - Ensure volume up and silent mode off
 
-### For Developers:
+### For Developers
 
 1. **Always wrap audio calls** - Never assume AudioContext is ready
 2. **Provide visual feedback** - Users need to know what's happening
@@ -193,7 +199,7 @@ console.log(getAudioDebugInfo());
 
 ## Future Improvements
 
-### Potential Enhancements:
+### Potential Enhancements
 
 1. **Vibration Fallback** - Use Vibration API when audio fails
 2. **Visual Alert** - Flash screen or show modal when timer completes
@@ -201,7 +207,7 @@ console.log(getAudioDebugInfo());
 4. **Audio Preload** - Load and test audio during user interaction
 5. **Better Error Messages** - More specific guidance based on failure type
 
-### Under Consideration:
+### Under Consideration
 
 1. **Audio Files** - Use `<audio>` element instead of Web Audio API
    - Pros: Better mobile support, simpler
